@@ -1,4 +1,4 @@
-</h1>🤖 AutoRetainer Localizer</h1>
+<h1>🤖 AutoRetainer Localizer</h1>
 
 AutoRetainer的自動化的 C# 源碼漢化工具。
 
