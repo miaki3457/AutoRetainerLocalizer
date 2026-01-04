@@ -1,0 +1,115 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32427.441
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRetainer", "AutoRetainer\AutoRetainer.csproj", "{C60CB325-B487-4F98-AE4B-E5751906A088}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommons", "ECommons\ECommons\ECommons.csproj", "{87B80C08-B4B5-468C-A3BE-6BCFCBBEE61C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PunishLib", "PunishLib\PunishLib\PunishLib.csproj", "{A345FDA7-19F5-42D1-919F-ADBAFF4CB770}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{534B94BB-3196-4D98-AA29-05A9059D5D7F}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		VentureOverrideTest.cs = VentureOverrideTest.cs
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRetainerAPI", "AutoRetainerAPI\AutoRetainerAPI\AutoRetainerAPI.csproj", "{807C2DC6-E136-4982-9A31-C233CA7C2846}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NightmareUI", "NightmareUI\NightmareUI\NightmareUI.csproj", "{90F9FC0A-8C9A-437E-B164-75F88AB01515}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NightmareUI.OtterGuiWrapper", "NightmareUI.OtterGuiWrapper\NightmareUI.OtterGuiWrapper\NightmareUI.OtterGuiWrapper.csproj", "{B9098DF3-0755-4AFE-8C00-FE5CDDEDC006}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtterGui", "OtterGui\OtterGui.csproj", "{A9A854AA-F54E-4739-9752-AC0FE54FCEA1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommons.FileWriter", "ECommons.FileWriter\ECommons.FileWriter\ECommons.FileWriter.csproj", "{100B454B-F244-4125-BCD0-FBC78B31DC50}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFXIVClientStructs", "FFXIVClientStructs\FFXIVClientStructs\FFXIVClientStructs.csproj", "{2B58FF81-C498-422F-B71D-AA0B6880C449}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteropGenerator", "FFXIVClientStructs\InteropGenerator\InteropGenerator.csproj", "{C61DF2C5-A7EA-404B-8812-5771794A9F9A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteropGenerator.Runtime", "FFXIVClientStructs\InteropGenerator.Runtime\InteropGenerator.Runtime.csproj", "{C55843F5-DC64-4E9D-9D0D-085DD453C7EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFXIVClientStructs.Generators", "FFXIVClientStructs\FFXIVClientStructs.Generators\FFXIVClientStructs.Generators.csproj", "{808935D9-D13C-49EF-92A4-EBC5A64A8F2A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C60CB325-B487-4F98-AE4B-E5751906A088}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{C60CB325-B487-4F98-AE4B-E5751906A088}.Debug|Any CPU.Build.0 = Debug|x64
+		{C60CB325-B487-4F98-AE4B-E5751906A088}.Debug|x64.ActiveCfg = Debug|x64
+		{C60CB325-B487-4F98-AE4B-E5751906A088}.Debug|x64.Build.0 = Debug|x64
+		{C60CB325-B487-4F98-AE4B-E5751906A088}.Release|Any CPU.ActiveCfg = Release|x64
+		{C60CB325-B487-4F98-AE4B-E5751906A088}.Release|Any CPU.Build.0 = Release|x64
+		{C60CB325-B487-4F98-AE4B-E5751906A088}.Release|x64.ActiveCfg = Release|x64
+		{C60CB325-B487-4F98-AE4B-E5751906A088}.Release|x64.Build.0 = Release|x64
+		{87B80C08-B4B5-468C-A3BE-6BCFCBBEE61C}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{87B80C08-B4B5-468C-A3BE-6BCFCBBEE61C}.Debug|Any CPU.Build.0 = Debug|x64
+		{87B80C08-B4B5-468C-A3BE-6BCFCBBEE61C}.Debug|x64.ActiveCfg = Debug|x64
+		{87B80C08-B4B5-468C-A3BE-6BCFCBBEE61C}.Debug|x64.Build.0 = Debug|x64
+		{87B80C08-B4B5-468C-A3BE-6BCFCBBEE61C}.Release|Any CPU.ActiveCfg = Release|x64
+		{87B80C08-B4B5-468C-A3BE-6BCFCBBEE61C}.Release|Any CPU.Build.0 = Release|x64
+		{87B80C08-B4B5-468C-A3BE-6BCFCBBEE61C}.Release|x64.ActiveCfg = Release|x64
+		{87B80C08-B4B5-468C-A3BE-6BCFCBBEE61C}.Release|x64.Build.0 = Release|x64
+		{A345FDA7-19F5-42D1-919F-ADBAFF4CB770}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{A345FDA7-19F5-42D1-919F-ADBAFF4CB770}.Debug|Any CPU.Build.0 = Debug|x64
+		{A345FDA7-19F5-42D1-919F-ADBAFF4CB770}.Debug|x64.ActiveCfg = Debug|x64
+		{A345FDA7-19F5-42D1-919F-ADBAFF4CB770}.Debug|x64.Build.0 = Debug|x64
+		{A345FDA7-19F5-42D1-919F-ADBAFF4CB770}.Release|Any CPU.ActiveCfg = Release|x64
+		{A345FDA7-19F5-42D1-919F-ADBAFF4CB770}.Release|Any CPU.Build.0 = Release|x64
+		{A345FDA7-19F5-42D1-919F-ADBAFF4CB770}.Release|x64.ActiveCfg = Release|x64
+		{A345FDA7-19F5-42D1-919F-ADBAFF4CB770}.Release|x64.Build.0 = Release|x64
+		{807C2DC6-E136-4982-9A31-C233CA7C2846}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{807C2DC6-E136-4982-9A31-C233CA7C2846}.Debug|Any CPU.Build.0 = Debug|x64
+		{807C2DC6-E136-4982-9A31-C233CA7C2846}.Debug|x64.ActiveCfg = Debug|x64
+		{807C2DC6-E136-4982-9A31-C233CA7C2846}.Debug|x64.Build.0 = Debug|x64
+		{807C2DC6-E136-4982-9A31-C233CA7C2846}.Release|Any CPU.ActiveCfg = Release|x64
+		{807C2DC6-E136-4982-9A31-C233CA7C2846}.Release|Any CPU.Build.0 = Release|x64
+		{807C2DC6-E136-4982-9A31-C233CA7C2846}.Release|x64.ActiveCfg = Release|x64
+		{807C2DC6-E136-4982-9A31-C233CA7C2846}.Release|x64.Build.0 = Release|x64
+		{90F9FC0A-8C9A-437E-B164-75F88AB01515}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{90F9FC0A-8C9A-437E-B164-75F88AB01515}.Debug|Any CPU.Build.0 = Debug|x64
+		{90F9FC0A-8C9A-437E-B164-75F88AB01515}.Debug|x64.ActiveCfg = Debug|x64
+		{90F9FC0A-8C9A-437E-B164-75F88AB01515}.Debug|x64.Build.0 = Debug|x64
+		{90F9FC0A-8C9A-437E-B164-75F88AB01515}.Release|Any CPU.ActiveCfg = Release|x64
+		{90F9FC0A-8C9A-437E-B164-75F88AB01515}.Release|Any CPU.Build.0 = Release|x64
+		{90F9FC0A-8C9A-437E-B164-75F88AB01515}.Release|x64.ActiveCfg = Release|x64
+		{90F9FC0A-8C9A-437E-B164-75F88AB01515}.Release|x64.Build.0 = Release|x64
+		{B9098DF3-0755-4AFE-8C00-FE5CDDEDC006}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{B9098DF3-0755-4AFE-8C00-FE5CDDEDC006}.Debug|Any CPU.Build.0 = Debug|x64
+		{B9098DF3-0755-4AFE-8C00-FE5CDDEDC006}.Debug|x64.ActiveCfg = Debug|x64
+		{B9098DF3-0755-4AFE-8C00-FE5CDDEDC006}.Debug|x64.Build.0 = Debug|x64
+		{B9098DF3-0755-4AFE-8C00-FE5CDDEDC006}.Release|Any CPU.ActiveCfg = Release|x64
+		{B9098DF3-0755-4AFE-8C00-FE5CDDEDC006}.Release|Any CPU.Build.0 = Release|x64
+		{B9098DF3-0755-4AFE-8C00-FE5CDDEDC006}.Release|x64.ActiveCfg = Release|x64
+		{B9098DF3-0755-4AFE-8C00-FE5CDDEDC006}.Release|x64.Build.0 = Release|x64
+		{A9A854AA-F54E-4739-9752-AC0FE54FCEA1}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{A9A854AA-F54E-4739-9752-AC0FE54FCEA1}.Debug|Any CPU.Build.0 = Debug|x64
+		{A9A854AA-F54E-4739-9752-AC0FE54FCEA1}.Debug|x64.ActiveCfg = Debug|x64
+		{A9A854AA-F54E-4739-9752-AC0FE54FCEA1}.Debug|x64.Build.0 = Debug|x64
+		{A9A854AA-F54E-4739-9752-AC0FE54FCEA1}.Release|Any CPU.ActiveCfg = Release|x64
+		{A9A854AA-F54E-4739-9752-AC0FE54FCEA1}.Release|Any CPU.Build.0 = Release|x64
+		{A9A854AA-F54E-4739-9752-AC0FE54FCEA1}.Release|x64.ActiveCfg = Release|x64
+		{A9A854AA-F54E-4739-9752-AC0FE54FCEA1}.Release|x64.Build.0 = Release|x64
+		{100B454B-F244-4125-BCD0-FBC78B31DC50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{100B454B-F244-4125-BCD0-FBC78B31DC50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{100B454B-F244-4125-BCD0-FBC78B31DC50}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{100B454B-F244-4125-BCD0-FBC78B31DC50}.Debug|x64.Build.0 = Debug|Any CPU
+		{100B454B-F244-4125-BCD0-FBC78B31DC50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{100B454B-F244-4125-BCD0-FBC78B31DC50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{100B454B-F244-4125-BCD0-FBC78B31DC50}.Release|x64.ActiveCfg = Release|Any CPU
+		{100B454B-F244-4125-BCD0-FBC78B31DC50}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A0EF4C68-A3FF-49D8-B6D4-20AB77125C34}
+	EndGlobalSection
+EndGlobal

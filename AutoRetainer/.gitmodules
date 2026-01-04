@@ -1,0 +1,24 @@
+[submodule "PunishLib"]
+	path = PunishLib
+	url = https://github.com/PunishXIV/PunishLib
+[submodule "ECommons"]
+	path = ECommons
+	url = https://github.com/NightmareXIV/ECommons
+[submodule "AutoRetainerAPI"]
+	path = AutoRetainerAPI
+	url = https://github.com/PunishXIV/AutoRetainerAPI
+[submodule "NightmareUI"]
+	path = NightmareUI
+	url = https://github.com/NightmareXIV/NightmareUI
+[submodule "NightmareUI.OtterGuiWrapper"]
+	path = NightmareUI.OtterGuiWrapper
+	url = https://github.com/NightmareXIV/NightmareUI.OtterGuiWrapper
+[submodule "OtterGui"]
+	path = OtterGui
+	url = https://github.com/Limiana/OtterGui.git
+[submodule "ECommons.FileWriter"]
+	path = ECommons.FileWriter
+	url = https://github.com/Limiana/ECommons.FileWriter
+[submodule "FFXIVClientStructs"]
+	path = FFXIVClientStructs
+	url = https://github.com/Limiana/FFXIVClientStructs
