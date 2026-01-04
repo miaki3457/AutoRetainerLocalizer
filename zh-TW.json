@@ -111,7 +111,6 @@
   "Free company {++i}": "部隊 {++i}",
   "Left click - Relog to this character": "左鍵 - 重新登入此角色",
   "Right click - set as gil holder": "右鍵 - 設為Gil持有者",
-  "Unknown": "未知",
   "Last updated {UpdatedWhen(x.Value.LastGilUpdate)}. Ctrl + click to reset": "最後更新於 {UpdatedWhen(x.Value.LastGilUpdate)}. Ctrl + 左鍵重置",
   "Mark this free company as Wallet FC. Gil Display tab will include money of this FC.": "標記此部隊為錢包部隊。Gil顯示標籤頁將包含此部隊的Gil。",
   "Hold CTRL and click to delete this FC. Note that if you will relog to that FC, it will appear again.": "按住CTRL並點擊刪除此部隊。注意：如果重新登入此部隊，它會再次出現。",
