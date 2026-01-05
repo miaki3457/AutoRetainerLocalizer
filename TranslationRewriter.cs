@@ -40,9 +40,24 @@ namespace Localizer
                 string originalText = node.Token.ValueText;
                 if (ShouldTranslate(node, originalText))
                 {
+                    // 1. 嘗試精確匹配 (Exact Match)
                     if (_dictionary.TryGetValue(originalText, out var translated))
                     {
-                        // 使用 SyntaxFactory.Literal 會正確處理轉義字符 (如引號和換行)
+                        return SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(translated));
+                    }
+        
+                    // 2. 嘗試修剪匹配 (Trim Match) - 解決首尾多餘換行或空格
+                    string trimmedText = originalText.Trim();
+                    if (_dictionary.TryGetValue(trimmedText, out translated))
+                    {
+                        return SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(translated));
+                    }
+        
+                    // 3. 嘗試正規化匹配 (Normalized Match) - 解決中間縮進導致的空格不一致
+                    // 將所有連續的空白字元（換行、Tab、空格）替換為單一空格
+                    string normalizedKey = Regex.Replace(originalText, @"\s+", " ").Trim();
+                    if (_dictionary.TryGetValue(normalizedKey, out translated))
+                    {
                         return SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(translated));
                     }
                 }
@@ -128,6 +143,13 @@ namespace Localizer
 
             // 只要內容包含任何 字母 或 中文字元 就視為人類語言
             return clean.Any(c => char.IsLetter(c) || char.GetUnicodeCategory(c) == System.Globalization.UnicodeCategory.OtherLetter);
+        }
+        
+        private string NormalizeKey(string text)
+        {
+            if (string.IsNullOrEmpty(text)) return text;
+            // 將所有連續的空白字元（包含換行、Tab、空格）替換成單一空格，並去除首尾空白
+            return Regex.Replace(text, @"\s+", " ").Trim();
         }
 
         private string GetMethodName(InvocationExpressionSyntax invocation)
