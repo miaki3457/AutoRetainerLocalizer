@@ -22,17 +22,14 @@ public sealed unsafe class ExchangeLists : InventoryManagementBase
     public override void Draw()
     {
         C.AdditionalGCExchangePlans.Where(x => x.GUID == Guid.Empty).Each(x => x.GUID = Guid.NewGuid());
-        ImGuiEx.TextWrapped($"""
-            Select the items to be purchased automatically during Grand Company Expert Delivery operations.
-            Purchase Logic:
-            - The system will attempt to purchase the first available item from the list.
-            - Purchases will continue until the quantity of that item in your inventory reaches the specified target amount.
-            If no listed items are available for purchase, or they cannot fit into your inventory:
-            - The system will purchase Ventures instead.
-            - Venture purchases will continue until your Venture count reaches 65,000.
-            Once the Venture cap is reached and no other purchases are possible:
-            - Any excess Grand Company Seals will be discarded.
-            """);
+        ImGuiEx.TextWrapped($"選擇在大國聯防軍專家籌備期間要自動購買的項目。購買邏輯：
+- 系統將嘗試從清單中購買第一個可用的項目。
+- 購買將持續到該項目在您的背包中達到指定數量。
+如果清單中沒有可購買的項目，或您的背包空間不足：
+- 系統將改為購買探險幣。
+- 探險幣購買將持續到您的探險幣數量達到 65,000 個。
+一旦達到探險幣上限且無法進行其他購買：
+- 任何多餘的軍票都將被丟棄。");
 
         var selectedPlan = C.AdditionalGCExchangePlans.FirstOrDefault(x => x.GUID == SelectedPlanGuid);
         ImGuiEx.InputWithRightButtonsArea(() =>
