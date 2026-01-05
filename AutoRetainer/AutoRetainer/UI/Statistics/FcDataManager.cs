@@ -68,7 +68,7 @@ public sealed class FcDataManager
                 }
                 else
                 {
-                    ImGuiEx.Text($"未知");
+                    ImGuiEx.Text($"Unknown");
                 }
 
                 ImGui.TableNextColumn();
@@ -80,7 +80,7 @@ public sealed class FcDataManager
                 }
                 else
                 {
-                    ImGuiEx.Text($"未知");
+                    ImGuiEx.Text($"Unknown");
                 }
 
                 ImGui.TableNextColumn();

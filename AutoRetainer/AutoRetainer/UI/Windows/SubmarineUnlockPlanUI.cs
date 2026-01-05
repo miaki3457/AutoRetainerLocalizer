@@ -224,7 +224,7 @@ internal unsafe class SubmarineUnlockPlanUI : Window
                 {
                     ImGuiEx.TextWrapped($"Access submarine list to retrieve data.");
                 }
-                ImGui.Checkbox($"Unlock submarine slots. Current slots: {GetNumUnlockedSubs()?.ToString() ?? "未知"}/4", ref SelectedPlan.UnlockSubs);
+                ImGui.Checkbox($"Unlock submarine slots. Current slots: {GetNumUnlockedSubs()?.ToString() ?? "Unknown"}/4", ref SelectedPlan.UnlockSubs);
                 ImGuiEx.TextWrapped($"Unlocking slots is always prioritized over unlocking routes.");
                 ImGui.Checkbox("Enforce Spam one destination mode in Deep sea site.", ref SelectedPlan.EnforceDSSSinglePoint);
                 ImGui.Checkbox("Set this plan as enforced.", ref SelectedPlan.EnforcePlan);

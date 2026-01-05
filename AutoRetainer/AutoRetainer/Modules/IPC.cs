@@ -1,4 +1,4 @@
-using AutoRetainerAPI;
+﻿using AutoRetainerAPI;
 using AutoRetainerAPI.Configuration;
 using ECommons.EzIpcManager;
 using ECommons.Reflection;
@@ -97,7 +97,7 @@ internal static class IPC
 
     private static List<ulong> GetRegisteredCIDs()
     {
-        return C.OfflineData.Where(x => !C.Blacklist.Any(z => z.CID == x.CID) && !x.Name.EqualsAny("未知", "")).Select(x => x.CID).ToList();
+        return C.OfflineData.Where(x => !C.Blacklist.Any(z => z.CID == x.CID) && !x.Name.EqualsAny("Unknown", "")).Select(x => x.CID).ToList();
     }
 
     private static OfflineCharacterData GetOCD(ulong CID)
