@@ -71,7 +71,7 @@ internal unsafe class AutoRetainerWindow : Window
         {
             if(time.Days > 0)
             {
-                return $"會話將在 {time.Days} 天{(time.Days == 1 ? "" : "s")}"+ (time.Hours > 0 ? $" {time.Hours} 小時過期": "");
+                return $"會話將在 {time.Days} 天{(time.Days == 1 ? "" : "s")}" + (time.Hours > 0 ? $" {time.Hours} 小時過期" : "");
             }
             else
             {
