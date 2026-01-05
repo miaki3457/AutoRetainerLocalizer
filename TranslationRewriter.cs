@@ -19,7 +19,7 @@ namespace Localizer
         private readonly string _apiKey;
         private static readonly HttpClient _client = new HttpClient();
 
-        private readonly string[] _uiKeywords = { "Text", "Button", "Label", "Combo", "Header", "Section", "Tooltip", "MenuItem", "Checkbox", "Help", "Notify", "Info", "FormatToken" };
+        private readonly string[] _uiKeywords = { "Text", "Button", "Label", "Combo", "Header", "Section", "Tooltip", "MenuItem", "Checkbox", "Help", "Notify", "Info", "FormatToken", "InputInt", "Widget", "EnumCombo" };
         private readonly string[] _blackList = { "PushID", "GetConfig", "Log", "Debug", "Print", "ExecuteCommand", "ToString", "GetField", "GetProperty" };
 
         public TranslationRewriter(Dictionary<string, string> dictionary, string apiKey = "")
@@ -28,11 +28,8 @@ namespace Localizer
             _apiKey = apiKey;
         }
 
-        // 處理內插字串內部的純文字部分 (如 $"Entrust plan \"...\"")
         public override SyntaxNode VisitInterpolatedStringText(InterpolatedStringTextSyntax node)
         {
-            // 在這裡攔截內插字串中的文字碎片是不夠的，因為字典 Key 是整句範本
-            // 所以我們維持在 VisitInterpolatedStringExpression 處理整句
             return base.VisitInterpolatedStringText(node);
         }
 
@@ -48,7 +45,6 @@ namespace Localizer
                         // 使用 SyntaxFactory.Literal 會正確處理轉義字符 (如引號和換行)
                         return SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(translated));
                     }
-                    // AI 翻譯略 (邏輯同前)...
                 }
             }
             return base.VisitLiteralExpression(node);
@@ -81,7 +77,6 @@ namespace Localizer
                 {
                     return ReconstructInterpolatedString(translated, interpolations);
                 }
-                // AI 翻譯 (templateKey) ...
             }
 
             return base.VisitInterpolatedStringExpression(node);
@@ -156,7 +151,6 @@ namespace Localizer
                 {
                     string textPart = translatedTemplate.Substring(lastIndex, match.Index - lastIndex);
 
-                    // 【關鍵修正】：手動轉義引號。
                     // 在內插字串節點中，內部的引號必須寫成 \" 才能編譯通過。
                     string escapedText = textPart.Replace("\"", "\\\"");
 
