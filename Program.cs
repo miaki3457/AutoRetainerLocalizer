@@ -13,12 +13,12 @@ class Program
     {
         string rootPath = Environment.CurrentDirectory;
         
-        if (!Directory.Exists(Path.Combine(rootPath, "AutoRetainer")))
+        if (!Directory.Exists(Path.Combine(rootPath,"AutoRetainer")))
         {
             rootPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         }
 
-        string sourcePath = Path.Combine(rootPath, "AutoRetainer");
+        string sourcePath = Path.Combine(rootPath, "AutoRetainer", "AutoRetainer", "UI");
         string dictPath = Path.Combine(rootPath, "zh-TW.json");
         // -------------------------
 
@@ -59,7 +59,7 @@ class Program
             }
         }
 
-        Console.WriteLine("漢化處理完成！");
+        Console.WriteLine("中文化處理完成！");
     }
 }
 
