@@ -20,7 +20,7 @@ namespace Localizer
         private static readonly HttpClient _client = new HttpClient();
 
         private readonly string[] _uiKeywords = { "Text", "Button", "Label", "Combo", "Header", "Section", "Tooltip", "MenuItem", "Checkbox", "Help", "Notify", "Info", "FormatToken" };
-        private readonly string[] _blackList = { "PushID", "GetConfig", "Log", "Debug", "Print", "ExecuteCommand", "ToString" };
+        private readonly string[] _blackList = { "PushID", "GetConfig", "Log", "Debug", "Print", "ExecuteCommand", "ToString", "GetField", "GetProperty" };
 
         public TranslationRewriter(Dictionary<string, string> dictionary, string apiKey = "")
         {
@@ -113,6 +113,13 @@ namespace Localizer
                     // 在這些方法內，只要包含字母或中文就允許翻譯 (即使開頭是空格)
                     return IsHumanText(text);
                 }
+            }
+            var property = node.Ancestors().OfType<PropertyDeclarationSyntax>().FirstOrDefault();
+            if (property != null)
+            {
+                string propName = property.Identifier.Text;
+                // 攔截 Name 或 Path 屬性
+                if (propName == "Name" || propName == "Path") return true;
             }
 
             return false;
