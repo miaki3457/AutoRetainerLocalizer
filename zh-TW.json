@@ -378,7 +378,7 @@
     "Grand Company Delivery/Exchange Lists": "大國聯防軍 - 軍票交換清單",
     "Grand Company Delivery/Character Configuration": "大國聯防軍 - 籌備設定",
     "Grand Company Delivery/General Settings": "大國聯防軍 - 一般設定",
-    "Select the items to be purchased automatically during Grand Company Expert Delivery operations. Purchase Logic: - The system will attempt to purchase the first available item from the list. - Purchases will continue until the quantity of that item in your inventory reaches the specified target amount. If no listed items are available for purchase, or they cannot fit into your inventory: - The system will purchase Ventures instead. - Venture purchases will continue until your Venture count reaches 65,000. Once the Venture cap is reached and no other purchases are possible: - Any excess Grand Company Seals will be discarded.": "選擇在大國聯防軍專家籌備期間要自動購買的物品。購買邏輯：\n- 系統將嘗試購買清單中第一個可用的物品。\n- 購買將持續到該物品在背包中的數量達到指定目標為止。\n如果清單中沒有物品可供購買，或背包空間不足：\n- 系統將轉為購買探險幣。\n- 購買探險幣將持續到您的探險幣數量達到 65,000 個。\n一旦達到探險幣上限且無法再進行其他購買：\n- 任何多餘的軍票都將被丟棄。",
+    "Select the items to be purchased automatically during Grand Company Expert Delivery operations. Purchase Logic: - The system will attempt to purchase the first available item from the list. - Purchases will continue until the quantity of that item in your inventory reaches the specified target amount. If no listed items are available for purchase, or they cannot fit into your inventory: - The system will purchase Ventures instead. - Venture purchases will continue until your Venture count reaches 65,000. Once the Venture cap is reached and no other purchases are possible: - Any excess Grand Company Seals will be discarded.": "選擇在大國聯防軍專家籌備期間要自動購買的項目。購買邏輯：\n- 系統將嘗試從清單中購買第一個可用的項目。\n- 購買將持續到該項目在您的背包中達到指定數量。\n如果清單中沒有可購買的項目，或您的背包空間不足：\n- 系統將改為購買探險幣。\n- 探險幣購買將持續到您的探險幣數量達到 65,000 個。\n一旦達到探險幣上限且無法進行其他購買：\n- 任何多餘的軍票都將被丟棄。",
     "When Expert Delivery Continuation is enabled:\n- The plugin will automatically spend available Grand Company Seals to purchase items from the configured Exchange List.\n- If the Exchange List is empty, only Ventures will be purchased.\n- Make sure that \"Delivery Mode\" is not set to \"Disabled\" in \"Character Configuration\" section\n\nAfter seals have been spent:\n- Expert Delivery will resume automatically.\n- The process will repeat until there are no eligible items left to deliver or no seals remaining.": "啟用自動籌備交換後:\n- 插件會自動使用軍票交換已設定的兌換清單中的物品。\n- 若清單為空，則只會交換探險幣。\n- 請確認在角色設定中，\"交付模式\"未設為\"停用\"(Disabled)。\n\n軍票兌換完成後:\n- 將繼續執行籌備稀有品。\n- 該流程將重複至沒有可籌備的物品或是軍票使用完畢。",
     "When enabled:\n- Characters with teleportation enabled will automatically deliver items for expert delivery and buy items according to exchange plan, if their rank is sufficient, during multi mode.": "啟用後:\n- 在多角色模式下，啟用傳送的角色會自動進行專家委託並根據兌換方案購買物品（前提是角色軍階足夠）。",
     "Inventory slots remaining to trigger delivery, less or equal": "觸發籌備的剩餘背包格數 (小於或等於)",
@@ -386,7 +386,6 @@
     "Only primary inventory is accounted for, not armory": "僅計算主要背包，不包含兵裝庫",
     "Mode": "模式",
     "Default plan": "預設計畫",
-    "Select the items to be purchased automatically during Grand Company Expert Delivery operations.\\nPurchase Logic:\\n- The system will attempt to purchase the first available item from the list.\\n- Purchases will continue until the quantity of that item in your inventory reaches the specified target amount.\\nIf no listed items are available for purchase, or they cannot fit into your inventory:\\n- The system will purchase Ventures instead.\\n- Venture purchases will continue until your Venture count reaches 65,000.\\nOnce the Venture cap is reached and no other purchases are possible:\\n- Any excess Grand Company Seals will be discarded.": "選擇在軍隊補給負責人中要自動交換的物品。\\n交換邏輯:\\n- 系統會嘗試從清單中交換第一個可交換的物品。\\n- 持續交換直到該物品在您的背包中達到指定數量。\\n如果清單中的物品無法交換或者無法放入背包:\\n- 系統將自動兌換探險幣。\\n- 持續兌換直到探險幣數量達到 65,000。\\n當探險幣數量達到上限且無其他可購買物品時:\\n- 多餘的軍票將被丟棄。",
     "Default Plan": "預設計畫",
     "Add new plan": "添加新的計畫",
     "Copy": "複製",
@@ -505,4 +504,5 @@
     "These items, when obtained from Quick Venture will be sold unless they have stacked with the same item.": "這些物品從快速任務（Quick Venture）獲得後會被出售，除非它們與相同物品堆疊。"
 
 }
+
 
