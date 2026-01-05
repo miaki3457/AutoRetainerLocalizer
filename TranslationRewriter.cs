@@ -33,45 +33,13 @@ namespace Localizer
             return base.VisitInterpolatedStringText(node);
         }
 
-        public override SyntaxNode VisitLiteralExpression(LiteralExpressionSyntax node)
-        {
-            if (node.IsKind(SyntaxKind.StringLiteralExpression))
-            {
-                string originalText = node.Token.ValueText;
-                if (ShouldTranslate(node, originalText))
-                {
-                    // 1. 嘗試精確匹配 (Exact Match)
-                    if (_dictionary.TryGetValue(originalText, out var translated))
-                    {
-                        return SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(translated));
-                    }
-        
-                    // 2. 嘗試修剪匹配 (Trim Match) - 解決首尾多餘換行或空格
-                    string trimmedText = originalText.Trim();
-                    if (_dictionary.TryGetValue(trimmedText, out translated))
-                    {
-                        return SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(translated));
-                    }
-        
-                    // 3. 嘗試正規化匹配 (Normalized Match) - 解決中間縮進導致的空格不一致
-                    // 將所有連續的空白字元（換行、Tab、空格）替換為單一空格
-                    string normalizedKey = Regex.Replace(originalText, @"\s+", " ").Trim();
-                    if (_dictionary.TryGetValue(normalizedKey, out translated))
-                    {
-                        return SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(translated));
-                    }
-                }
-            }
-            return base.VisitLiteralExpression(node);
-        }
-
         public override SyntaxNode VisitInterpolatedStringExpression(InterpolatedStringExpressionSyntax node)
         {
             // 1. 將整句拼湊成帶 {0} 的範本
             var sb = new StringBuilder();
             int placeholderIndex = 0;
             var interpolations = new List<InterpolationSyntax>();
-
+        
             foreach (var content in node.Contents)
             {
                 if (content is InterpolatedStringTextSyntax text)
@@ -82,19 +50,50 @@ namespace Localizer
                     interpolations.Add(interp);
                 }
             }
-
+        
             string templateKey = sb.ToString();
-
+        
             // 2. 判斷與翻譯
             if (ShouldTranslate(node, templateKey))
-            {
+            {                
+                // A. 精確匹配
                 if (_dictionary.TryGetValue(templateKey, out var translated))
+                {
+                    return ReconstructInterpolatedString(translated, interpolations);
+                }        
+                // B. 修剪匹配
+                if (_dictionary.TryGetValue(templateKey.Trim(), out translated))
+                {
+                    return ReconstructInterpolatedString(translated, interpolations);
+                }        
+                // C. 正規化匹配 (無視換行與縮進)
+                string normalizedKey = NormalizeKey(templateKey);
+                if (_dictionary.TryGetValue(normalizedKey, out translated))
                 {
                     return ReconstructInterpolatedString(translated, interpolations);
                 }
             }
-
+        
             return base.VisitInterpolatedStringExpression(node);
+        }
+        
+        public override SyntaxNode VisitLiteralExpression(LiteralExpressionSyntax node)
+        {
+            if (node.IsKind(SyntaxKind.StringLiteralExpression))
+            {
+                string originalText = node.Token.ValueText;
+                if (ShouldTranslate(node, originalText))
+                {
+                    // 使用與上面相同的邏輯
+                    if (_dictionary.TryGetValue(originalText, out var translated) ||
+                        _dictionary.TryGetValue(originalText.Trim(), out translated) ||
+                        _dictionary.TryGetValue(NormalizeKey(originalText), out translated))
+                    {
+                        return SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(translated));
+                    }
+                }
+            }
+            return base.VisitLiteralExpression(node);
         }
 
         private bool ShouldTranslate(SyntaxNode node, string text)
