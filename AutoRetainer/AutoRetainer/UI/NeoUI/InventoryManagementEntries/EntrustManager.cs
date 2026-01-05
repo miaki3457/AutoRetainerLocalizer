@@ -7,14 +7,14 @@ using Lumina.Excel.Sheets;
 namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries;
 public class EntrustManager : InventoryManagementBase
 {
-    public override string Name { get; } = "Entrust Manager";
+    public override string Name { get; } = "委託管理";
     private Guid SelectedGuid = Guid.Empty;
     private string Filter = "";
     private InventoryManagementCommon InventoryManagementCommon = new();
 
     public override void Draw()
     {
-        ImGuiEx.TextWrapped("Use advanced entrust manager to entrust specific items to specific retainers. In this window you can configure specific plans; then, you can assign entrust plans to your retainers in retainer configuration window.");
+        ImGuiEx.TextWrapped("使用進階存放管理器將特定物品存入特定僱員。在此視窗中可設定具體存放方案；隨後，您可在僱員配置視窗中將存放方案指派給僱員。");
         ImGui.Checkbox("啟用", ref C.EnableEntrustManager);
         ImGui.Checkbox("將委託的物品輸出至聊天頻道", ref C.EnableEntrustChat);
         var selectedPlan = C.EntrustPlans.FirstOrDefault(x => x.Guid == SelectedGuid);
@@ -150,7 +150,7 @@ public class EntrustManager : InventoryManagementBase
             ImGuiEx.TreeNodeCollapsingHeader($"快速新增/移除", () =>
             {
                 ImGuiEx.TextWrapped(GradientColor.Get(EColor.RedBright, EColor.YellowBright), $"當此文字可見時，將滑鼠懸停在物品上並按住按鍵:");
-                ImGuiEx.Text(!ImGui.GetIO().KeyShift ? ImGuiColors.DalamudGrey : ImGuiColors.DalamudRed, $"Shift - 新增至委託方案");
+                ImGuiEx.Text(!ImGui.GetIO().KeyShift ? ImGuiColors.DalamudGrey : ImGuiColors.DalamudRed, $"Shift - 添加至存入計畫");
                 ImGuiEx.Text(!ImGui.GetIO().KeyAlt ? ImGuiColors.DalamudGrey : ImGuiColors.DalamudRed, $"Alt - 從委託方案刪除");
                 if(Svc.GameGui.HoveredItem > 0)
                 {

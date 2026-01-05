@@ -1,11 +1,11 @@
-﻿using AutoRetainerAPI.Configuration;
+using AutoRetainerAPI.Configuration;
 using ECommons.MathHelpers;
 using RetainerDescriptor = (ulong CID, string RetainerName);
 
 namespace AutoRetainer.UI.NeoUI;
 public class RetainersTab : NeoUIEntry
 {
-    public override string Path => "Retainers";
+    public override string Path => "僱員管理";
     private int MassMinLevel = 0;
     private int MassMaxLevel = 100;
     private VenturePlan SelectedVenturePlan;
@@ -47,12 +47,12 @@ public class RetainersTab : NeoUIEntry
             }
             ImGui.EndCombo();
         }
-        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61527, "Deselect All"))
+        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61527, "取消全選"))
         {
             SelectedRetainers.Clear();
         }
         ImGui.SameLine();
-        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61525, "Select All"))
+        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61525, "全選"))
         {
             SelectedRetainers.Clear();
             foreach(var x in C.OfflineData)

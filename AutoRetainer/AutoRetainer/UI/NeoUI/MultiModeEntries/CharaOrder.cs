@@ -1,4 +1,4 @@
-﻿using AutoRetainerAPI.Configuration;
+using AutoRetainerAPI.Configuration;
 
 namespace AutoRetainer.UI.NeoUI.MultiModeEntries;
 public class CharaOrder : NeoUIEntry
@@ -24,7 +24,7 @@ public class CharaOrder : NeoUIEntry
             if(ImGui.BeginTable("CharaOrderTable", 4, ImGuiTableFlags.Borders | ImGuiTableFlags.NoSavedSettings | ImGuiTableFlags.RowBg | ImGuiTableFlags.SizingFixedFit))
             {
                 ImGui.TableSetupColumn("##ctrl");
-                ImGui.TableSetupColumn("Character", ImGuiTableColumnFlags.WidthStretch);
+                ImGui.TableSetupColumn("角色", ImGuiTableColumnFlags.WidthStretch);
                 ImGui.TableSetupColumn("Toggles");
                 ImGui.TableSetupColumn("Deletion");
                 ImGui.TableHeadersRow();

@@ -106,7 +106,7 @@ public static unsafe class RetainerConfig
             {
                 ret.VentureEndsAt = 1;
             }
-            if(ImGui.Button("Fake unready"))
+            if(ImGui.Button("偽造未就緒"))
             {
                 ret.VentureEndsAt = P.Time + 60 * 60;
             }

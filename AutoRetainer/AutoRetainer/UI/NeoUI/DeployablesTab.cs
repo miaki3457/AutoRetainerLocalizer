@@ -16,7 +16,7 @@ using VesselDescriptor = (ulong CID, string VesselName);
 namespace AutoRetainer.UI.NeoUI;
 public class DeployablesTab : NeoUIEntry
 {
-    public override string Path => "Deployables";
+    public override string Path => "遠航探索";
 
     private static int MinLevel = 0;
     private static int MaxLevel = 0;
@@ -181,12 +181,12 @@ public class DeployablesTab : NeoUIEntry
             }
             ImGui.EndCombo();
         }
-        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)'\uf057', "Deselect All"))
+        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)'\uf057', "取消全選"))
         {
             SelectedVessels.Clear();
         }
         ImGui.SameLine();
-        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)'\uf055', "Select All"))
+        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)'\uf055', "全選"))
         {
             SelectedVessels.Clear();
             foreach(var x in C.OfflineData) foreach(var v in x.OfflineSubmarineData) SelectedVessels.Add((x.CID, v.Name));

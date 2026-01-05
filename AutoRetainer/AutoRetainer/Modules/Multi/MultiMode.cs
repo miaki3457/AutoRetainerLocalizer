@@ -1,4 +1,4 @@
-using AutoRetainer.Internal;
+﻿using AutoRetainer.Internal;
 using AutoRetainer.Modules.Voyage;
 using AutoRetainer.Modules.Voyage.Tasks;
 using AutoRetainer.Scheduler.Tasks;
@@ -152,7 +152,7 @@ internal static unsafe class MultiMode
     {
         if(Active)
         {
-            if(EzThrottler.Throttle("MultiNotify", 15000)) Utils.NotifyIfLifestreamIsNotInstalled("多角色模式");
+            if(EzThrottler.Throttle("MultiNotify", 15000)) Utils.NotifyIfLifestreamIsNotInstalled("Multi Mode");
             ValidateAutoAfkSettings();
             if(!Svc.ClientState.IsLoggedIn && TryGetAddonByName<AtkUnitBase>("Title", out _) && !P.TaskManager.IsBusy)
             {

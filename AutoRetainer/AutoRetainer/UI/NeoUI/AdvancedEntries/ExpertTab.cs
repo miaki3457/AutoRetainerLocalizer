@@ -4,7 +4,7 @@ using ECommons.Reflection;
 namespace AutoRetainer.UI.NeoUI.AdvancedEntries;
 public class ExpertTab : NeoUIEntry
 {
-    public override string Path => "Advanced/Expert Settings";
+    public override string Path => "進階設定/專家設定";
 
     public override NuiBuilder Builder { get; init; } = new NuiBuilder()
         .Section("Behavior")
@@ -13,21 +13,21 @@ public class ExpertTab : NeoUIEntry
         .EnumComboFullWidth(null, "存取鈴鐺後任務完成的行為：", () => ref C.TaskCompletedBehaviorAccess)
         .EnumComboFullWidth(null, "手動啟用後任務完成的行為：", () => ref C.TaskCompletedBehaviorManual)
         .EnumComboFullWidth(null, "插件運作期間任務完成的行為：", () => ref C.TaskCompletedBehaviorAuto)
-        .TextWrapped(ImGuiColors.DalamudGrey, "\"Close retainer list and disable plugin\" option for 3 previous settings is enforced during MultiMode operation.")
-        .Checkbox("如果 5 分鐘內有僱員將完成探險，則停留在僱員選單中", () => ref C.Stay5, "This option is enforced during MultiMode operation.")
+        .TextWrapped(ImGuiColors.DalamudGrey, "多角色模式運作期間，上述3個設定中的\"關閉僱員清單並停用外掛程式\"選項將被強制啟用。")
+        .Checkbox("如果 5 分鐘內有僱員將完成探險，則停留在僱員選單中", () => ref C.Stay5, "此選項在多角色模式運行期間強制啟用。")
         .Checkbox($"關閉僱員列表時自動停用插件", () => ref C.AutoDisable, "Only applies when you exit menu by yourself. Otherwise, settings above apply.")
-        .Checkbox($"Do not show plugin status icons", () => ref C.HideOverlayIcons)
-        .Checkbox($"Display multi mode type selector", () => ref C.DisplayMMType)
-        .Checkbox($"Display deployables checkbox in workshop", () => ref C.ShowDeployables)
-        .Checkbox("Enable bailout module", () => ref C.EnableBailout)
+        .Checkbox($"不顯示插件狀態圖標", () => ref C.HideOverlayIcons)
+        .Checkbox($"顯示多角色模式類型選擇器", () => ref C.DisplayMMType)
+        .Checkbox($"在部隊工房中顯示遠航探險", () => ref C.ShowDeployables)
+        .Checkbox("啟用應急復原模組", () => ref C.EnableBailout)
         .InputInt(150f, "Timeout before AutoRetainer will attempt to unstuck, seconds", () => ref C.BailoutTimeout)
 
         .Section("設定")
-        .Checkbox($"Disable sorting and collapsing/expanding", () => ref C.NoCurrentCharaOnTop)
-        .Checkbox($"Show MultiMode checkbox on plugin UI bar", () => ref C.MultiModeUIBar)
+        .Checkbox($"禁用排序和折疊/展開功能", () => ref C.NoCurrentCharaOnTop)
+        .Checkbox($"在插件UI欄顯示多角色模式複選框", () => ref C.MultiModeUIBar)
         .SliderIntAsFloat(100f, "Retainer menu delay, seconds", () => ref C.RetainerMenuDelay.ValidateRange(0, 2000), 0, 2000)
         .Checkbox($"Allow venture timer to display negative values", () => ref C.TimerAllowNegative)
-        .Checkbox($"Do not error check venture planner", () => ref C.NoErrorCheckPlanner2)
+        .Checkbox($"不檢查派遣計劃錯誤", () => ref C.NoErrorCheckPlanner2)
         .Checkbox("Enable Manual relogs character postprocess", () => ref C.AllowManualPostprocess, "Allow manual command invocation while AutoRetainer locked in postprocess. ")
         .Widget("Market Cooldown Overlay", (x) =>
         {
@@ -45,10 +45,10 @@ public class ExpertTab : NeoUIEntry
         })
 
         .Section("Integrations")
-        .Checkbox($"Artisan integration", () => ref C.ArtisanIntegration, "Automatically enables AutoRetainer while Artisan is Pauses Artisan operation when ventures are ready to be collected and a retainer bell is within range. Once ventures have been dealt with Artisan will be enabled and resume whatever it was doing.")
+        .Checkbox($"Artisan 整合功能", () => ref C.ArtisanIntegration, "Automatically enables AutoRetainer while Artisan is Pauses Artisan operation when ventures are ready to be collected and a retainer bell is within range. Once ventures have been dealt with Artisan will be enabled and resume whatever it was doing.")
 
         .Section("Server Time")
-        .Checkbox("Use server time instead of PC time", () => ref C.UseServerTime)
+        .Checkbox("使用伺服器時間而非本地時間", () => ref C.UseServerTime)
 
         .Section("Utility")
         .Widget("Cleanup ghost retainers", (x) =>

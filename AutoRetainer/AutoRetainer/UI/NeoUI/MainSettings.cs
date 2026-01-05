@@ -1,7 +1,7 @@
 namespace AutoRetainer.UI.NeoUI;
 public class MainSettings : NeoUIEntry
 {
-    public override string Path => "General";
+    public override string Path => "一般";
 
     public override NuiBuilder Builder { get; init; } = new NuiBuilder()
         .Section("Delays")

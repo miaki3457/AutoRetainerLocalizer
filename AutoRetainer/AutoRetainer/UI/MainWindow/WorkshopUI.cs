@@ -570,7 +570,7 @@ internal static unsafe class WorkshopUI
                                 var toDelete = x.Key;
                                 datas[copyTo] = x.Value;
                                 datas.Remove(toDelete);
-                                Notify.Success($"Moved data from {toDelete} to {copyTo}");
+                                Notify.Success($"已將數據從 {toDelete} 移動到 {copyTo}");
                             });
                         }
                         if(d) ImGui.EndDisabled();
@@ -581,9 +581,9 @@ internal static unsafe class WorkshopUI
             if(C.Verbose)
             {
                 if(ImGui.Button("模擬就緒")) vessel.ReturnTime = (uint)P.Time;
-                if(ImGui.Button("Fake ready+")) vessel.ReturnTime += 60u * (ImGui.GetIO().KeyCtrl ? 10u : 1u) * (ImGui.GetIO().KeyShift ? 10u : 1u);
-                if(ImGui.Button("Fake ready-")) vessel.ReturnTime -= 60u * (ImGui.GetIO().KeyCtrl ? 10u : 1u) * (ImGui.GetIO().KeyShift ? 10u : 1u);
-                if(ImGui.Button("Fake unready")) vessel.ReturnTime = (uint)(P.Time + 9999);
+                if(ImGui.Button("偽造就緒+")) vessel.ReturnTime += 60u * (ImGui.GetIO().KeyCtrl ? 10u : 1u) * (ImGui.GetIO().KeyShift ? 10u : 1u);
+                if(ImGui.Button("偽造就緒-")) vessel.ReturnTime -= 60u * (ImGui.GetIO().KeyCtrl ? 10u : 1u) * (ImGui.GetIO().KeyShift ? 10u : 1u);
+                if(ImGui.Button("偽造未就緒")) vessel.ReturnTime = (uint)(P.Time + 9999);
             }
             ImGui.EndPopup();
         }

@@ -7,27 +7,23 @@ using System.Threading.Tasks;
 namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.GCDeliveryEntries;
 public sealed unsafe class GeneralSettings : InventoryManagementBase
 {
-    public override string Name { get; } = "Grand Company Delivery/General Settings";
+    public override string Name { get; } = "大國聯防軍 - 一般設定";
 
     public override NuiBuilder Builder => new NuiBuilder()
         .Section("一般設定")
         .Checkbox("啟用自動籌備交換", () => ref C.AutoGCContinuation)
-        .TextWrapped($"""
-            When Expert Delivery Continuation is enabled:
-            - The plugin will automatically spend available Grand Company Seals to purchase items from the configured Exchange List.
-            - If the Exchange List is empty, only Ventures will be purchased.
-            - Make sure that "Delivery Mode" is not set to "Disabled" in "Character Configuration" section
+        .TextWrapped($"啟用自動籌備交換後:
+- 插件會自動使用軍票交換已設定的兌換清單中的物品。
+- 若清單為空，則只會交換探險幣。
+- 請確認在角色設定中，\"交付模式\"未設為\"停用\"(Disabled)。
 
-            After seals have been spent:
-            - Expert Delivery will resume automatically.
-            - The process will repeat until there are no eligible items left to deliver or no seals remaining.
-            """)
+軍票兌換完成後:
+- 將繼續執行籌備稀有品。
+- 該流程將重複至沒有可籌備的物品或是軍票使用完畢。")
 
         .Section("多角色模式籌備交換")
-        .TextWrapped($"""
-        When enabled:
-        - Characters with teleportation enabled will automatically deliver items for expert delivery and buy items according to exchange plan, if their rank is sufficient, during multi mode.
-        """)
+        .TextWrapped($"啟用後:
+- 在多角色模式下，啟用傳送的角色會自動進行專家委託並根據兌換方案購買物品（前提是角色軍階足夠）。")
         .Checkbox("啟用多角色籌備交換", () => ref C.FullAutoGCDelivery)
         .Checkbox("僅在工作台未鎖定時觸發", () => ref C.FullAutoGCDeliveryOnlyWsUnlocked)
         .InputInt(150f, "Inventory slots remaining to trigger delivery, less or equal", () => ref C.FullAutoGCDeliveryInventory, "Only primary inventory is accounted for, not armory")

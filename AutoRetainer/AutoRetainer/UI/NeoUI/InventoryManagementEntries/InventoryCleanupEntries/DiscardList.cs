@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.InventoryCleanupEntries;
 public unsafe sealed class DiscardList : InventoryManagementBase
 {
-    public override string Name => "Inventory Cleanup/Discard List";
+    public override string Name => "背包清理/丟棄清單";
     private InventoryManagementCommon InventoryManagementCommon = new();
 
     public override int DisplayPriority => -1;

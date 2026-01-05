@@ -6,7 +6,7 @@ using ECommons.WindowsFormsReflector;
 namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.InventoryCleanupEntries;
 public unsafe class FastAddition : InventoryManagementBase
 {
-    public override string Name { get; } = "Inventory Cleanup/Fast Addition and Removal";
+    public override string Name { get; } = "背包清理/快速添加和移除";
 
     private FastAddition()
     {
@@ -25,7 +25,7 @@ public unsafe class FastAddition : InventoryManagementBase
             //ImGuiEx.Text(IsKeyPressed(Keys.Space) ? ImGuiColors.DalamudGrey : ImGuiColors.DalamudRed, $"Space - add to Desynthesis List");
             //ImGuiEx.Text($"* Items that already in other lists WILL BE MOVED to Desynthesis List");
             ImGuiEx.Text(!ImGui.GetIO().KeyAlt ? ImGuiColors.DalamudGrey : ImGuiColors.DalamudRed, $"Alt - 從任何清單中刪除");
-            ImGuiEx.Text("\\n受保護的物品不受此操作影響");
+            ImGuiEx.Text("受保護的物品不受此操作影響");
             if(Svc.GameGui.HoveredItem > 0)
             {
                 var id = (uint)(Svc.GameGui.HoveredItem % 1000000);

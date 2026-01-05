@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.GCDeliveryEntries;
 public sealed unsafe class GCCharacterConfiguration : InventoryManagementBase
 {
-    public override string Name { get; } = "Grand Company Delivery/Character Configuration";
+    public override string Name { get; } = "大國聯防軍 - 籌備設定";
 
     public override int DisplayPriority => -10;
 
@@ -48,7 +48,7 @@ public sealed unsafe class GCCharacterConfiguration : InventoryManagementBase
                 ImGui.TableNextColumn();
                 ImGui.SetNextItemWidth(150f);
                 ImGuiEx.EnumCombo("##deliveryMode", ref characterData.GCDeliveryType);
-                ImGuiEx.DragDropRepopulate("Mode", characterData.GCDeliveryType, ref characterData.GCDeliveryType);
+                ImGuiEx.DragDropRepopulate("模式", characterData.GCDeliveryType, ref characterData.GCDeliveryType);
 
                 ImGui.PopID();
             }

@@ -11,7 +11,7 @@ namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.GCDeliveryEntries;
 public sealed unsafe class ExchangeLists : InventoryManagementBase
 {
     private ImGuiEx.RealtimeDragDrop<GCExchangeItem> DragDrop = new("GCELDD", x => x.ID);
-    public override string Name { get; } = "Grand Company Delivery/Exchange Lists";
+    public override string Name { get; } = "大國聯防軍 - 軍票交換清單";
     private GCExchangeCategoryTab? SelectedCategory = null;
     private GCExchangeCategoryTab? SelectedCategory2 = null;
     private GCExchangeRankTab? SelectedRank = null;

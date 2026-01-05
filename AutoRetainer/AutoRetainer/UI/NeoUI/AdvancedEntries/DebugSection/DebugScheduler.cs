@@ -1,4 +1,4 @@
-﻿using AutoRetainer.Scheduler.Handlers;
+using AutoRetainer.Scheduler.Handlers;
 using AutoRetainer.Scheduler.Tasks;
 using Dalamud.Utility;
 using FFXIVClientStructs.FFXIV.Client.UI;
@@ -176,7 +176,7 @@ internal unsafe class DebugScheduler : DebugSectionBase
                                         }
                                 };
                 addon->FireCallback(1, v);
-                Notify.Info("Done");
+                Notify.Info("已完成");
             }
         }
         {

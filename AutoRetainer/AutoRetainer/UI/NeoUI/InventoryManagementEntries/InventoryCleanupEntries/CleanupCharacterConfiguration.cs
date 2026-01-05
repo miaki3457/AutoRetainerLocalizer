@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.InventoryCleanupEntries;
 public sealed unsafe class CleanupCharacterConfiguration : InventoryManagementBase
 {
-    public override string Name { get; } = "Inventory Cleanup/Character Configuration";
+    public override string Name { get; } = "背包清理/角色配置";
 
     public override int DisplayPriority => -20;
 
