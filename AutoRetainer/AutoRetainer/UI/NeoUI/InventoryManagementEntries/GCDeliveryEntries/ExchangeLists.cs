@@ -11,7 +11,7 @@ namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.GCDeliveryEntries;
 public sealed unsafe class ExchangeLists : InventoryManagementBase
 {
     private ImGuiEx.RealtimeDragDrop<GCExchangeItem> DragDrop = new("GCELDD", x => x.ID);
-    public override string Name { get; } = "大國聯防軍 - 軍票交換清單";
+    public override string Name { get; } = "大國防聯軍 - 軍票交換清單";
     private GCExchangeCategoryTab? SelectedCategory = null;
     private GCExchangeCategoryTab? SelectedCategory2 = null;
     private GCExchangeRankTab? SelectedRank = null;
@@ -23,13 +23,13 @@ public sealed unsafe class ExchangeLists : InventoryManagementBase
     {
         C.AdditionalGCExchangePlans.Where(x => x.GUID == Guid.Empty).Each(x => x.GUID = Guid.NewGuid());
         ImGuiEx.TextWrapped($"""
-選擇在大國聯防軍專家籌備期間要自動購買的項目。購買邏輯：
-- 系統將嘗試從清單中購買第一個可用的項目。
-- 購買將持續到該項目在您的背包中達到指定數量。
-如果清單中沒有可購買的項目，或您的背包空間不足：
-- 系統將改為購買探險幣。
-- 探險幣購買將持續到您的探險幣數量達到 65,000 個。
-一旦達到探險幣上限且無法進行其他購買：
+選擇在大國防聯軍專家籌備期間要自動購買的物品。購買邏輯：
+- 系統將嘗試購買清單中第一個可用的物品。
+- 購買將持續到該物品在背包中的數量達到指定目標為止。
+如果清單中沒有物品可供購買，或背包空間不足：
+- 系統將轉為購買探險幣。
+- 購買探險幣將持續到您的探險幣數量達到 65,000 個。
+一旦達到探險幣上限且無法再進行其他購買：
 - 任何多餘的軍票都將被丟棄。
             """);
 

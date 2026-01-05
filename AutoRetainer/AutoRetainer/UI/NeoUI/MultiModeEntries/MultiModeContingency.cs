@@ -1,4 +1,4 @@
-﻿using AutoRetainerAPI.Configuration;
+using AutoRetainerAPI.Configuration;
 using System.Collections.Frozen;
 
 namespace AutoRetainer.UI.NeoUI.MultiModeEntries;
@@ -11,20 +11,20 @@ public class MultiModeContingency : NeoUIEntry
         [WorkshopFailAction.ExcludeChar] = "Exclude captain from multi mode rotation",
     }.ToFrozenDictionary();
 
-    public override string Path => "Multi Mode/Contingency";
+    public override string Path => "多角色模式/應急設定";
 
     public override NuiBuilder Builder { get; init; } = new NuiBuilder()
-        .Section("Contingency")
-        .TextWrapped("Here you can apply various fallback actions to perform in the case of some common failure states or potential operation errors.")
-        .EnumComboFullWidth(null, "Ceruleum Tanks Expended", () => ref C.FailureNoFuel, (x) => x != WorkshopFailAction.ExcludeVessel, WorkshopFailActionNames, "Applies selected fallback action in the case of insufficient Ceruleum Tanks to deploy vessel on a new voyage.")
-        .EnumComboFullWidth(null, "Unable to Repair Deployable", () => ref C.FailureNoRepair, null, WorkshopFailActionNames, "Applies selected fallback action in the case of insufficient Magitek Repair Materials to repair a vessel.")
-        .EnumComboFullWidth(null, "Inventory at Capacity", () => ref C.FailureNoInventory, (x) => x != WorkshopFailAction.ExcludeVessel, WorkshopFailActionNames, "Applies selected fallback action in the case of the captain's inventory having insufficient space to receive voyage rewards.")
-        .EnumComboFullWidth(null, "Critical Operation Failure", () => ref C.FailureGeneric, (x) => x != WorkshopFailAction.ExcludeVessel, WorkshopFailActionNames, "Applies selected fallback action in the case of any unknown or miscellaneous error.")
-        .Widget("Jailed by the GM", (x) =>
+        .Section("應急設定")
+        .TextWrapped("在此配置各種常見故障狀態或潛在操作錯誤時的緊急方案")
+        .EnumComboFullWidth(null, "青磷水耗盡", () => ref C.FailureNoFuel, (x) => x != WorkshopFailAction.ExcludeVessel, WorkshopFailActionNames, "Applies selected fallback action in the case of insufficient Ceruleum Tanks to deploy vessel on a new voyage.")
+        .EnumComboFullWidth(null, "無法維修艦艇", () => ref C.FailureNoRepair, null, WorkshopFailActionNames, "Applies selected fallback action in the case of insufficient Magitek Repair Materials to repair a vessel.")
+        .EnumComboFullWidth(null, "背包空間不足", () => ref C.FailureNoInventory, (x) => x != WorkshopFailAction.ExcludeVessel, WorkshopFailActionNames, "Applies selected fallback action in the case of the captain's inventory having insufficient space to receive voyage rewards.")
+        .EnumComboFullWidth(null, "關鍵操作失敗", () => ref C.FailureGeneric, (x) => x != WorkshopFailAction.ExcludeVessel, WorkshopFailActionNames, "Applies selected fallback action in the case of any unknown or miscellaneous error.")
+        .Widget("被 GM 關監獄", (x) =>
         {
             ImGui.BeginDisabled();
             ImGuiEx.SetNextItemFullWidth();
-            if(ImGui.BeginCombo("##jailsel", "Terminate the game")) { ImGui.EndCombo(); }
+            if(ImGui.BeginCombo("##jailsel", "強制結束遊戲")) { ImGui.EndCombo(); }
             ImGui.EndDisabled();
         }, "Applies selected fallback action in the case if you got jailed by the GM while plugin is running. Good luck!");
 }

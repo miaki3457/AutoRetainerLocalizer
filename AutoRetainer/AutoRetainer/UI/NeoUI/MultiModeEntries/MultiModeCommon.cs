@@ -1,20 +1,20 @@
 namespace AutoRetainer.UI.NeoUI.MultiModeEntries;
 public class MultiModeCommon : NeoUIEntry
 {
-    public override string Path => "Multi Mode/Common Settings";
+    public override string Path => "多角色模式/通用設定";
 
     public override NuiBuilder Builder { get; init; } = new NuiBuilder()
-        .Section("Common Settings")
-        .Checkbox($"Wait on login screen", () => ref C.MultiWaitOnLoginScreen, "If no character is available for ventures, you will be logged off until any character is available again. Title screen movie will be disabled while this option and MultiMode are enabled.")
-        .Checkbox($"Disable Multi Mode on Manual Login", () => ref C.MultiDisableOnRelog, "Upon relogging via AutoRetainer's UI or command, disable Multi Mode.")
-        .Checkbox($"Do not reset Preferred Character on Manual Login", () => ref C.MultiNoPreferredReset, "Upon relogging via AutoRetainer's UI or command, do not reset preferred character.")
-        .Checkbox("Allow entering shared houses", () => ref C.SharedHET)
-        .Checkbox("Attempt to enter house on login even when Multi Mode is disabled", () => ref C.HETWhenDisabled)
-        .Checkbox("Do not teleport or enter house for retainers when already next to bell", () => ref C.NoTeleportHetWhenNextToBell)
+        .Section("通用設定")
+        .Checkbox($"在登入介面等待", () => ref C.MultiWaitOnLoginScreen, "如果沒有角色可進行探險任務，你將保持登出狀態直到有角色可用。啟用此選項和多角色模式時，標題畫面動畫將會停用。")
+        .Checkbox($"手動登入時停用多角色模式", () => ref C.MultiDisableOnRelog, "使用 AutoRetainer 介面或指令重新登入後，多角色模式將被關閉。")
+        .Checkbox($"手動登入時不重置首選角色", () => ref C.MultiNoPreferredReset, "使用 AutoRetainer 介面或指令重新登入後，首選角色保持不變。")
+        .Checkbox("允許進入共享房屋", () => ref C.SharedHET)
+        .Checkbox("即使多角色模式停用也嘗試在登入時進入房屋", () => ref C.HETWhenDisabled)
+        .Checkbox("當已在傳喚鈴旁時禁止傳送或進入房屋", () => ref C.NoTeleportHetWhenNextToBell)
 
-        .Section("Game startup")
-        .Checkbox($"Enable Multi Mode on Game Boot", () => ref C.MultiAutoStart)
-        .Checkbox($"Enable Multi Mode on Plugin Startup", () => ref C.MultiOnPluginLoad)
+        .Section("遊戲啟動")
+        .Checkbox($"遊戲啟動時啟用多角色模式", () => ref C.MultiAutoStart)
+        .Checkbox($"外掛啟動時啟用多角色模式", () => ref C.MultiOnPluginLoad)
         .Indent()
         .SliderInt(150f, "Delay, seconds", () => ref C.MultiModeOnPluginLoadDelay, 0, 20)
         .Unindent()
@@ -61,13 +61,9 @@ public class MultiModeCommon : NeoUIEntry
         .Checkbox("為潛水艇/飛艇傳送至部隊房屋", () => ref C.GlobalTeleportOptions.Deployables)
         .Checkbox("Enable Simple Teleport", () => ref C.AllowSimpleTeleport)
         .Unindent()
-        .Widget(() => ImGuiEx.HelpMarker("""
-            Allows teleporting to houses without registering them in Lifestream. Note: the Lifestream plugin is still required for teleportation to work.
+        .Widget(() => ImGuiEx.HelpMarker("允許在未向Lifestream註冊房屋的情況下傳送。傳送功能仍需安裝Lifestream外掛才能運作。\n\n警告：此選項比在Lifestream中註冊房屋更不可靠。請僅在必要時使用。", EColor.RedBright, FontAwesomeIcon.ExclamationTriangle.ToIconString()))
 
-            Warning: This option is less reliable than registering your houses in Lifestream. Use it only if necessary.
-            """, EColor.RedBright, FontAwesomeIcon.ExclamationTriangle.ToIconString()))
-
-        .Section("Bailout Module")
-        .Checkbox("Auto-close and retry logging in on connection errors", () => ref C.ResolveConnectionErrors, "Upon disconnecting, AutoRetainer will attempt to log back in. If the session has expired, no login attempt will be made.")
+        .Section("緊急逃生模組")
+        .Checkbox("發生連線錯誤時自動關閉並重試登入", () => ref C.ResolveConnectionErrors, "Upon disconnecting, AutoRetainer will attempt to log back in. If the session has expired, no login attempt will be made.")
         .Widget(() => ImGuiEx.PluginAvailabilityIndicator([new("NoKillPlugin")]));
 }
