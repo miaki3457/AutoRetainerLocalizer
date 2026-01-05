@@ -15,7 +15,7 @@ public sealed unsafe class UserInterface : NeoUIEntry
         .Checkbox("匿名化雇員", () => ref C.NoNames, "Retainer names will be redacted from general UI elements. They will not be hidden in debug menus and plugin logs however. While this option is on, character and retainer numbers are not guaranteed to be equal in different sections of a plugin (for example, retainer 1 in retainers view is not guaranteed to be the same retainer as in statistics view).")
         .Checkbox("在雇員介面顯示快捷選單", () => ref C.UIBar)
         .Checkbox("顯示雇員詳細資訊", () => ref C.ShowAdditionalInfo, "Displays retainer item level/gathering/perception and the name of their current venture in the main UI.")
-        .Widget("Do not close AutoRetainer windows on ESC key press", (x) =>
+        .Widget("按下 ESC 鍵時不關閉 AutoRetainer 視窗", (x) =>
         {
             if(ImGui.Checkbox(x, ref C.IgnoreEsc)) Utils.ResetEscIgnoreByWindows();
         })

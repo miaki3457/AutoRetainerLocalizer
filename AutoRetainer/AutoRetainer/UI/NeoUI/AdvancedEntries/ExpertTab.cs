@@ -20,7 +20,7 @@ public class ExpertTab : NeoUIEntry
         .Checkbox($"顯示多角色模式類型選擇器", () => ref C.DisplayMMType)
         .Checkbox($"在部隊工房中顯示遠航探險", () => ref C.ShowDeployables)
         .Checkbox("啟用應急復原模組", () => ref C.EnableBailout)
-        .InputInt(150f, "Timeout before AutoRetainer will attempt to unstuck, seconds", () => ref C.BailoutTimeout)
+        .InputInt(150f, "AutoRetainer嘗試解除卡死前的超時時間(秒)", () => ref C.BailoutTimeout)
 
         .Section("設定")
         .Checkbox($"禁用排序和折疊/展開功能", () => ref C.NoCurrentCharaOnTop)

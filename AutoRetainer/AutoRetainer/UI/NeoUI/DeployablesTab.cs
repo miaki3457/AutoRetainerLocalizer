@@ -46,7 +46,7 @@ public class DeployablesTab : NeoUIEntry
         .Section("Alert Settings")
         .Checkbox($"Less than possible vessels enabled", () => ref C.AlertNotAllEnabled)
         .Checkbox($"Enabled vessel isn't deployed", () => ref C.AlertNotDeployed)
-        .Widget("Unoptimal submersible configuration alerts:", (z) =>
+        .Widget("潛水艇配置非最佳化警報:", (z) =>
         {
             foreach(var x in C.UnoptimalVesselConfigurations)
             {
@@ -96,7 +96,7 @@ public class DeployablesTab : NeoUIEntry
             ImGuiEx.FilteringCheckbox("Export only enabled submarines (otherwise - all)", out var exportEnabledSubs);
             if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.FileExport, "Export"))
             {
-                string[] headers = ["Name", "Build (1)", "Build (2)", "Build (3)", "Build (4)", "Level (1)", "Level (2)", "Level (3)", "Level (4)", "Route (1)", "Route (2)", "Route (3)", "Route (4)"];
+                string[] headers = ["名稱", "Build (1)", "Build (2)", "Build (3)", "Build (4)", "Level (1)", "Level (2)", "Level (3)", "Level (4)", "Route (1)", "Route (2)", "Route (3)", "Route (4)"];
                 List<string[]> data = [];
                 foreach(var x in C.OfflineData)
                 {

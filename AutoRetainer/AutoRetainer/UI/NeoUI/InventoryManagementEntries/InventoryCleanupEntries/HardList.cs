@@ -9,7 +9,7 @@ public class HardList : InventoryManagementBase
         Builder = InventoryCleanupCommon.CreateCleanupHeaderBuilder()
             .Section(Name)
             .TextWrapped("這些物品將始終被出售，不論其來源，只要堆疊數量不超過下方設定的數值。此外，僅這些物品會被出售給 NPC。")
-            .InputInt(150f, $"Maximum stack size to be sold", () => ref InventoryCleanupCommon.SelectedPlan.IMAutoVendorHardStackLimit)
+            .InputInt(150f, $"可出售的最大堆疊數量", () => ref InventoryCleanupCommon.SelectedPlan.IMAutoVendorHardStackLimit)
             .Widget(() => InventoryManagementCommon.DrawListNew(
                 itemId => InventoryCleanupCommon.SelectedPlan.AddItemToList(IMListKind.HardSell, itemId, out _),
                 itemId => InventoryCleanupCommon.SelectedPlan.IMAutoVendorHard.Remove(itemId),
