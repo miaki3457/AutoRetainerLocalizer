@@ -209,9 +209,9 @@ namespace Localizer
             }
 
             return SyntaxFactory.InterpolatedStringExpression(
-                SyntaxFactory.Token(SyntaxKind.InterpolatedStringStartToken),
+                node.StringStartToken,
                 SyntaxFactory.List(contents),
-                SyntaxFactory.Token(SyntaxKind.InterpolatedStringEndToken));
+                node.StringEndToken
         }
     }
 }
