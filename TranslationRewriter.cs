@@ -171,7 +171,7 @@ namespace Localizer
                 }
         
                 string joined = string.Join("\n" + leadingWhitespace, lines);        
-                return joined;
+                return isFirstPart ? leadingWhitespace + joined : joined;
             }
         
             // 標記是否為字串的最開頭部分
