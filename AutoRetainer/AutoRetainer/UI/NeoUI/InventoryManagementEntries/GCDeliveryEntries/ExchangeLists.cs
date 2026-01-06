@@ -23,7 +23,7 @@ public sealed unsafe class ExchangeLists : InventoryManagementBase
     {
         C.AdditionalGCExchangePlans.Where(x => x.GUID == Guid.Empty).Each(x => x.GUID = Guid.NewGuid());
         ImGuiEx.TextWrapped($"""
-                                                               選擇在大國防聯軍專家籌備期間要自動購買的物品。購買邏輯：
+選擇在大國防聯軍專家籌備期間要自動購買的物品。購買邏輯：
                                                                - 系統將嘗試購買清單中第一個可用的物品。
                                                                - 購買將持續到該物品在背包中的數量達到指定目標為止。
                                                                如果清單中沒有物品可供購買，或背包空間不足：
