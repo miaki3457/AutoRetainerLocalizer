@@ -145,9 +145,12 @@ namespace Localizer
             string leadingWhitespace = "";
             if (isRawString)
             {
-                // 獲取結尾引號的列位置 (Column) 作為基準
-                var lineSpan = node.StringEndToken.GetLocation().GetLineSpan();
-                leadingWhitespace = new string(' ', lineSpan.StartLinePosition.Character);
+                // 抓取結束引號「同一行」最左邊的所有空白
+                var endTokenTrivia = node.StringEndToken.LeadingTrivia.ToString();
+                var lastNewLineIndex = endTokenTrivia.LastIndexOf('\n');
+                leadingWhitespace = lastNewLineIndex >= 0 
+                    ? endTokenTrivia.Substring(lastNewLineIndex + 1) 
+                    : endTokenTrivia;
             }
         
             var matches = Regex.Matches(translatedTemplate, @"\{(\d+)\}");
@@ -167,7 +170,7 @@ namespace Localizer
                     lines[i] = lines[i].TrimStart(); // 去掉字典裡可能自帶的舊縮排
                 }
         
-                string joined = string.Join("\n" , lines);        
+                string joined = string.Join("\n" + leadingWhitespace , lines);        
                 return isFirstPart ? leadingWhitespace + joined : joined;
             }
         
