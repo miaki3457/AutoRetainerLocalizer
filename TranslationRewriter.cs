@@ -137,29 +137,57 @@ namespace Localizer
             return invocation.Expression.ToString();
         }
 
-        // 修正後的 ReconstructInterpolatedString，傳入原始 node 參數
         private SyntaxNode ReconstructInterpolatedString(InterpolatedStringExpressionSyntax node, string translatedTemplate, List<InterpolationSyntax> interpolations)
         {
             var contents = new List<InterpolatedStringContentSyntax>();
+            
+            // 1. 偵測是否為原始字串 ($"""...)
+            bool isRawString = node.StringStartToken.ValueText.StartsWith("$" + "\"\"\"");
+        
+            // 2. 獲取基準縮排 (抓取結尾引號所在的列數作為空格數)
+            string leadingWhitespace = "";
+            if (isRawString)
+            {
+                var lineSpan = node.StringEndToken.GetLocation().GetLineSpan();
+                int column = lineSpan.StartLinePosition.Character;
+                leadingWhitespace = new string(' ', column);
+            }
+        
             var matches = Regex.Matches(translatedTemplate, @"\{(\d+)\}");
             int lastIndex = 0;
-
+        
+            // 定義一個內部處理函式，統一處理多行縮排與轉義
+            string ProcessText(string rawText)
+            {
+                if (string.IsNullOrEmpty(rawText)) return rawText;
+                
+                // 如果是原始字串，我們要把換行符號後方補上縮排空格
+                // 如果是一般字串，則需要轉義引號
+                string processed = isRawString 
+                    ? rawText.Replace("\n", "\n" + leadingWhitespace) 
+                    : rawText.Replace("\"", "\\\"");
+                    
+                return processed;
+            }
+        
             foreach (Match match in matches)
             {
+                // 處理插值與插值之間的純文字
                 if (match.Index > lastIndex)
                 {
                     string textPart = translatedTemplate.Substring(lastIndex, match.Index - lastIndex);
-                    string escapedText = textPart.Replace("\"", "\\\"");
-
+                    string finalPart = ProcessText(textPart);
+        
                     contents.Add(SyntaxFactory.InterpolatedStringText(
                         SyntaxFactory.Token(
                             SyntaxFactory.TriviaList(),
                             SyntaxKind.InterpolatedStringTextToken,
-                            escapedText,
-                            textPart,
+                            finalPart, // 顯示在編輯器上的樣子
+                            textPart,  // 實際的值
                             SyntaxFactory.TriviaList())));
                 }
-
+        
+                // 插入原本的插值運算式 (例如 {0}, {itemName})
                 int idx = int.Parse(match.Groups[1].Value);
                 if (idx < interpolations.Count)
                 {
@@ -167,21 +195,23 @@ namespace Localizer
                 }
                 lastIndex = match.Index + match.Length;
             }
-
+        
+            // 處理最後一段剩餘的文字
             if (lastIndex < translatedTemplate.Length)
             {
                 string rest = translatedTemplate.Substring(lastIndex);
-                string escapedRest = rest.Replace("\"", "\\\"");
-
+                string finalRest = ProcessText(rest);
+        
                 contents.Add(SyntaxFactory.InterpolatedStringText(
                     SyntaxFactory.Token(
                         SyntaxFactory.TriviaList(),
                         SyntaxKind.InterpolatedStringTextToken,
-                        escapedRest,
+                        finalRest,
                         rest,
                         SyntaxFactory.TriviaList())));
             }
-
+        
+            // 重新組合成插值字串運算式，並保留原始的開頭與結尾 Token
             return SyntaxFactory.InterpolatedStringExpression(
                 node.StringStartToken,
                 SyntaxFactory.List(contents),
