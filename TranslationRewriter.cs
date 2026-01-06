@@ -170,9 +170,8 @@ namespace Localizer
                     lines[i] = lines[i].TrimStart(); // 去掉字典裡可能自帶的舊縮排
                 }
         
-                string joined = string.Join("\n" + leadingWhitespace, lines);
-        
-                return isFirstPart ? "\n" + leadingWhitespace + joined : joined;
+                string joined = string.Join("\n" + leadingWhitespace, lines);        
+                return joined;
             }
         
             // 標記是否為字串的最開頭部分
