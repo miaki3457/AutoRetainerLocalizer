@@ -11,9 +11,9 @@ public static unsafe class RetainerTable
     {
         if(ImGui.BeginTable("##retainertable", 4, ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.Borders))
         {
-            ImGui.TableSetupColumn("Name", ImGuiTableColumnFlags.WidthStretch);
-            ImGui.TableSetupColumn("Job");
-            ImGui.TableSetupColumn("Venture");
+            ImGui.TableSetupColumn("名稱", ImGuiTableColumnFlags.WidthStretch);
+            ImGui.TableSetupColumn("職業");
+            ImGui.TableSetupColumn("探險");
             ImGui.TableSetupColumn("");
             ImGui.TableHeadersRow();
             var retainers = P.GetSelectedRetainers(data.CID);
@@ -46,7 +46,7 @@ public static unsafe class RetainerTable
                         if(!C.EnableEntrustManager) c = ImGuiColors.DalamudRed;
                         ImGuiEx.Text(c, Lang.IconDuplicate);
                         ImGui.PopFont();
-                        ImGuiEx.Tooltip($"委託計畫 "{plan.Name}" 已啟用。" + (plan.ManualPlan ? "\\n這是手動處理計劃": "") + (Utils.GetReachableRetainerBell(false) != null ? "\\n點擊進行委託": ""));
+                        ImGuiEx.Tooltip($"委託計畫 \"{plan.Name}\" 已啟用。" + (plan.ManualPlan ? "\\n這是手動處理計劃": "") + (Utils.GetReachableRetainerBell(false) != null ? "\\n點擊進行委託": ""));
                         if(ImGui.IsItemClicked())
                         {
                             if(!Svc.Condition[Dalamud.Game.ClientState.Conditions.ConditionFlag.OccupiedSummoningBell])

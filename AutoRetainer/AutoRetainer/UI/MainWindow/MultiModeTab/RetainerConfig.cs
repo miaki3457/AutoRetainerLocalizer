@@ -16,7 +16,7 @@ public static unsafe class RetainerConfig
         ImGui.SetNextItemWidth(150f);
         if(ImGui.BeginCombo($"##select", selectedPlan?.Name ?? "禁用", ImGuiComboFlags.HeightLarge))
         {
-            if(ImGui.Selectable("Disabled")) adata.EntrustPlan = Guid.Empty;
+            if(ImGui.Selectable("禁用")) adata.EntrustPlan = Guid.Empty;
             for(var i = 0; i < C.EntrustPlans.Count; i++)
             {
                 var plan = C.EntrustPlans[i];
@@ -35,7 +35,7 @@ public static unsafe class RetainerConfig
         }
         if(ImGui.BeginPopup("CopyEntrustPlanTo"))
         {
-            if(ImGui.Selectable("To all other retainers of this character"))
+            if(ImGui.Selectable("複製到此角色的其他所有僱員"))
             {
                 var cnt = 0;
                 foreach(var x in data.RetainerData)
@@ -45,7 +45,7 @@ public static unsafe class RetainerConfig
                 }
                 Notify.Info($"已更改 {cnt} 個僱員");
             }
-            if(ImGui.Selectable("To all other retainers without entrust plan of this character"))
+            if(ImGui.Selectable("複製到此角色其他所有無委託計劃的僱員"))
             {
                 foreach(var x in data.RetainerData)
                 {
@@ -58,7 +58,7 @@ public static unsafe class RetainerConfig
                     Notify.Info($"已更改 {cnt} 個僱員");
                 }
             }
-            if(ImGui.Selectable("To all other retainers of ALL characters"))
+            if(ImGui.Selectable("複製到所有角色的其他所有僱員"))
             {
                 var cnt = 0;
                 foreach(var offlineData in C.OfflineData)
@@ -71,7 +71,7 @@ public static unsafe class RetainerConfig
                 }
                 Notify.Info($"已更改 {cnt} 個僱員");
             }
-            if(ImGui.Selectable("To all other retainers without entrust plan of ALL characters"))
+            if(ImGui.Selectable("複製到所有角色其他所有無委託計劃的僱員"))
             {
                 var cnt = 0;
                 foreach(var offlineData in C.OfflineData)

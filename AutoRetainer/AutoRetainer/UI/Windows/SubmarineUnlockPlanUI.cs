@@ -218,7 +218,7 @@ internal unsafe class SubmarineUnlockPlanUI : Window
                     Svc.Chat.Print($"Here is the list of all points that can be unlocked. Whenever a plugin needs to select something to unlock, a first available destination will be chosen from this list. Please note that you can NOT simply specify end point of unlocking, you need to select ALL destinations on your way.");
                 }
             });
-            if(ImGui.BeginChild("Plan"))
+            if(ImGui.BeginChild("計畫"))
             {
                 if(!IsSubDataAvail())
                 {

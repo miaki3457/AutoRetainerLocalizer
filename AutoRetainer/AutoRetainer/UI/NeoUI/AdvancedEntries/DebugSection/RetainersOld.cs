@@ -45,8 +45,8 @@ internal unsafe class RetainersOld : DebugSectionBase
         }
         ImGui.SetCursorPos(storePos);
         ImGui.BeginTable("##ertainertable", 3, ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.Borders);
-        ImGui.TableSetupColumn("Name", ImGuiTableColumnFlags.WidthStretch);
-        ImGui.TableSetupColumn("Venture");
+        ImGui.TableSetupColumn("名稱", ImGuiTableColumnFlags.WidthStretch);
+        ImGui.TableSetupColumn("探險");
         ImGui.TableSetupColumn("Interaction");
         ImGui.TableHeadersRow();
         var retainers = P.GetSelectedRetainers(Svc.ClientState.LocalContentId);

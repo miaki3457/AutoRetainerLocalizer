@@ -71,23 +71,23 @@ internal unsafe class AutoRetainerWindow : Window
         {
             if(time.Days > 0)
             {
-                return $"Session expires in {time.Days} day{(time.Days == 1 ? "" : "s")}" + (time.Hours > 0 ? $" {time.Hours} hours" : "");
+                return $"會話將在 {time.Days} 天{(time.Days == 1 ? "" : "s")}" + (time.Hours > 0 ? $" {time.Hours} 小時過期" : "");
             }
             else
             {
                 if(time.Hours > 0)
                 {
-                    return $"Session expires in {time.Hours} hours";
+                    return $"會話將在 {time.Hours} 小時後過期";
                 }
                 else
                 {
-                    return $"Session expires in less than an hour";
+                    return $"會話將在一個小時內過期";
                 }
             }
         }
         else
         {
-            return "Session expired";
+            return "會話已過期";
         }
     }
     public override void Draw()
@@ -207,11 +207,11 @@ internal unsafe class AutoRetainerWindow : Window
 
             PatreonBanner.DrawRight();
             ImGuiEx.EzTabBar("tabbar", PatreonBanner.Text,
-                            ("Retainers", MultiModeUI.Draw, null, true),
-                            ("Deployables", WorkshopUI.Draw, null, true),
-                            ("Troubleshooting", TroubleshootingUI.Draw, null, true),
-                            ("Statistics", DrawStats, null, true),
-                            ("About", CustomAboutTab.Draw, null, true)
+                            ("僱員管理", MultiModeUI.Draw, null, true),
+                            ("遠航探索", WorkshopUI.Draw, null, true),
+                            ("故障排除", TroubleshootingUI.Draw, null, true),
+                            ("統計信息", DrawStats, null, true),
+                            ("關於", CustomAboutTab.Draw, null, true)
                             );
             if(!C.PinWindow)
             {

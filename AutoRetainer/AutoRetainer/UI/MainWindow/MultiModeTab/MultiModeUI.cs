@@ -63,7 +63,7 @@ internal static unsafe class MultiModeUI
             {
                 if(MultiMode.Relog(data, out var error, RelogReason.ConfigGUI))
                 {
-                    Notify.Success("Relogging...");
+                    Notify.Success("正在重新登入...");
                 }
                 else
                 {
@@ -150,10 +150,10 @@ internal static unsafe class MultiModeUI
                 }
             }
             ImGui.SameLine(0, 0);
-            List<(bool, string)> texts = [(data.Ventures < C.UIWarningRetVentureNum, $"V: {data.Ventures}"), (data.InventorySpace < C.UIWarningRetSlotNum, $"I: {data.InventorySpace}")];
+            List<(bool, string)> texts = [(data.Ventures < C.UIWarningRetVentureNum, $"探險幣: {data.Ventures}"), (data.InventorySpace < C.UIWarningRetSlotNum, $"空格: {data.InventorySpace}")];
             if(C.CharEqualize && MultiMode.Enabled)
             {
-                texts.Insert(0, (false, $"C: {MultiMode.CharaCnt.GetOrDefault(data.CID)}"));
+                texts.Insert(0, (false, $"計數: {MultiMode.CharaCnt.GetOrDefault(data.CID)}"));
             }
             overlayTexts.Add((new Vector2(ImGui.GetContentRegionMax().X - ImGui.GetStyle().FramePadding.X, rCurPos.Y + ImGui.GetStyle().FramePadding.Y), [.. texts]));
             ImGui.NewLine();

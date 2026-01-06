@@ -6,7 +6,7 @@ using ECommons.WindowsFormsReflector;
 namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.InventoryCleanupEntries;
 public unsafe class FastAddition : InventoryManagementBase
 {
-    public override string Name { get; } = "Inventory Cleanup/Fast Addition and Removal";
+    public override string Name { get; } = "背包清理/快速添加和移除";
 
     private FastAddition()
     {

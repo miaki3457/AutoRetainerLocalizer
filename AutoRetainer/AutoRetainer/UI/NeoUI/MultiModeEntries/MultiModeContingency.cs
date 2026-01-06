@@ -11,7 +11,7 @@ public class MultiModeContingency : NeoUIEntry
         [WorkshopFailAction.ExcludeChar] = "Exclude captain from multi mode rotation",
     }.ToFrozenDictionary();
 
-    public override string Path => "Multi Mode/Contingency";
+    public override string Path => "多角色模式/應急設定";
 
     public override NuiBuilder Builder { get; init; } = new NuiBuilder()
         .Section("應急設定")

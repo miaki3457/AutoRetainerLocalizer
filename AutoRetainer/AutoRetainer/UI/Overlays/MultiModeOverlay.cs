@@ -292,7 +292,7 @@ internal class MultiModeOverlay : Window
         ImGui.Dummy(Vector2.One);
         if(Data != null && !C.OldStatusIcons)
         {
-            ImGuiEx.LineCentered("Status", delegate
+            ImGuiEx.LineCentered("狀態", delegate
             {
                 if(C.MultiModeWorkshopConfiguration.MultiWaitForAll)
                 {

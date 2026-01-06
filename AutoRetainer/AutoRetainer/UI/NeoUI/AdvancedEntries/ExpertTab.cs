@@ -4,7 +4,7 @@ using ECommons.Reflection;
 namespace AutoRetainer.UI.NeoUI.AdvancedEntries;
 public class ExpertTab : NeoUIEntry
 {
-    public override string Path => "Advanced/Expert Settings";
+    public override string Path => "進階設定/專家設定";
 
     public override NuiBuilder Builder { get; init; } = new NuiBuilder()
         .Section("Behavior")

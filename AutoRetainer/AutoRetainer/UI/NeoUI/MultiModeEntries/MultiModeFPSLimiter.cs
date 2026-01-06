@@ -1,7 +1,7 @@
 namespace AutoRetainer.UI.NeoUI.MultiModeEntries;
 public class MultiModeFPSLimiter : NeoUIEntry
 {
-    public override string Path => "Multi Mode/FPS Limiter";
+    public override string Path => "多角色模式/FPS限制器";
 
     public override NuiBuilder Builder { get; init; } = new NuiBuilder()
         .Section("FPS限制器")

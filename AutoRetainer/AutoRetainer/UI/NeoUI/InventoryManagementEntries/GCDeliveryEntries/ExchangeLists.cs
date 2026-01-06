@@ -11,7 +11,7 @@ namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.GCDeliveryEntries;
 public sealed unsafe class ExchangeLists : InventoryManagementBase
 {
     private ImGuiEx.RealtimeDragDrop<GCExchangeItem> DragDrop = new("GCELDD", x => x.ID);
-    public override string Name { get; } = "Grand Company Delivery/Exchange Lists";
+    public override string Name { get; } = "大國防聯軍 - 軍票交換清單";
     private GCExchangeCategoryTab? SelectedCategory = null;
     private GCExchangeCategoryTab? SelectedCategory2 = null;
     private GCExchangeRankTab? SelectedRank = null;
@@ -24,13 +24,13 @@ public sealed unsafe class ExchangeLists : InventoryManagementBase
         C.AdditionalGCExchangePlans.Where(x => x.GUID == Guid.Empty).Each(x => x.GUID = Guid.NewGuid());
         ImGuiEx.TextWrapped($"""
 選擇在大國防聯軍專家籌備期間要自動購買的物品。購買邏輯：
-                                                               - 系統將嘗試購買清單中第一個可用的物品。
-                                                               - 購買將持續到該物品在背包中的數量達到指定目標為止。
-                                                               如果清單中沒有物品可供購買，或背包空間不足：
-                                                               - 系統將轉為購買探險幣。
-                                                               - 購買探險幣將持續到您的探險幣數量達到 65,000 個。
-                                                               一旦達到探險幣上限且無法再進行其他購買：
-                                                               - 任何多餘的軍票都將被丟棄。
+- 系統將嘗試購買清單中第一個可用的物品。
+- 購買將持續到該物品在背包中的數量達到指定目標為止。
+如果清單中沒有物品可供購買，或背包空間不足：
+- 系統將轉為購買探險幣。
+- 購買探險幣將持續到您的探險幣數量達到 65,000 個。
+一旦達到探險幣上限且無法再進行其他購買：
+- 任何多餘的軍票都將被丟棄。
             """);
 
         var selectedPlan = C.AdditionalGCExchangePlans.FirstOrDefault(x => x.GUID == SelectedPlanGuid);
@@ -38,7 +38,7 @@ public sealed unsafe class ExchangeLists : InventoryManagementBase
         {
             if(ImGui.BeginCombo("##selplan", selectedPlan?.DisplayName ?? "預設計畫"))
             {
-                if(ImGui.Selectable("Default Plan", selectedPlan == null)) SelectedPlanGuid = Guid.Empty;
+                if(ImGui.Selectable("預設計畫", selectedPlan == null)) SelectedPlanGuid = Guid.Empty;
                 ImGui.Separator();
                 foreach(var x in C.AdditionalGCExchangePlans)
                 {
@@ -226,7 +226,7 @@ public sealed unsafe class ExchangeLists : InventoryManagementBase
         }
         if(ImGui.BeginPopup("Ex"))
         {
-            if(ImGui.Selectable("Fill weapons and armor purchases optimally for extra FC points"))
+            if(ImGui.Selectable("自動交換軍票武器與裝備，最佳化以獲取額外部隊點數。(FC Point)"))
             {
                 List<GCExchangeItem> items = [];
                 var qualifyingItems = Utils.SharedGCExchangeListings.Where(x => (x.Value.Category == GCExchangeCategoryTab.Weapons || x.Value.Category == GCExchangeCategoryTab.Armor) && x.Value.Data.GetRarity() == ItemRarity.Green).ToDictionary();
@@ -243,7 +243,7 @@ public sealed unsafe class ExchangeLists : InventoryManagementBase
                 }
             }
             ImGuiEx.Tooltip("選擇此選項將自動填入所有可交換的武器與裝備；交換的武器與裝備將會立即籌備至軍隊，以最大化產生部隊點數。這些物品將會被放在清單末端，且僅在沒有其他可購買物品時才會購買。");
-            if(ImGui.Selectable("Add all missing items"))
+            if(ImGui.Selectable("加入所有缺少的物品"))
             {
                 foreach(var x in Utils.SharedGCExchangeListings)
                 {
@@ -253,16 +253,16 @@ public sealed unsafe class ExchangeLists : InventoryManagementBase
                     }
                 }
             }
-            if(ImGui.Selectable("Reset quantities to 0"))
+            if(ImGui.Selectable("將數量重設為 0"))
             {
                 plan.Items.Each(x => x.Quantity = 0);
                 plan.Items.Each(x => x.QuantitySingleTime = 0);
             }
-            if(ImGui.Selectable("Remove 0-quantity items"))
+            if(ImGui.Selectable("移除數量為 0 的物品"))
             {
                 plan.Items.RemoveAll(x => x.Quantity == 0 && x.QuantitySingleTime == 0);
             }
-            if(ImGuiEx.Selectable("Clear the list (Hold CTRL and click)", enabled: ImGuiEx.Ctrl))
+            if(ImGuiEx.Selectable("清除清單(按住 CTRL + 左鍵)", enabled: ImGuiEx.Ctrl))
             {
                 plan.Items.Clear();
             }
@@ -288,7 +288,7 @@ public sealed unsafe class ExchangeLists : InventoryManagementBase
 
 
         DragDrop.Begin();
-        if(ImGuiEx.BeginDefaultTable("GCDeliveryList", ["##dragDrop", "~Item", "GC", "Lv", "Price", "Category", "Keep", "One-Time", "##controls"]))
+        if(ImGuiEx.BeginDefaultTable("GCDeliveryList", ["##dragDrop", "~Item", "GC", "Lv", "Price", "類別", "Keep", "One-Time", "##controls"]))
         {
             for(var i = 0; i < plan.Items.Count; i++)
             {
