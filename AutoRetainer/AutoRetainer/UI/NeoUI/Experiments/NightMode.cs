@@ -2,7 +2,7 @@ namespace AutoRetainer.UI.NeoUI.Experiments;
 
 internal class NightMode : ExperimentUIEntry
 {
-    public override string Name => "夜間模式";
+    public override string Name => "Night Mode";
     public override void Draw()
     {
         ImGuiEx.TextWrapped($"Night mode:\n" +

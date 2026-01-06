@@ -1,7 +1,7 @@
 namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.InventoryCleanupEntries;
 public class ProtectionList : InventoryManagementBase
 {
-    public override string Name { get; } = "背包清理/保護名單";
+    public override string Name { get; } = "Inventory Cleanup/Protection List";
     private InventoryManagementCommon InventoryManagementCommon = new();
     private ProtectionList()
     {

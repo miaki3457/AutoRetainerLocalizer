@@ -18,10 +18,10 @@ public sealed class FcDataManager
         ImGui.Checkbox($"僅顯示錢包部隊", ref C.DisplayOnlyWalletFC);
         if(ImGui.BeginTable("FCData", 5, ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.Borders | ImGuiTableFlags.RowBg))
         {
-            ImGui.TableSetupColumn($"名稱", ImGuiTableColumnFlags.WidthStretch);
-            ImGui.TableSetupColumn($"角色");
+            ImGui.TableSetupColumn($"Name", ImGuiTableColumnFlags.WidthStretch);
+            ImGui.TableSetupColumn($"Characters");
             ImGui.TableSetupColumn($"Gil");
-            ImGui.TableSetupColumn($"部隊戰績");
+            ImGui.TableSetupColumn($"FC points");
             ImGui.TableSetupColumn($"##control");
             ImGui.TableHeadersRow();
 
@@ -41,13 +41,13 @@ public sealed class FcDataManager
                 foreach(var c in C.OfflineData.Where(z => z.FCID == x.Key))
                 {
                     ImGuiEx.Text(x.Value.HolderChara == c.CID && x.Value.GilCountsTowardsChara ? EColor.GreenBright : null, Censor.Character(c.Name, c.World));
-                    if(ImGuiEx.HoveredAndClicked("左鍵 - 重新登入此角色"))
+                    if(ImGuiEx.HoveredAndClicked("Left click - Relog to this character"))
                     {
                         Svc.Commands.ProcessCommand($"/ays relog {c.Name}@{c.World}");
                     }
                     if(x.Value.GilCountsTowardsChara)
                     {
-                        if(ImGuiEx.HoveredAndClicked("右鍵 - 設為Gil持有者", ImGuiMouseButton.Right))
+                        if(ImGuiEx.HoveredAndClicked("Right click - set as gil holder", ImGuiMouseButton.Right))
                         {
                             x.Value.HolderChara = c.CID;
                         }

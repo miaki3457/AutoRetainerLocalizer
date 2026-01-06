@@ -35,7 +35,7 @@ internal static class SharedUI
         {
             for(var i = 1; i <= 10; i++)
             {
-                if(ImGui.Selectable($"服務帳戶 {i}"))
+                if(ImGui.Selectable($"Service Account {i}"))
                 {
                     data.ServiceAccount = i - 1;
                 }

@@ -5,7 +5,7 @@ using TerraFX.Interop.Windows;
 namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.InventoryCleanupEntries;
 public class GeneralSettings : InventoryManagementBase
 {
-    public override string Name { get; } = "背包清理/一般設定";
+    public override string Name { get; } = "Inventory Cleanup/General Settings";
 
     private GeneralSettings()
     {

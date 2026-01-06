@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.GCDeliveryEntries;
 public sealed unsafe class GCCharacterConfiguration : InventoryManagementBase
 {
-    public override string Name { get; } = "大國防聯軍 - 籌備設定";
+    public override string Name { get; } = "Grand Company Delivery/Character Configuration";
 
     public override int DisplayPriority => -10;
 
@@ -16,7 +16,7 @@ public sealed unsafe class GCCharacterConfiguration : InventoryManagementBase
         ImGuiEx.TextWrapped($"在這裡您可以將預先設定好的兌換清單指派給已註冊的角色，並選擇籌備模式。");
         ImGuiEx.SetNextItemFullWidth();
         ImGuiEx.FilteringInputTextWithHint("##search", "搜索...", out var filter);
-        if(ImGuiEx.BeginDefaultTable(["~Character", "計畫", "籌備模式"]))
+        if(ImGuiEx.BeginDefaultTable(["~Character", "Plan", "Delivery mode"]))
         {
             foreach(var characterData in C.OfflineData)
             {
@@ -30,7 +30,7 @@ public sealed unsafe class GCCharacterConfiguration : InventoryManagementBase
                 ImGui.SetNextItemWidth(200f);
                 if(ImGui.BeginCombo("##chPlan", plan?.DisplayName ?? "預設計畫", ImGuiComboFlags.HeightLarge))
                 {
-                    if(ImGui.Selectable("預設計畫", plan == null)) characterData.ExchangePlan = Guid.Empty;
+                    if(ImGui.Selectable("Default Plan", plan == null)) characterData.ExchangePlan = Guid.Empty;
                     ImGui.Separator();
                     foreach(var exchangePlan in C.AdditionalGCExchangePlans)
                     {
@@ -43,12 +43,12 @@ public sealed unsafe class GCCharacterConfiguration : InventoryManagementBase
                     }
                     ImGui.EndCombo();
                 }
-                ImGuiEx.DragDropRepopulate("計畫", plan?.GUID ?? Guid.Empty, ref characterData.ExchangePlan);
+                ImGuiEx.DragDropRepopulate("Plan", plan?.GUID ?? Guid.Empty, ref characterData.ExchangePlan);
 
                 ImGui.TableNextColumn();
                 ImGui.SetNextItemWidth(150f);
                 ImGuiEx.EnumCombo("##deliveryMode", ref characterData.GCDeliveryType);
-                ImGuiEx.DragDropRepopulate("模式", characterData.GCDeliveryType, ref characterData.GCDeliveryType);
+                ImGuiEx.DragDropRepopulate("Mode", characterData.GCDeliveryType, ref characterData.GCDeliveryType);
 
                 ImGui.PopID();
             }

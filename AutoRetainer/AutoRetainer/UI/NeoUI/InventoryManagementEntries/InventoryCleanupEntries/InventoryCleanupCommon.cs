@@ -46,7 +46,7 @@ public static unsafe class InventoryCleanupCommon
         {
             if(ImGui.BeginCombo("##selimplan", selectedPlan?.DisplayName ?? "預設計畫"))
             {
-                if(ImGui.Selectable("預設計畫", selectedPlan == null)) SelectedPlanGuid = Guid.Empty;
+                if(ImGui.Selectable("Default Plan", selectedPlan == null)) SelectedPlanGuid = Guid.Empty;
                 ImGui.Separator();
                 foreach(var x in C.AdditionalIMSettings)
                 {

@@ -16,7 +16,7 @@ using VesselDescriptor = (ulong CID, string VesselName);
 namespace AutoRetainer.UI.NeoUI;
 public class DeployablesTab : NeoUIEntry
 {
-    public override string Path => "遠航探索";
+    public override string Path => "Deployables";
 
     private static int MinLevel = 0;
     private static int MaxLevel = 0;

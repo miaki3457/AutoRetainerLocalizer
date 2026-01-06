@@ -125,7 +125,7 @@ internal class VentureBrowser : Window
                 {
                     ImGui.TableSetupScrollFreeze(0, 1);
                     ImGui.TableSetupColumn(Lang.CharLevel);
-                    ImGui.TableSetupColumn("名稱", ImGuiTableColumnFlags.WidthStretch);
+                    ImGui.TableSetupColumn("Name", ImGuiTableColumnFlags.WidthStretch);
                     ImGui.TableSetupColumn(Data.FirstOrDefault()?.IsDol == true ? Lang.CharPlant : Lang.CharItemLevel);
                     ImGui.TableSetupColumn("☆☆☆☆");
                     ImGui.TableSetupColumn("★☆☆☆");

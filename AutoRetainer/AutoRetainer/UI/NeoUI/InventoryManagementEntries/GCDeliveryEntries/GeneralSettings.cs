@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.GCDeliveryEntries;
 public sealed unsafe class GeneralSettings : InventoryManagementBase
 {
-    public override string Name { get; } = "大國防聯軍 - 一般設定";
+    public override string Name { get; } = "Grand Company Delivery/General Settings";
 
     public override NuiBuilder Builder => new NuiBuilder()
         .Section("一般設定")

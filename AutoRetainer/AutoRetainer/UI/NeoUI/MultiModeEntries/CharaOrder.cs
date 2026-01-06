@@ -3,7 +3,7 @@ using AutoRetainerAPI.Configuration;
 namespace AutoRetainer.UI.NeoUI.MultiModeEntries;
 public class CharaOrder : NeoUIEntry
 {
-    public override string Path => "多角色模式/排除與排序";
+    public override string Path => "Multi Mode/Functions, Exclusions, Order";
 
     private static string Search = "";
     private static ImGuiEx.RealtimeDragDrop<OfflineCharacterData> DragDrop = new("CharaOrder", x => x.Identity);
@@ -24,7 +24,7 @@ public class CharaOrder : NeoUIEntry
             if(ImGui.BeginTable("CharaOrderTable", 4, ImGuiTableFlags.Borders | ImGuiTableFlags.NoSavedSettings | ImGuiTableFlags.RowBg | ImGuiTableFlags.SizingFixedFit))
             {
                 ImGui.TableSetupColumn("##ctrl");
-                ImGui.TableSetupColumn("角色", ImGuiTableColumnFlags.WidthStretch);
+                ImGui.TableSetupColumn("Character", ImGuiTableColumnFlags.WidthStretch);
                 ImGui.TableSetupColumn("Toggles");
                 ImGui.TableSetupColumn("Deletion");
                 ImGui.TableHeadersRow();

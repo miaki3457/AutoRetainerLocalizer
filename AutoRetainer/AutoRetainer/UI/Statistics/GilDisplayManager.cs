@@ -68,7 +68,7 @@ public sealed class GilDisplayManager
                         }
                     }
                     ImGuiEx.Text(ImGuiColors.DalamudViolet, $"    {Censor.Character(c.Name, c.World)}{(fcdata != null && fcdata.Gil > 0 ? "+FC" : "")} total: {charTotal:N0}");
-                    if(ImGuiEx.HoveredAndClicked("點擊重新登入"))
+                    if(ImGuiEx.HoveredAndClicked("Click to relog"))
                     {
                         if(!MultiMode.Relog(c, out var error, Internal.RelogReason.Command))
                         {

@@ -1,7 +1,7 @@
 namespace AutoRetainer.UI.NeoUI.MultiModeEntries;
 public class MultiModeCommon : NeoUIEntry
 {
-    public override string Path => "多角色模式/通用設定";
+    public override string Path => "Multi Mode/Common Settings";
 
     public override NuiBuilder Builder { get; init; } = new NuiBuilder()
         .Section("通用設定")

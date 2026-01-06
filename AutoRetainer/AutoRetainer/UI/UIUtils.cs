@@ -71,7 +71,7 @@ internal static class UIUtils
         {
             if(!Utils.IsLifestreamInstalled())
             {
-                Utils.DrawLifestreamWarning("多角色模式");
+                Utils.DrawLifestreamWarning("Multi Mode");
             }
         }
         if(!C.NoCharaSearch)
@@ -256,7 +256,7 @@ internal static class UIUtils
             }
             else
             {
-                if(ImGui.Selectable("自動偵測新按鍵", false, ImGuiSelectableFlags.DontClosePopups))
+                if(ImGui.Selectable("Auto-detect new key", false, ImGuiSelectableFlags.DontClosePopups))
                 {
                     KeyInputActive = text;
                 }

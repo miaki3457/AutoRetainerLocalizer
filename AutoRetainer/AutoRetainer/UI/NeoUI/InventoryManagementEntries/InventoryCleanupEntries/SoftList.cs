@@ -1,7 +1,7 @@
 namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.InventoryCleanupEntries;
 public class SoftList : InventoryManagementBase
 {
-    public override string Name => "背包清理/快速僱員販售清單";
+    public override string Name => "Inventory Cleanup/Quick Venture Sell List";
     private InventoryManagementCommon InventoryManagementCommon = new();
     private SoftList()
     {

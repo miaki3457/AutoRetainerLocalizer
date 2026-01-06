@@ -1,7 +1,7 @@
 namespace AutoRetainer.UI.NeoUI.MultiModeEntries;
 public class MultiModeRetainers : NeoUIEntry
 {
-    public override string Path => "多角色模式/僱員設定";
+    public override string Path => "Multi Mode/Retainers";
 
     public override NuiBuilder Builder { get; init; } = new NuiBuilder()
         .Section("多角色模式 - 僱員設定")

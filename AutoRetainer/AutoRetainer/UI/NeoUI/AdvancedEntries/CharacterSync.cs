@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AutoRetainer.UI.NeoUI.AdvancedEntries;
 public unsafe sealed class CharacterSync : NeoUIEntry
 {
-    public override string Path => "進階/角色同步";
+    public override string Path => "Advanced/Character Synchronization";
 
     private List<string> ToDelete = [];
 
@@ -15,7 +15,7 @@ public unsafe sealed class CharacterSync : NeoUIEntry
     {
         if(ToDelete.Count > 0)
         {
-            if(ImGuiEx.BeginDefaultTable(["名稱", "##control"]))
+            if(ImGuiEx.BeginDefaultTable(["Name", "##control"]))
             {
                 foreach(var item in ToDelete)
                 {
