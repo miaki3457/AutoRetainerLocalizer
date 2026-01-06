@@ -161,14 +161,14 @@ namespace Localizer
                 // 1. 先處理掉翻譯文本中可能意外帶有的多餘頭尾換行與空格
                 // 2. 將每一行內容重新對齊到基準縮排
                 var lines = rawText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-                                   .Select(l => l.Trim()) 
-                                   .ToArray();
                 
-                if (isFirstPart)
-                    {
-                        return leadingWhitespace + string.Join("\n" + leadingWhitespace, lines);
-                    }
-                return string.Join("\n" + leadingWhitespace, lines);
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    lines[i] = lines[i].TrimStart(); // 去掉字典裡可能自帶的舊縮排
+                }
+        
+                string joined = string.Join("\n" + leadingWhitespace, lines);        
+                return joined;
             }
         
             // 標記是否為字串的最開頭部分
