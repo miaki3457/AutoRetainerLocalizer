@@ -70,7 +70,7 @@ public static unsafe class TroubleshootingUI
         {
             if(DalamudReflector.IsOnStaging())
             {
-                Error($"偵測到非正式版Dalamud分支。這可能導致問題。請透過輸入/xlbranch開啟分支切換器，切換到 \"release\" 分支並重新啟動遊戲");
+                Error($"偵測到非正式版Dalamud分支。這可能導致問題。請透過輸入/xlbranch開啟分支切換器，切換到 "release" 分支並重新啟動遊戲");
             }
         }
         catch(Exception e)
