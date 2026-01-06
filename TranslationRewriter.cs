@@ -137,27 +137,32 @@ namespace Localizer
             return invocation.Expression.ToString();
         }
 
-        // 修正後的 ReconstructInterpolatedString，傳入原始 node 參數
         private SyntaxNode ReconstructInterpolatedString(InterpolatedStringExpressionSyntax node, string translatedTemplate, List<InterpolationSyntax> interpolations)
         {
             var contents = new List<InterpolatedStringContentSyntax>();
             var matches = Regex.Matches(translatedTemplate, @"\{(\d+)\}");
             int lastIndex = 0;
 
+            // 1. 偵測是否為 Raw String ($"""...)
+            string startTokenText = node.StringStartToken.ToString();
+            bool isRawString = startTokenText.Contains("\"\"\"");
+
+            // 2. 如果是 Raw String，提取它的縮排量 (Indentation)
+            // 我們從 StringEndToken (最後的 """) 所在的行首計算空格數
+            string indentation = "";
+            if (isRawString)
+            {
+                var lineSpan = node.StringEndToken.GetLocation().GetLineSpan();
+                // 取得結尾標記所在行的起始位置，藉此推算基礎縮排
+                indentation = new string(' ', lineSpan.StartLinePosition.Character);
+            }
+
             foreach (Match match in matches)
             {
                 if (match.Index > lastIndex)
                 {
                     string textPart = translatedTemplate.Substring(lastIndex, match.Index - lastIndex);
-                    string escapedText = textPart.Replace("\"", "\\\"");
-
-                    contents.Add(SyntaxFactory.InterpolatedStringText(
-                        SyntaxFactory.Token(
-                            SyntaxFactory.TriviaList(),
-                            SyntaxKind.InterpolatedStringTextToken,
-                            escapedText,
-                            textPart,
-                            SyntaxFactory.TriviaList())));
+                    contents.Add(CreateTextContent(textPart, isRawString, indentation));
                 }
 
                 int idx = int.Parse(match.Groups[1].Value);
@@ -171,21 +176,42 @@ namespace Localizer
             if (lastIndex < translatedTemplate.Length)
             {
                 string rest = translatedTemplate.Substring(lastIndex);
-                string escapedRest = rest.Replace("\"", "\\\"");
-
-                contents.Add(SyntaxFactory.InterpolatedStringText(
-                    SyntaxFactory.Token(
-                        SyntaxFactory.TriviaList(),
-                        SyntaxKind.InterpolatedStringTextToken,
-                        escapedRest,
-                        rest,
-                        SyntaxFactory.TriviaList())));
+                contents.Add(CreateTextContent(rest, isRawString, indentation));
             }
 
             return SyntaxFactory.InterpolatedStringExpression(
                 node.StringStartToken,
                 SyntaxFactory.List(contents),
                 node.StringEndToken);
+        }
+
+        private InterpolatedStringContentSyntax CreateTextContent(string text, bool isRawString, string indentation)
+        {
+            string finalValueText = text;
+            string finalRawText = text;
+
+            if (isRawString && text.Contains("\n"))
+            {
+                var lines = text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+                for (int i = 1; i < lines.Length; i++)
+                {
+                    lines[i] = indentation + lines[i];
+                }
+                finalValueText = string.Join(Environment.NewLine, lines);
+                finalRawText = finalValueText; 
+            }
+            else if (!isRawString)
+            {
+                finalRawText = text.Replace("\"", "\\\""); // 一般字串需要轉義
+            }
+
+            return SyntaxFactory.InterpolatedStringText(
+                SyntaxFactory.Token(
+                    SyntaxFactory.TriviaList(),
+                    SyntaxKind.InterpolatedStringTextToken,
+                    finalValueText,
+                    finalRawText,
+                    SyntaxFactory.TriviaList()));
         }
     }
 }
