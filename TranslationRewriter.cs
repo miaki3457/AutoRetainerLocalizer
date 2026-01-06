@@ -140,78 +140,70 @@ namespace Localizer
         private SyntaxNode ReconstructInterpolatedString(InterpolatedStringExpressionSyntax node, string translatedTemplate, List<InterpolationSyntax> interpolations)
         {
             var contents = new List<InterpolatedStringContentSyntax>();
-            
-            // 1. 偵測是否為原始字串 ($"""...)
             bool isRawString = node.StringStartToken.ValueText.StartsWith("$" + "\"\"\"");
         
-            // 2. 獲取基準縮排 (抓取結尾引號所在的列數作為空格數)
             string leadingWhitespace = "";
             if (isRawString)
             {
+                // 獲取結尾引號的列位置 (Column) 作為基準
                 var lineSpan = node.StringEndToken.GetLocation().GetLineSpan();
-                int column = lineSpan.StartLinePosition.Character;
-                leadingWhitespace = new string(' ', column);
+                leadingWhitespace = new string(' ', lineSpan.StartLinePosition.Character);
             }
         
             var matches = Regex.Matches(translatedTemplate, @"\{(\d+)\}");
             int lastIndex = 0;
         
-            // 定義一個內部處理函式，統一處理多行縮排與轉義
-            string ProcessText(string rawText)
+            string ProcessText(string rawText, bool isFirstPart)
             {
                 if (string.IsNullOrEmpty(rawText)) return rawText;
+                if (!isRawString) return rawText.Replace("\"", "\\\"");
+        
+                // 1. 先處理掉翻譯文本中可能意外帶有的多餘頭尾換行與空格
+                // 2. 將每一行內容重新對齊到基準縮排
+                var lines = rawText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
                 
-                // 如果是原始字串，我們要把換行符號後方補上縮排空格
-                // 如果是一般字串，則需要轉義引號
-                string processed = isRawString 
-                    ? rawText.Replace("\n", "\n" + leadingWhitespace) 
-                    : rawText.Replace("\"", "\\\"");
-                    
-                return processed;
+                // 處理第一行：如果這段文字是整個字串的開頭 (isFirstPart)，
+                // 通常原始字串第一行是緊跟在 $""" 之後，不需額外縮排；
+                // 強迫它換行並縮排。
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    lines[i] = lines[i].TrimStart(); // 去掉字典裡可能自帶的舊縮排
+                }
+        
+                string joined = string.Join("\n" + leadingWhitespace, lines);
+        
+                return isFirstPart ? "\n" + leadingWhitespace + joined : joined;
             }
+        
+            // 標記是否為字串的最開頭部分
+            bool isFirst = true;
         
             foreach (Match match in matches)
             {
-                // 處理插值與插值之間的純文字
                 if (match.Index > lastIndex)
                 {
                     string textPart = translatedTemplate.Substring(lastIndex, match.Index - lastIndex);
-                    string finalPart = ProcessText(textPart);
+                    string finalPart = ProcessText(textPart, isFirst);
+                    isFirst = false; // 處理過第一段後關閉標記
         
                     contents.Add(SyntaxFactory.InterpolatedStringText(
-                        SyntaxFactory.Token(
-                            SyntaxFactory.TriviaList(),
-                            SyntaxKind.InterpolatedStringTextToken,
-                            finalPart, // 顯示在編輯器上的樣子
-                            textPart,  // 實際的值
-                            SyntaxFactory.TriviaList())));
+                        SyntaxFactory.Token(SyntaxFactory.TriviaList(), SyntaxKind.InterpolatedStringTextToken, finalPart, textPart, SyntaxFactory.TriviaList())));
                 }
         
-                // 插入原本的插值運算式 (例如 {0}, {itemName})
                 int idx = int.Parse(match.Groups[1].Value);
-                if (idx < interpolations.Count)
-                {
-                    contents.Add(interpolations[idx]);
-                }
+                if (idx < interpolations.Count) contents.Add(interpolations[idx]);
                 lastIndex = match.Index + match.Length;
             }
         
-            // 處理最後一段剩餘的文字
             if (lastIndex < translatedTemplate.Length)
             {
                 string rest = translatedTemplate.Substring(lastIndex);
-                string finalRest = ProcessText(rest);
+                string finalRest = ProcessText(rest, isFirst);
         
                 contents.Add(SyntaxFactory.InterpolatedStringText(
-                    SyntaxFactory.Token(
-                        SyntaxFactory.TriviaList(),
-                        SyntaxKind.InterpolatedStringTextToken,
-                        finalRest,
-                        rest,
-                        SyntaxFactory.TriviaList())));
+                    SyntaxFactory.Token(SyntaxFactory.TriviaList(), SyntaxKind.InterpolatedStringTextToken, finalRest, rest, SyntaxFactory.TriviaList())));
             }
         
-            // 重新組合成插值字串運算式，並保留原始的開頭與結尾 Token
             return SyntaxFactory.InterpolatedStringExpression(
                 node.StringStartToken,
                 SyntaxFactory.List(contents),
