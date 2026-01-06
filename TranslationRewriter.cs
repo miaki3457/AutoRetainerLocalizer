@@ -167,7 +167,7 @@ namespace Localizer
                     lines[i] = lines[i].TrimStart(); // 去掉字典裡可能自帶的舊縮排
                 }
         
-                string joined = string.Join("\n" , lines);        
+                string joined = string.Join("\n" + leadingWhitespace , lines);        
                 return isFirstPart ? leadingWhitespace + joined : joined;
             }
         
