@@ -24,13 +24,13 @@ public sealed unsafe class ExchangeLists : InventoryManagementBase
         C.AdditionalGCExchangePlans.Where(x => x.GUID == Guid.Empty).Each(x => x.GUID = Guid.NewGuid());
         ImGuiEx.TextWrapped($"""
             選擇在大國防聯軍專家籌備期間要自動購買的物品。購買邏輯：
-- 系統將嘗試購買清單中第一個可用的物品。
-- 購買將持續到該物品在背包中的數量達到指定目標為止。
-如果清單中沒有物品可供購買，或背包空間不足：
-- 系統將轉為購買探險幣。
-- 購買探險幣將持續到您的探險幣數量達到 65,000 個。
-一旦達到探險幣上限且無法再進行其他購買：
-- 任何多餘的軍票都將被丟棄。
+            - 系統將嘗試購買清單中第一個可用的物品。
+            - 購買將持續到該物品在背包中的數量達到指定目標為止。
+            如果清單中沒有物品可供購買，或背包空間不足：
+            - 系統將轉為購買探險幣。
+            - 購買探險幣將持續到您的探險幣數量達到 65,000 個。
+            一旦達到探險幣上限且無法再進行其他購買：
+            - 任何多餘的軍票都將被丟棄。
             """);
 
         var selectedPlan = C.AdditionalGCExchangePlans.FirstOrDefault(x => x.GUID == SelectedPlanGuid);
