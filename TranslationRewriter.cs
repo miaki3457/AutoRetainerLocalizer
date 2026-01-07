@@ -21,7 +21,7 @@ namespace Localizer
         public HashSet<string> MissingTranslations { get; } = new HashSet<string>();
 
         private readonly string[] _uiKeywords = { "Text", "Button", "Label", "Combo", "Header", "Section", "Tooltip", "MenuItem", "Checkbox", "Help", "Notify", "Info", "FormatToken", "InputInt", "Widget", "EnumCombo" };
-        private readonly string[] _blackList = { "PushID", "GetConfig", "Log", "Debug", "Print", "ExecuteCommand", "ToString", "GetField", "GetProperty" };
+        private readonly string[] _blackList = { "PushID", "GetConfig", "Log", "Debug", "Print", "ExecuteCommand", "ToString", "GetField", "GetProperty", "SetFilter", "Tag", "GetTag", "InternalName", "Database", "HasTag", "AddTag", "Find" };
 
         public TranslationRewriter(Dictionary<string, string> dictionary, string jsonPath)
         {
@@ -153,8 +153,8 @@ namespace Localizer
         {
             if (string.IsNullOrWhiteSpace(text)) return false;
 
-            // 檢查是否在黑名單方法中
             var invocation = node.Ancestors().OfType<InvocationExpressionSyntax>().FirstOrDefault();
+            if (text.StartsWith("##") || text.StartsWith("Component")) return false;
             if (invocation != null)
             {
                 string methodName = GetMethodName(invocation);
@@ -187,8 +187,9 @@ namespace Localizer
 
         private bool IsHumanText(string text)
         {
-            string clean = text.Trim(' ', '\n', '\r', '\"', '\\', 't');
-            if (clean.Length == 0) return false;
+            string clean = text.Trim(' ', '\n', '\r', '\"', '\\', 't', '#', '_'); // 增加過濾符號
+            if (clean.Length <= 1) return false; // 太短的通常是代號或符號        
+            // 如果字串包含過多特殊符號，通常不是給人看的
             // 判斷是否含有字母或中文字元
             return clean.Any(c => char.IsLetter(c) || char.GetUnicodeCategory(c) == System.Globalization.UnicodeCategory.OtherLetter);
         }
