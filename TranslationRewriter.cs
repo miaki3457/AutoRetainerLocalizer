@@ -189,9 +189,11 @@ namespace Localizer
         {
             string clean = text.Trim(' ', '\n', '\r', '\"', '\\', 't', '#', '_'); // 增加過濾符號
             if (clean.Length <= 1) return false; // 太短的通常是代號或符號        
+            if (char.IsLower(clean[0])) return false; // 過濾字首小寫
             // 如果字串包含過多特殊符號，通常不是給人看的
             // 判斷是否含有字母或中文字元
             return clean.Any(c => char.IsLetter(c) || char.GetUnicodeCategory(c) == System.Globalization.UnicodeCategory.OtherLetter);
+            
         }
 
         private string NormalizeKey(string text)
