@@ -45,7 +45,7 @@ public static unsafe class TroubleshootingUI
             }
         }
 
-        if((C.GlobalTeleportOptions.Enabled || C.OfflineData.Any(x => x.TeleportOptionsOverride.Enabled == true)) && !Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "Lifestream"&& x.IsLoaded))
+        if((C.GlobalTeleportOptions.Enabled || C.OfflineData.Any(x => x.TeleportOptionsOverride.Enabled == true)) && !Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "Lifestream" && x.IsLoaded))
         {
             Error("\"Teleportation is enabled but Lifestream plugin is not installed/loaded. AutoRetainer can not function in this configuration. Either disable teleportation or install Lifestream plugin.");
         }
@@ -247,22 +247,22 @@ public static unsafe class TroubleshootingUI
             Info("You have \"Do not warn about second game instance running from same directory\" option enabled, which will skip AutoRetainer's loading on 2nd instance of the game running with the same Dalamud directory automatically.");
         }
 
-        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "SimpleTweaksPlugin"&& x.IsLoaded))
+        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "SimpleTweaksPlugin" && x.IsLoaded))
         {
             Info("Simple Tweaks plugin detected. Any tweaks related to retainers or submarines may affect AutoRetainer functions negatively. Please ensure that tweaks are configured in a way to not interfere with AutoRetainer functions.");
         }
 
-        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "PandorasBox"&& x.IsLoaded))
+        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "PandorasBox" && x.IsLoaded))
         {
             Info("Pandora's Box plugin detected. Automatic use of actions while AutoRetainer is enabled may affect AutoRetainer functions negatively. Please ensure that Pandora's Box is configured in a way to not automatically use actions while AutoRetainer is active.");
         }
 
-        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "Automaton"&& x.IsLoaded))
+        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "Automaton" && x.IsLoaded))
         {
             Info("Automaton plugin detected. Automatic use of actions and automatic numeric inputs while AutoRetainer is enabled may affect AutoRetainer functions negatively. Please ensure that Automaton is configured in a way to not use automatically actions while AutoRetainer is active.");
         }
 
-        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "RotationSolver"&& x.IsLoaded))
+        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "RotationSolver" && x.IsLoaded))
         {
             Info("RotationSolver plugin detected. Automatic use of actions while AutoRetainer is enabled may affect AutoRetainer functions negatively. Please ensure that RotationSolver is configured in a way to not automatically use actions while AutoRetainer is active.");
         }
@@ -297,7 +297,7 @@ public static unsafe class TroubleshootingUI
     private static void Error(string message, string tooltip = null)
     {
         ImGui.PushFont(UiBuilder.IconFont);
-        ImGuiEx.Text(EColor.RedBright, "");
+        ImGuiEx.Text(EColor.RedBright, "\uf057");
         ImGui.PopFont();
         if(tooltip != null) ImGuiEx.Tooltip(tooltip);
         ImGui.SameLine();
@@ -308,7 +308,7 @@ public static unsafe class TroubleshootingUI
     private static void Warning(string message, string tooltip = null)
     {
         ImGui.PushFont(UiBuilder.IconFont);
-        ImGuiEx.Text(EColor.OrangeBright, "");
+        ImGuiEx.Text(EColor.OrangeBright, "\uf071");
         ImGui.PopFont();
         if(tooltip != null) ImGuiEx.Tooltip(tooltip);
         ImGui.SameLine();
@@ -319,7 +319,7 @@ public static unsafe class TroubleshootingUI
     private static void Info(string message, string tooltip = null)
     {
         ImGui.PushFont(UiBuilder.IconFont);
-        ImGuiEx.Text(EColor.YellowBright, "");
+        ImGuiEx.Text(EColor.YellowBright, "\uf05a");
         ImGui.PopFont();
         if(tooltip != null) ImGuiEx.Tooltip(tooltip);
         ImGui.SameLine();

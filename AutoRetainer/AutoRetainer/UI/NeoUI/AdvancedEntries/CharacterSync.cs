@@ -42,7 +42,7 @@ public unsafe sealed class CharacterSync : NeoUIEntry
             {
                 C.OfflineData.RemoveAll(x => ToDelete.Contains(x.NameWithWorld));
             }
-            ImGuiEx.Tooltip("Hold CTRL and click");
+            ImGuiEx.Tooltip("按住 CTRL 並點擊");
             if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.Ban, "Cancel"))
             {
                 ToDelete.Clear();
@@ -50,28 +50,28 @@ public unsafe sealed class CharacterSync : NeoUIEntry
             return;
         }
 
-        ImGuiEx.TextWrapped($"Prune deleted characters in a single click.");
+        ImGuiEx.TextWrapped($"一鍵刪除已不存在的角色資料");
         var jbInstalled = Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "JustBackup"&& x.IsLoaded);
         if(!jbInstalled)
         {
-            ImGuiEx.TextWrapped(EColor.RedBright, "To continue, you need to install JustBackup plugin.");
-            if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.WindowMaximize, "Open Plugin Installer"))
+            ImGuiEx.TextWrapped(EColor.RedBright, "若要繼續，你需要安裝 JustBackup 插件");
+            if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.WindowMaximize, "開啟插件安裝器"))
             {
                 Svc.PluginInterface.OpenPluginInstallerTo(PluginInstallerOpenKind.AllPlugins, "JustBackup");
             }
             return;
         }
         ImGuiEx.TextWrapped($"""
-            1. Create a backup by typing /justbackup, ensure it has succeeded and saved into a secure location.
-            2. Open your character list on FFXIV Lodestone.
+            1. 輸入 /justbackup 建立備份，確保成功並存放在安全的位置。
+            2. 開啟 FFXIV Lodestone 官網的角色名單
             """);
-        if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.ExternalLinkSquareAlt, "Open character list now"))
+        if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.ExternalLinkSquareAlt, "立即開啟角色名單"))
         {
             ShellStart("https://eu.finalfantasyxiv.com/lodestone/account/select_character/");
         }
-        ImGuiEx.TextWrapped($"3. Make sure you are logged with the correct account and copy entire page's content by pressing CTRL+A then CTRL+C");
-        ImGuiEx.TextWrapped($"4. Once finished, click the following button:");
-        if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.Paste, "Prepare Character Cleanup"))
+        ImGuiEx.TextWrapped($"3. 確保你登入了正確的帳號，並按下 CTRL+A 全選後 CTRL+C 複製整個頁面內容。");
+        ImGuiEx.TextWrapped($"4. 完成後，點擊以下按鈕：");
+        if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.Paste, "準備角色資料清理"))
         {
             Parse();
         }

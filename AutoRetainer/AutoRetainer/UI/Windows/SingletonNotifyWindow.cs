@@ -18,8 +18,7 @@ public class SingletonNotifyWindow : NotifyWindow
 
     public override void DrawContent()
     {
-        ImGuiEx.Text($"AutoRetainer has detected that another instance of the plugin is running 
-with the same data path configuration.");
+        ImGuiEx.Text($"AutoRetainer has detected that another instance of the plugin is running \nwith the same data path configuration.");
         ImGuiEx.Text($"為防止資料遺失，插件載入已中止。");
         if(ImGui.Button("關閉此視窗且不載入 AutoRetainer"))
         {

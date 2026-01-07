@@ -15,7 +15,7 @@ public unsafe class AutoBuyFuelOverlay : Window
 
     public override void Draw()
     {
-        if(TryGetAddonByName<AtkUnitBase>("FreeCompanyCreditShop", out var a) && IsAddonReady(a))
+        if(TryGetAddonByName<AtkUnitBase>("部隊軍票商店", out var a) && IsAddonReady(a))
         {
             if(a->X != 0 || a->Y != 0)
             {
@@ -28,6 +28,6 @@ public unsafe class AutoBuyFuelOverlay : Window
 
     public override bool DrawConditions()
     {
-        return VoyageUtils.Workshops.Contains(Svc.ClientState.TerritoryType) && TryGetAddonByName<AtkUnitBase>("FreeCompanyCreditShop", out var a) && IsAddonReady(a);
+        return VoyageUtils.Workshops.Contains(Svc.ClientState.TerritoryType) && TryGetAddonByName<AtkUnitBase>("部隊軍票商店", out var a) && IsAddonReady(a);
     }
 }

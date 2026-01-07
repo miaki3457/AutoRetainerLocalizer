@@ -138,7 +138,7 @@ public static unsafe class RetainerTable
                         ImGui.SameLine();
                     }
                 }
-                ImGuiEx.Text($"{(!ret.HasVenture ? "No Venture" : Utils.ToTimeString(ret.GetVentureSecondsRemaining(C.TimerAllowNegative)))}");
+                ImGuiEx.Text($"{(!ret.HasVenture ? "無探險": Utils.ToTimeString(ret.GetVentureSecondsRemaining(C.TimerAllowNegative)))}");
                 ImGui.TableNextColumn();
                 ImGui.TableSetBgColor(ImGuiTableBgTarget.CellBg, 0);
                 var n = $"{data.CID} {ret.Name} settings";

@@ -45,9 +45,9 @@ internal class MultiModeOverlay : Window
                     {
                         BailoutManager.IsLogOnTitleEnabled = false;
                     }
-                    ImGui.SetTooltip($"AutoRetainer was requested to temporarily wait for valid character on login screen. 
-Left click - open AutoRetainer. 
-Right click - abort.");
+                    ImGui.SetTooltip($"AutoRetainer 已請求在登入畫面暫時等待有效角色
+左鍵點擊 - 開啟 AutoRetainer
+右鍵點擊 - 中止。");
                 }
             }
             else
@@ -74,11 +74,11 @@ Right click - abort.");
                         Shutdown.ForceShutdownAt = 0;
                         Shutdown.ShutdownAt = 0;
                     }
-                    ImGui.SetTooltip($"A shutdown timer is set.
-Shutting down in {TimeSpan.FromMilliseconds(Shutdown.ShutdownAt - Environment.TickCount64)}
-Force shutdown in {TimeSpan.FromMilliseconds(Shutdown.ForceShutdownAt - Environment.TickCount64)} 
-Left click - open AutoRetainer. 
-Right click - clear timer.");
+                    ImGui.SetTooltip($"已設定關機計時器。
+將於 {TimeSpan.FromMilliseconds(Shutdown.ShutdownAt - Environment.TickCount64)} 後關機
+將於 {TimeSpan.FromMilliseconds(Shutdown.ForceShutdownAt - Environment.TickCount64)} 後強制關機
+左鍵點擊 - 開啟 AutoRetainer
+右鍵點擊 - 清除計時器");
                 }
             }
             else
@@ -104,7 +104,7 @@ Right click - clear timer.");
                     {
                         SchedulerMain.CharacterPostProcessLocked = false;
                     }
-                    ImGui.SetTooltip("AutoRetainer is in postprocessing. \nLeft click - open AutoRetainer. \nRight click - abort.");
+                    ImGui.SetTooltip("AutoRetainer 正在進行後處理階段\n左鍵點擊 - 開啟 AutoRetainer\n右鍵點擊 - 中止");
                 }
             }
             else
@@ -130,7 +130,7 @@ Right click - clear timer.");
                     {
                         P.TaskManager.Abort();
                     }
-                    ImGui.SetTooltip("AutoRetainer is processing tasks. \nLeft click - open AutoRetainer. \nRight click - abort.");
+                    ImGui.SetTooltip("AutoRetainer 正在處理任務中\n左鍵點擊 - 開啟 AutoRetainer\n右鍵點擊 - 中止");
                 }
             }
             else
@@ -152,7 +152,7 @@ Right click - clear timer.");
                     {
                         Svc.Commands.ProcessCommand("/ays");
                     }
-                    ImGui.SetTooltip("RetainerSense is active. \nLeft click - open AutoRetainer.");
+                    ImGui.SetTooltip("傳喚鈴感應已啟用\n左鍵點擊 - 開啟 AutoRetainer");
                 }
                 var f = (float)(Environment.TickCount64 - P.LastMovementAt) / (float)C.RetainerSenseThreshold;
                 ImGui.ProgressBar(f, new(128, 10), "");
@@ -180,7 +180,7 @@ Right click - clear timer.");
                     {
                         MultiMode.Enabled = false;
                     }
-                    ImGui.SetTooltip("MultiMode enabled. \nLeft click - open AutoRetainer. \nRight click - disable Multi Mode.");
+                    ImGui.SetTooltip("多角色模式已啟用\n左鍵點擊 - 開啟 AutoRetainer\n右鍵點擊 - 停用多角色模式。");
                 }
             }
             else
@@ -207,9 +207,9 @@ Right click - clear timer.");
                         C.NightMode = false;
                         MultiMode.BailoutNightMode();
                     }
-                    ImGui.SetTooltip($"Night mode enabled. 
-Left click - open AutoRetainer. 
-Right click - disable.");
+                    ImGui.SetTooltip($"夜間模式已啟用
+左鍵點擊 - 開啟 AutoRetainer
+右鍵點擊 - 停用");
                 }
             }
             else
@@ -235,7 +235,7 @@ Right click - disable.");
                     {
                         VoyageScheduler.Enabled = false;
                     }
-                    ImGui.SetTooltip("Submarine module enabled. \nLeft click - open AutoRetainer. \nRight click - disable submarine module.");
+                    ImGui.SetTooltip("潛水艇模組已啟用\n左鍵點擊 - 開啟 AutoRetainer\n右鍵點擊 - 停用潛水艇模組");
                 }
             }
             else
@@ -247,7 +247,7 @@ Right click - disable.");
         if(SchedulerMain.PluginEnabled && ShouldDisplay())
         {
             displayed = true;
-            if(ThreadLoadImageHandler.TryGetTextureWrap(Path.Combine(Svc.PluginInterface.AssemblyLocation.DirectoryName, "res", Utils.GetReachableRetainerBell(false) == null ? "bellcrossed.png": "bell.png"), out var t))
+            if(ThreadLoadImageHandler.TryGetTextureWrap(Path.Combine(Svc.PluginInterface.AssemblyLocation.DirectoryName, "res", Utils.GetReachableRetainerBell(false) == null ? "bellcrossed.png" : "bell.png"), out var t))
             {
                 ImGui.Image(t.Handle, StatusPanelSize);
                 if(ImGui.IsItemHovered())
@@ -261,7 +261,7 @@ Right click - disable.");
                     {
                         SchedulerMain.DisablePlugin();
                     }
-                    ImGui.SetTooltip("AutoRetainer enabled. \nLeft click - open AutoRetainer. \nRight click - disable AutoRetainer.");
+                    ImGui.SetTooltip("AutoRetainer 已啟用\n左鍵點擊 - 開啟 AutoRetainer\n右鍵點擊 - 停用 AutoRetainer");
                 }
             }
             else
@@ -288,7 +288,7 @@ Right click - disable.");
                     {
                         NotificationHandler.IsHidden = true;
                     }
-                    ImGui.SetTooltip("Some retainers completed their ventures. \nLeft click - open AutoRetainer;\nRight click - dismiss.");
+                    ImGui.SetTooltip("部分僱員已完成探險任務。\n左鍵點擊 - 開啟 AutoRetainer\n右鍵點擊 - 關閉提示");
                 }
             }
             else

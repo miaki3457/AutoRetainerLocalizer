@@ -21,7 +21,7 @@ public class CharaOrder : NeoUIEntry
             ImGui.SetNextItemWidth(150f);
             ImGui.InputText($"搜索", ref Search, 50);
             DragDrop.Begin();
-            if(ImGui.BeginTable("CharaOrderTable", 4, ImGuiTableFlags.Borders | ImGuiTableFlags.NoSavedSettings | ImGuiTableFlags.RowBg | ImGuiTableFlags.SizingFixedFit))
+            if(ImGui.BeginTable("角色順序表", 4, ImGuiTableFlags.Borders | ImGuiTableFlags.NoSavedSettings | ImGuiTableFlags.RowBg | ImGuiTableFlags.SizingFixedFit))
             {
                 ImGui.TableSetupColumn("##ctrl");
                 ImGui.TableSetupColumn("角色", ImGuiTableColumnFlags.WidthStretch);
@@ -90,7 +90,7 @@ public class CharaOrder : NeoUIEntry
                     }
                     ImGuiEx.Tooltip($"按住CTRL + 左鍵以刪除儲存的角色資料。重新登入後會自動重建。");
                     ImGui.SameLine();
-                    if(ImGuiEx.IconButton("", enabled: ImGuiEx.Ctrl))
+                    if(ImGuiEx.IconButton("\uf057", enabled: ImGuiEx.Ctrl))
                     {
                         C.Blacklist.Add((chr.CID, chr.Name));
                     }

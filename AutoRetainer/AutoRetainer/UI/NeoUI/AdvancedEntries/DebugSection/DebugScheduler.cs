@@ -165,7 +165,7 @@ internal unsafe class DebugScheduler : DebugSectionBase
             }
         }
         {
-            if(ImGui.Button("Try close") && TryGetAddonByName<AtkUnitBase>("RetainerList", out var addon))
+            if(ImGui.Button("Try close") && TryGetAddonByName<AtkUnitBase>("僱員名單", out var addon))
             {
                 var v = stackalloc AtkValue[1]
                 {

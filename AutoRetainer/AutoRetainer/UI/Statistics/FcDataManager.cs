@@ -68,7 +68,7 @@ public sealed class FcDataManager
                 }
                 else
                 {
-                    ImGuiEx.Text($"Unknown");
+                    ImGuiEx.Text($"未知");
                 }
 
                 ImGui.TableNextColumn();
@@ -80,12 +80,12 @@ public sealed class FcDataManager
                 }
                 else
                 {
-                    ImGuiEx.Text($"Unknown");
+                    ImGuiEx.Text($"未知");
                 }
 
                 ImGui.TableNextColumn();
                 ImGui.PushFont(UiBuilder.IconFont);
-                ImGuiEx.ButtonCheckbox($"##FC{x.Key}", ref x.Value.GilCountsTowardsChara, EColor.Green);
+                ImGuiEx.ButtonCheckbox($"\uf555##FC{x.Key}", ref x.Value.GilCountsTowardsChara, EColor.Green);
                 ImGui.PopFont();
                 ImGuiEx.Tooltip("標記此部隊為錢包部隊。Gil顯示標籤頁將包含此部隊的Gil。");
                 ImGui.SameLine();

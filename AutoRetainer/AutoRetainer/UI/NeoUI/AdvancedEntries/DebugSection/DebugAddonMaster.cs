@@ -10,7 +10,7 @@ public unsafe class DebugAddonMaster : DebugSectionBase
     {
         if(ImGui.CollapsingHeader("RestainerList"))
         {
-            if(TryGetAddonByName<AtkUnitBase>("RetainerList", out var addon) && IsAddonReady(addon))
+            if(TryGetAddonByName<AtkUnitBase>("僱員名單", out var addon) && IsAddonReady(addon))
             {
                 var r = new AddonMaster.RetainerList(addon);
                 foreach(var x in r.Retainers)

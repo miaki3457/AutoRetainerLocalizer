@@ -12,13 +12,13 @@ internal unsafe class DebugReader : DebugSectionBase
     public override void Draw()
     {
         {
-            if(TryGetAddonByName<AtkUnitBase>("FreeCompanyCreditShop", out var a) && IsAddonReady(a))
+            if(TryGetAddonByName<AtkUnitBase>("部隊軍票商店", out var a) && IsAddonReady(a))
             {
                 var reader = new ReaderFreeCompanyCreditShop(a);
                 ImGuiEx.Text($"""
-            Rank: {reader.FCRank}
-            Credits: {reader.Credits}
-            Count: {reader.Count}
+                    Rank: {reader.FCRank}
+                    Credits: {reader.Credits}
+                    Count: {reader.Count}
                     """);
                 for(var i = 0; i < reader.Count; i++)
                 {
@@ -33,7 +33,7 @@ internal unsafe class DebugReader : DebugSectionBase
         }
 
         {
-            if(TryGetAddonByName<AtkUnitBase>("RetainerList", out var a) && IsAddonReady(a))
+            if(TryGetAddonByName<AtkUnitBase>("僱員名單", out var a) && IsAddonReady(a))
             {
                 var reader = new ReaderRetainerList(a);
                 foreach(var x in reader.Retainers)

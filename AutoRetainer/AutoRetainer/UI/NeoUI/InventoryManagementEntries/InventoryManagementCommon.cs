@@ -45,7 +45,7 @@ public unsafe class InventoryManagementCommon
                 e.Log();
             }
         }
-        ImGuiEx.Tooltip("Hold CTRL and click");
+        ImGuiEx.Tooltip("按住 CTRL 並點擊");
         ImGuiEx.TreeNodeCollapsingHeader("Mass addition/removal", () =>
         {
             ImGui.SetNextItemWidth(200f);
@@ -160,7 +160,7 @@ public unsafe class InventoryManagementCommon
                         if(!itemList.Contains(x.RowId)) addAction(x.RowId);
                     }
                 }
-                ImGuiEx.Tooltip("Hold CTRL and click");
+                ImGuiEx.Tooltip("按住 CTRL 並點擊");
                 if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.MinusSquare, "Remove these items to list", ImGuiEx.Ctrl))
                 {
                     foreach(var x in SelectedItems)
@@ -168,7 +168,7 @@ public unsafe class InventoryManagementCommon
                         removeAction(x.RowId);
                     }
                 }
-                ImGuiEx.Tooltip("Hold CTRL and click");
+                ImGuiEx.Tooltip("按住 CTRL 並點擊");
             }
         });
 
