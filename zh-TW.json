@@ -20,6 +20,7 @@
   "Teleport for retainers...": "為傳喚鈴傳送...",
   "...to private house": "...到私人房屋",
   "...to shared estate": "...到共享房屋",
+  "...to shared house": "...到共享房屋",
   "...to free company house": "...到部隊房屋",
   "...to apartment": "...到公寓",
   "If all above are disabled or fail, will be teleported to inn.": "如果以上所有選項都停用或失敗，將會傳送到旅館",
@@ -600,4 +601,5 @@
 
 
 }
+
 
