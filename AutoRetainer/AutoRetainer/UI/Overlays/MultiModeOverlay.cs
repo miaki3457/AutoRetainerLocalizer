@@ -45,7 +45,9 @@ internal class MultiModeOverlay : Window
                     {
                         BailoutManager.IsLogOnTitleEnabled = false;
                     }
-                    ImGui.SetTooltip($"AutoRetainer was requested to temporarily wait for valid character on login screen. \nLeft click - open AutoRetainer. \nRight click - abort.");
+                    ImGui.SetTooltip($"AutoRetainer was requested to temporarily wait for valid character on login screen. 
+Left click - open AutoRetainer. 
+Right click - abort.");
                 }
             }
             else
@@ -72,7 +74,11 @@ internal class MultiModeOverlay : Window
                         Shutdown.ForceShutdownAt = 0;
                         Shutdown.ShutdownAt = 0;
                     }
-                    ImGui.SetTooltip($"A shutdown timer is set.\nShutting down in {TimeSpan.FromMilliseconds(Shutdown.ShutdownAt - Environment.TickCount64)}\nForce shutdown in {TimeSpan.FromMilliseconds(Shutdown.ForceShutdownAt - Environment.TickCount64)} \nLeft click - open AutoRetainer. \nRight click - clear timer.");
+                    ImGui.SetTooltip($"A shutdown timer is set.
+Shutting down in {TimeSpan.FromMilliseconds(Shutdown.ShutdownAt - Environment.TickCount64)}
+Force shutdown in {TimeSpan.FromMilliseconds(Shutdown.ForceShutdownAt - Environment.TickCount64)} 
+Left click - open AutoRetainer. 
+Right click - clear timer.");
                 }
             }
             else
@@ -201,7 +207,9 @@ internal class MultiModeOverlay : Window
                         C.NightMode = false;
                         MultiMode.BailoutNightMode();
                     }
-                    ImGui.SetTooltip($"Night mode enabled. \nLeft click - open AutoRetainer. \nRight click - disable.");
+                    ImGui.SetTooltip($"Night mode enabled. 
+Left click - open AutoRetainer. 
+Right click - disable.");
                 }
             }
             else
@@ -239,7 +247,7 @@ internal class MultiModeOverlay : Window
         if(SchedulerMain.PluginEnabled && ShouldDisplay())
         {
             displayed = true;
-            if(ThreadLoadImageHandler.TryGetTextureWrap(Path.Combine(Svc.PluginInterface.AssemblyLocation.DirectoryName, "res", Utils.GetReachableRetainerBell(false) == null ? "bellcrossed.png" : "bell.png"), out var t))
+            if(ThreadLoadImageHandler.TryGetTextureWrap(Path.Combine(Svc.PluginInterface.AssemblyLocation.DirectoryName, "res", Utils.GetReachableRetainerBell(false) == null ? "bellcrossed.png": "bell.png"), out var t))
             {
                 ImGui.Image(t.Handle, StatusPanelSize);
                 if(ImGui.IsItemHovered())

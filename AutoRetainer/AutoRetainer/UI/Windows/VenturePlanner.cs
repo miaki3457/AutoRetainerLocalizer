@@ -208,7 +208,7 @@ public sealed class VenturePlanner : Window
                             C.SavedPlans.Add(adata.VenturePlan.JSONClone());
                             Notify.Success($"Plan {adata.VenturePlan.Name} saved!");
                         }
-                        ImGuiEx.Tooltip(overwrite ? "Overwrite Existing Venture Plan" : $"Save Venture Plan");
+                        ImGuiEx.Tooltip(overwrite ? "Overwrite Existing Venture Plan": $"Save Venture Plan");
                     });
                 }
 

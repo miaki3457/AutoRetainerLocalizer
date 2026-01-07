@@ -1,4 +1,4 @@
-﻿using AutoRetainer.Internal;
+using AutoRetainer.Internal;
 using AutoRetainer.Modules.Voyage.Readers;
 using AutoRetainer.Scheduler.Tasks;
 using AutoRetainer.UiHelpers;
@@ -16,9 +16,9 @@ internal unsafe class DebugReader : DebugSectionBase
             {
                 var reader = new ReaderFreeCompanyCreditShop(a);
                 ImGuiEx.Text($"""
-                    Rank: {reader.FCRank}
-                    Credits: {reader.Credits}
-                    Count: {reader.Count}
+            Rank: {reader.FCRank}
+            Credits: {reader.Credits}
+            Count: {reader.Count}
                     """);
                 for(var i = 0; i < reader.Count; i++)
                 {

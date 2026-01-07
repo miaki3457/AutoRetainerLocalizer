@@ -51,7 +51,7 @@ public unsafe sealed class CharacterSync : NeoUIEntry
         }
 
         ImGuiEx.TextWrapped($"Prune deleted characters in a single click.");
-        var jbInstalled = Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "JustBackup" && x.IsLoaded);
+        var jbInstalled = Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "JustBackup"&& x.IsLoaded);
         if(!jbInstalled)
         {
             ImGuiEx.TextWrapped(EColor.RedBright, "To continue, you need to install JustBackup plugin.");
