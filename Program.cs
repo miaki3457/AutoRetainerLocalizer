@@ -13,16 +13,13 @@ class Program
     {
         string rootPath = Environment.CurrentDirectory;
         
-        if (!Directory.Exists(Path.Combine(rootPath,"AutoRetainer")))
+        if (!Directory.Exists(Path.Combine(rootPath, "AutoRetainer")))
         {
             rootPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
         }
 
         string sourcePath = Path.Combine(rootPath, "AutoRetainer", "AutoRetainer", "UI");
         string dictPath = Path.Combine(rootPath, "zh-TW.json");
-        // -------------------------
-
-        string apiKey = Environment.GetEnvironmentVariable("TRANSLATION_API_KEY") ?? "";
 
         Console.WriteLine($"[資訊] 當前工作目錄: {Environment.CurrentDirectory}");
         Console.WriteLine($"[資訊] 預計源碼路徑: {sourcePath}");
@@ -30,12 +27,10 @@ class Program
         if (!Directory.Exists(sourcePath))
         {
             Console.WriteLine($"[錯誤] 找不到 AutoRetainer 資料夾！");
-            Console.WriteLine("[偵錯] 目錄下的內容有：");
-            foreach (var d in Directory.GetDirectories(rootPath)) Console.WriteLine($" D: {Path.GetFileName(d)}");
-            foreach (var f in Directory.GetFiles(rootPath)) Console.WriteLine($" F: {Path.GetFileName(f)}");
             return;
         }
 
+        // 讀取現有的字典
         var dictionary = File.Exists(dictPath)
             ? JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(dictPath))
             : new Dictionary<string, string>();
@@ -43,13 +38,17 @@ class Program
         var files = Directory.GetFiles(sourcePath, "*.cs", SearchOption.AllDirectories);
         Console.WriteLine($"找到 {files.Length} 個檔案，準備開始掃描...");
 
+        // 1: 建立一個持久的 rewriter 實例
+        // 這樣 MissingTranslations 可以在處理所有檔案時持續累積
+        var rewriter = new TranslationRewriter(dictionary ?? new(), dictPath);
+
         foreach (var file in files)
         {
             string code = File.ReadAllText(file);
             SyntaxTree tree = CSharpSyntaxTree.ParseText(code);
             var root = tree.GetRoot();
 
-            var rewriter = new TranslationRewriter(dictionary ?? new(), apiKey);
+            // 2: 使用同一個 rewriter 進行 Visit
             var result = rewriter.Visit(root);
 
             if (result != root)
@@ -59,7 +58,10 @@ class Program
             }
         }
 
-        Console.WriteLine("中文化處理完成！");
+        // 3: 處理完所有檔案後，一次性寫入未翻譯字串
+        Console.WriteLine("正在檢查是否有新發現的字串需寫入字典...");
+        rewriter.SaveMissingTranslations();
+
+        Console.WriteLine("中文化處理與字典更新完成！");
     }
 }
-
