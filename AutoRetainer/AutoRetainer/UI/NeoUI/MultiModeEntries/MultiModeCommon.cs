@@ -53,7 +53,7 @@ public class MultiModeCommon : NeoUIEntry
         .Checkbox("為傳喚鈴傳送...", () => ref C.GlobalTeleportOptions.Retainers)
         .Indent()
         .Checkbox("...到私人房屋", () => ref C.GlobalTeleportOptions.RetainersPrivate)
-        .Checkbox("...to shared estate", () => ref C.GlobalTeleportOptions.RetainersShared)
+        .Checkbox("...到共享房屋", () => ref C.GlobalTeleportOptions.RetainersShared)
         .Checkbox("...到部隊房屋", () => ref C.GlobalTeleportOptions.RetainersFC)
         .Checkbox("...到公寓", () => ref C.GlobalTeleportOptions.RetainersApartment)
         .TextWrapped("如果以上所有選項都停用或失敗，將會傳送到旅館")

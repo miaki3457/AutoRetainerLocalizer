@@ -172,14 +172,14 @@ internal static unsafe class MultiModeUI
             ImGuiEx.Text($"確保角色有效性: {MultiMode.EnsureCharacterValidity(true)}");
             ImGuiEx.Text($"是否允許交互: {MultiMode.IsInteractionAllowed()}");
             ImGuiEx.Text($"獲取首選角色: {MultiMode.GetPreferredCharacter()}");
-            ImGuiEx.Text($"所有雇員是否剩餘 15 分鐘以上: {MultiMode.IsAllRetainersHaveMoreThan15Mins()}");
+            ImGuiEx.Text($"所有僱員是否剩餘 15 分鐘以上: {MultiMode.IsAllRetainersHaveMoreThan15Mins()}");
             ImGuiEx.Text($"目標 或 首選: {MultiMode.GetCurrentTargetCharacter() ?? MultiMode.GetPreferredCharacter()}");
             //ImGuiEx.Text($"GetAutoAfkOpt: {MultiMode.GetAutoAfkOpt()}");
             //ImGuiEx.Text($"AutoAfkValue: {ConfigModule.Instance()->GetIntValue(145)}");
             ImGuiEx.Text($"最後登入時間: {MultiMode.LastLogin:X16}");
-            ImGuiEx.Text($"是否有可用雇員: {MultiMode.AnyRetainersAvailable()}");
-            ImGuiEx.Text($"是否有選中雇員在 60 秒內完成: {MultiMode.IsAnySelectedRetainerFinishesWithin(60)}");
-            ImGuiEx.Text($"是否有選中雇員在 5 分鐘內完成: {MultiMode.IsAnySelectedRetainerFinishesWithin(5 * 60)}");
+            ImGuiEx.Text($"是否有可用僱員: {MultiMode.AnyRetainersAvailable()}");
+            ImGuiEx.Text($"是否有選中僱員在 60 秒內完成: {MultiMode.IsAnySelectedRetainerFinishesWithin(60)}");
+            ImGuiEx.Text($"是否有選中僱員在 5 分鐘內完成: {MultiMode.IsAnySelectedRetainerFinishesWithin(5 * 60)}");
             foreach(var data in C.OfflineData)
             {
                 ImGuiEx.Text($"角色 {data}\n  所需探險幣數量: {data.GetNeededVentureAmount()}");

@@ -52,7 +52,7 @@ public class CharaConfig
             ImGuiEx.Checkbox("為傳喚鈴傳送...", ref data.TeleportOptionsOverride.Retainers);
             ImGui.Indent();
             ImGuiEx.Checkbox("...到私人房屋", ref data.TeleportOptionsOverride.RetainersPrivate);
-            ImGuiEx.Checkbox("...到共享房屋", ref data.TeleportOptionsOverride.RetainersShared);
+            ImGuiEx.Checkbox("...to shared house", ref data.TeleportOptionsOverride.RetainersShared);
             ImGuiEx.Checkbox("...到部隊房屋", ref data.TeleportOptionsOverride.RetainersFC);
             ImGuiEx.Checkbox("...到公寓", ref data.TeleportOptionsOverride.RetainersApartment);
             ImGui.Text("如果以上所有選項都停用或失敗，將會傳送到旅館");
