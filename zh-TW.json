@@ -45,7 +45,8 @@
   "Configure Character": "配置角色",
   "V: {0}": "探險幣: {0}",
   "I: {0}": "空格: {0}",
-  "C: {0}": "計數: {0}",
+  "C: {0}": "青磷水: {0}",
+  "R: {0}": "修理: {0}",
   "GetCurrentTargetCharacter: {0}": "當前目標角色: {0}",
   "IsCurrentCharacterDone: {0}": "當前角色是否完成: {0}",
   "NextInteraction: {0}": "下次交互預計在: {0}",
@@ -601,5 +602,6 @@
 
 
 }
+
 
 
