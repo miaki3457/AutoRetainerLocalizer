@@ -153,7 +153,7 @@ internal static unsafe class MultiModeUI
             List<(bool, string)> texts = [(data.Ventures < C.UIWarningRetVentureNum, $"探險幣: {data.Ventures}"), (data.InventorySpace < C.UIWarningRetSlotNum, $"空格: {data.InventorySpace}")];
             if(C.CharEqualize && MultiMode.Enabled)
             {
-                texts.Insert(0, (false, $"計數: {MultiMode.CharaCnt.GetOrDefault(data.CID)}"));
+                texts.Insert(0, (false, $"青磷水: {MultiMode.CharaCnt.GetOrDefault(data.CID)}"));
             }
             overlayTexts.Add((new Vector2(ImGui.GetContentRegionMax().X - ImGui.GetStyle().FramePadding.X, rCurPos.Y + ImGui.GetStyle().FramePadding.Y), [.. texts]));
             ImGui.NewLine();
