@@ -28,7 +28,7 @@ public sealed unsafe class AccountWhitelist : NeoUIEntry
                 new TickScheduler(() => C.WhitelistedAccounts.Remove(x));
             }
             ImGui.SameLine();
-            ImGuiEx.TextV($"Account {x}");
+            ImGuiEx.TextV($"帳號 {x}");
             ImGui.PopID();
         }
     }

@@ -45,9 +45,9 @@ public static unsafe class TroubleshootingUI
             }
         }
 
-        if((C.GlobalTeleportOptions.Enabled || C.OfflineData.Any(x => x.TeleportOptionsOverride.Enabled == true)) && !Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "Lifestream"&& x.IsLoaded))
+        if((C.GlobalTeleportOptions.Enabled || C.OfflineData.Any(x => x.TeleportOptionsOverride.Enabled == true)) && !Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "Lifestream" && x.IsLoaded))
         {
-            Error("\"Teleportation is enabled but Lifestream plugin is not installed/loaded. AutoRetainer can not function in this configuration. Either disable teleportation or install Lifestream plugin.");
+            Error("已啟用傳送功能但未安裝或未加載 Lifestream 插件。在此配置下 AutoRetainer 無法運作。請停用傳送功能或安裝 Lifestream 插件。");
         }
 
         foreach(var x in C.SubmarineUnlockPlans)
@@ -184,39 +184,39 @@ public static unsafe class TroubleshootingUI
 
         if(C.OfflineData.Any(x => x.MultiWaitForAllDeployables))
         {
-            Info("Some characters have \"Wait For All Pending Deployables\" option enabled. This means that for these characters AutoRetainer will wait for all deployables to return before processing them. Hover to see complete list of characters with enabled option.", C.OfflineData.Where(x => x.MultiWaitForAllDeployables).Select(x => $"{x.Name}@{x.World}").Print("\n"));
+            Info("部分角色已啟用了\"等待所有待處理潛艇\"選項。這代表對於這些角色，AutoRetainer 會等到所有潛艇回歸後才開始處理。將游標懸停在此處可查看啟用了此選項的角色清單。", C.OfflineData.Where(x => x.MultiWaitForAllDeployables).Select(x => $"{x.Name}@{x.World}").Print("\n"));
         }
 
         if(C.MultiModeWorkshopConfiguration.MultiWaitForAll)
         {
-            Info("Global option \"Wait For Venture Completion\" is enabled. This means that for all characters AutoRetainer will wait for all deployables to return before processing them, even for these whose per-character option is disabled.");
+            Info("全局選項\"等待探險完成\"已啟用。這代表對於所有角色，AutoRetainer 都會等到所有僱員回歸後才處理，即使該角色的獨立選項已關閉也是如此。");
         }
 
         if(C.MultiModeWorkshopConfiguration.WaitForAllLoggedIn)
         {
-            Info("Option \"Wait even when already logged in\" is enabled for deployables. This means that AutoRetainer will wait for all deployables on a character to be completed before processing them even when you are logged in.");
+            Info("潛艇已啟用「即使已登入也等待」選項。這代表即使你已在線上，AutoRetainer 仍會等到該角色的所有潛艇任務完成後才進行處理。");
         }
 
         if(C.DisableRetainerVesselReturn > 0)
         {
             if(C.DisableRetainerVesselReturn > 10)
             {
-                Warning("Option \"Retainer venture processing cutoff\" is set to abnormally high value. You may experience significant delays with resending retainers when deployables are soon to be available.");
+                Warning("\"僱員探險處理截止時間\"被設定為異常高值。當僱員即將可用時，你可能會在重新派遣僱員時遇到明顯延遲。");
             }
             else
             {
-                Info("Option \"Retainer venture processing cutoff\" is enabled. You may experience delays with resending retainers when deployables are soon to be available.");
+                Info("\"僱員探險處理截止時間\"已啟用。當僱員即將可用時，你可能會在重新派遣僱員時遇到明顯延遲。");
             }
         }
 
         if(C.MultiModeRetainerConfiguration.MultiWaitForAll)
         {
-            Info("Option \"Wait For Venture Completion\" is enabled. This means that AutoRetainer will wait for all ventures from all retainers on a character to be completed before logging in to process them.");
+            Info("\"等待探險完成\"選項已啟用。這代表 AutoRetainer 會等到該角色的所有僱員探險都完成後，才會登入並處理。");
         }
 
         if(C.MultiModeRetainerConfiguration.WaitForAllLoggedIn)
         {
-            Info("Option \"Wait even when already logged in\" is enabled for retainers. This means that AutoRetainer will wait for all ventures from all retainers on a character to be completed before processing them even when you are logged in.");
+            Info("僱員已啟用\"即使已登入也等待\"選項。這代表即使你已在線上，AutoRetainer 仍會等到該角色的所有僱員探險完成後才進行處理。");
         }
 
         {
@@ -234,46 +234,46 @@ public static unsafe class TroubleshootingUI
             }
             if(manualList.Count > 0)
             {
-                Info("Some of your retainers have manual entrust plans set. These plans won't be processed automatically after resending retainer for venture, but only manually upon clicking button in overlay. Hover to see the list.", manualList.Print("\n"));
+                Info("你的一些僱員設定了手動存放計畫。這些計畫在重新派遣僱員後不會自動執行，只能透過點擊覆蓋介面上的按鈕來手動觸發。將游標懸停以查看名單。", manualList.Print("\n"));
             }
             if(deletedList.Count > 0)
             {
-                Warning("Some of your retainers' entrust plans were deleted before. Retainers with deleted entrust plans will not entrust anything. Hover to see list.", deletedList.Print("\n"));
+                Warning("你的一些僱員存放計畫先前已被刪除。這些僱員將不會存放任何物品。將游標懸停以查看名單。", deletedList.Print("\n"));
             }
         }
 
         if(C.No2ndInstanceNotify)
         {
-            Info("You have \"Do not warn about second game instance running from same directory\" option enabled, which will skip AutoRetainer's loading on 2nd instance of the game running with the same Dalamud directory automatically.");
+            Info("你啟用了\"不針對從相同目錄執行的第二個遊戲實例進行警告\"，這會讓 AutoRetainer 在檢測到使用相同 Dalamud 目錄的第二個遊戲視窗時，自動跳過該視窗的加載。");
         }
 
-        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "SimpleTweaksPlugin"&& x.IsLoaded))
+        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "SimpleTweaksPlugin" && x.IsLoaded))
         {
-            Info("Simple Tweaks plugin detected. Any tweaks related to retainers or submarines may affect AutoRetainer functions negatively. Please ensure that tweaks are configured in a way to not interfere with AutoRetainer functions.");
+            Info("偵測到 Simple Tweaks 插件。任何與僱員或潛水艇相關的微調都可能對 AutoRetainer 的功能造成負面影響。請確保微調設定不會干擾 AutoRetainer 的運作。");
         }
 
-        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "PandorasBox"&& x.IsLoaded))
+        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "PandorasBox" && x.IsLoaded))
         {
-            Info("Pandora's Box plugin detected. Automatic use of actions while AutoRetainer is enabled may affect AutoRetainer functions negatively. Please ensure that Pandora's Box is configured in a way to not automatically use actions while AutoRetainer is active.");
+            Info("偵測到 Pandora's Box 插件。在 AutoRetainer 啟用時自動執行動作可能會造成負面影響。請確保當 AutoRetainer 處於活動狀態時，Pandora's Box 不會自動執行任何動作。");
         }
 
-        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "Automaton"&& x.IsLoaded))
+        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "Automaton" && x.IsLoaded))
         {
-            Info("Automaton plugin detected. Automatic use of actions and automatic numeric inputs while AutoRetainer is enabled may affect AutoRetainer functions negatively. Please ensure that Automaton is configured in a way to not use automatically actions while AutoRetainer is active.");
+            Info("偵測到 Automaton 插件。在 AutoRetainer 啟用時自動執行動作或自動輸入數值可能會造成負面影響。請確保在 AutoRetainer 活動期間，Automaton 不會自動執行動作。");
         }
 
-        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "RotationSolver"&& x.IsLoaded))
+        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "RotationSolver" && x.IsLoaded))
         {
-            Info("RotationSolver plugin detected. Automatic use of actions while AutoRetainer is enabled may affect AutoRetainer functions negatively. Please ensure that RotationSolver is configured in a way to not automatically use actions while AutoRetainer is active.");
+            Info("偵測到 RotationSolver 插件。在 AutoRetainer 啟用時自動執行技能可能會造成負面影響。請確保在 AutoRetainer 活動期間，RotationSolver 不會自動執行動作。");
         }
 
         if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName.StartsWith("BossMod") && x.IsLoaded))
         {
-            Info("BossMod plugin detected. Automatic use of actions while AutoRetainer is enabled may affect AutoRetainer functions negatively. Please ensure that BossMod is configured in a way to not automatically use actions while AutoRetainer is active.");
+            Info("偵測到 BossMod 插件。在 AutoRetainer 啟用時自動執行動作可能會造成負面影響。請確保在 AutoRetainer 活動期間，BossMod 不會自動執行動作。");
         }
 
         ImGui.Separator();
-        ImGuiEx.TextWrapped("Expert settings alter behavior that was intended by developer. Please check that your issue is not related to incorrectly configured expert settings.");
+        ImGuiEx.TextWrapped("專家設定會修改開發者預期的行為。請檢查你的問題是否與錯誤配置的專家設定有關。");
         CheckExpertSetting("無可用派遣任務時存取傳喚鈴的操作", nameof(C.OpenBellBehaviorNoVentures));
         CheckExpertSetting("有可用派遣任務時存取傳喚鈴的操作", nameof(C.OpenBellBehaviorWithVentures));
         CheckExpertSetting("訪問傳喚鈴後任務完成行為", nameof(C.TaskCompletedBehaviorAccess));
@@ -297,7 +297,7 @@ public static unsafe class TroubleshootingUI
     private static void Error(string message, string tooltip = null)
     {
         ImGui.PushFont(UiBuilder.IconFont);
-        ImGuiEx.Text(EColor.RedBright, "");
+        ImGuiEx.Text(EColor.RedBright, "\uf057");
         ImGui.PopFont();
         if(tooltip != null) ImGuiEx.Tooltip(tooltip);
         ImGui.SameLine();
@@ -308,7 +308,7 @@ public static unsafe class TroubleshootingUI
     private static void Warning(string message, string tooltip = null)
     {
         ImGui.PushFont(UiBuilder.IconFont);
-        ImGuiEx.Text(EColor.OrangeBright, "");
+        ImGuiEx.Text(EColor.OrangeBright, "\uf071");
         ImGui.PopFont();
         if(tooltip != null) ImGuiEx.Tooltip(tooltip);
         ImGui.SameLine();
@@ -319,7 +319,7 @@ public static unsafe class TroubleshootingUI
     private static void Info(string message, string tooltip = null)
     {
         ImGui.PushFont(UiBuilder.IconFont);
-        ImGuiEx.Text(EColor.YellowBright, "");
+        ImGuiEx.Text(EColor.YellowBright, "\uf05a");
         ImGui.PopFont();
         if(tooltip != null) ImGuiEx.Tooltip(tooltip);
         ImGui.SameLine();

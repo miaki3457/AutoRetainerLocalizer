@@ -43,7 +43,7 @@ public unsafe sealed class CharacterSync : NeoUIEntry
                 C.OfflineData.RemoveAll(x => ToDelete.Contains(x.NameWithWorld));
             }
             ImGuiEx.Tooltip("按住 CTRL 並點擊");
-            if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.Ban, "Cancel"))
+            if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.Ban, "取消"))
             {
                 ToDelete.Clear();
             }

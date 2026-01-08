@@ -92,7 +92,7 @@ internal class VentureBrowser : Window
             });
             if(adata.Gathering == -1 || adata.Perception == -1 || adata.Ilvl == -1 || SelectedRetainer.Level == 0)
             {
-                ImGuiEx.TextWrapped($"Data is absent for this retainer. Access retainer bell and select that retainer to populate data.");
+                ImGuiEx.TextWrapped($"缺少此僱員的數據。請與僱員鈴互動並點選該僱員以填入數據。");
             }
             else
             {
@@ -183,7 +183,7 @@ internal class VentureBrowser : Window
 
                         if(x.IsDol)
                         {
-                            ImGuiEx.Text(x.Gathered ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed, x.Gathered ? "Yes": "No");
+                            ImGuiEx.Text(x.Gathered ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed, x.Gathered ? "Yes" : "No");
                             if(!x.Gathered && GatherBuddyPresent)
                             {
                                 if(ImGui.SmallButton($"Gather##{x.ID}"))

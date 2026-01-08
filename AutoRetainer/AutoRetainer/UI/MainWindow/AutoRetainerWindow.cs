@@ -35,7 +35,7 @@ internal unsafe class AutoRetainerWindow : Window
             Click = (m) => { if(m == ImGuiMouseButton.Left) S.NeoWindow.IsOpen = true; },
             Icon = FontAwesomeIcon.Cog,
             IconOffset = new(2, 2),
-            ShowTooltip = () => ImGui.SetTooltip("Open settings window"),
+            ShowTooltip = () => ImGui.SetTooltip("開啟設定視窗"),
         });
         TitleBarButtons.Add(LockButton);
     }
@@ -102,7 +102,7 @@ internal unsafe class AutoRetainerWindow : Window
                     .TextWrapped(ImGuiColors.DalamudYellow, "請注意，嚴禁將 AutoRetainer 用於 RMT 目的")
                     .TextWrapped(ImGuiColors.DalamudRed, "為避免不必要的後果，使用AutoRetainer時請遵守下列規則 :")
                     .TextWrapped("1. 不要在遊戲聊天中提及您使用AutoRetainer;")
-                    .TextWrapped("2. Do not leave AutoRetainer unattended for prolonged period of time;")
+                    .TextWrapped("2. 請勿長時間在無人看管的情況下執行 AutoRetainer；")
                     .TextWrapped("3. 確保您的實際遊戲+AutoRetainer使用時間每天不超過16小時；確保在僱員/潛水艇檢查流程之間存在非活動間隔;")
                     .TextWrapped("4. 永遠不要回應那些試圖透過交易或聊天進行所謂'機器人檢測'的玩家；應立即將這些玩家加入黑名單;")
                     .TextWrapped("5. 如果GM詢問，始終聲稱所有操作都是手動完成的，絕不承認使用插件。")
@@ -126,7 +126,7 @@ internal unsafe class AutoRetainerWindow : Window
             {
                 ImGui.BeginDisabled();
             }
-            if(ImGui.Checkbox($"Enable {P.Name}", ref e))
+            if(ImGui.Checkbox($"啟用 {P.Name}", ref e))
             {
                 P.WasEnabled = false;
                 if(e)
@@ -146,17 +146,17 @@ internal unsafe class AutoRetainerWindow : Window
             if(disabled)
             {
                 ImGui.EndDisabled();
-                ImGuiComponents.HelpMarker($"MultiMode controls this option. Hold CTRL to override.");
+                ImGuiComponents.HelpMarker($"多角色模式正控制此選項。按住 CTRL 可強制覆蓋。");
             }
 
             if(P.WasEnabled)
             {
                 ImGui.SameLine();
-                ImGuiEx.Text(GradientColor.Get(ImGuiColors.DalamudGrey, ImGuiColors.DalamudGrey3, 500), $"Paused");
+                ImGuiEx.Text(GradientColor.Get(ImGuiColors.DalamudGrey, ImGuiColors.DalamudGrey3, 500), $"已暫停");
             }
 
             ImGui.SameLine();
-            if(ImGui.Checkbox("Multi", ref MultiMode.Enabled))
+            if(ImGui.Checkbox("多角色", ref MultiMode.Enabled))
             {
                 MultiMode.OnMultiModeEnabled();
             }
@@ -164,7 +164,7 @@ internal unsafe class AutoRetainerWindow : Window
             if(C.ShowNightMode)
             {
                 ImGui.SameLine();
-                if(ImGui.Checkbox("Night", ref C.NightMode))
+                if(ImGui.Checkbox("夜間", ref C.NightMode))
                 {
                     MultiMode.BailoutNightMode();
                 }
@@ -178,7 +178,7 @@ internal unsafe class AutoRetainerWindow : Window
             if(C.CharEqualize && MultiMode.Enabled)
             {
                 ImGui.SameLine();
-                if(ImGui.Button("Reset counters"))
+                if(ImGui.Button("重設計數器"))
                 {
                     MultiMode.CharaCnt.Clear();
                 }
@@ -188,9 +188,9 @@ internal unsafe class AutoRetainerWindow : Window
 
             if(IPC.Suppressed)
             {
-                ImGuiEx.Text(ImGuiColors.DalamudRed, $"Plugin operation is suppressed by other plugin.");
+                ImGuiEx.Text(ImGuiColors.DalamudRed, $"插件操作正被其他插件抑制中");
                 ImGui.SameLine();
-                if(ImGui.SmallButton("Cancel"))
+                if(ImGui.SmallButton("取消"))
                 {
                     IPC.Suppressed = false;
                 }

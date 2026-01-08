@@ -33,7 +33,7 @@ public class DeployablesTab : NeoUIEntry
         .Checkbox($"在重新派遣之前完成所有船隻的結算", () => ref C.FinalizeBeforeResend)
         .Checkbox($"在派遣介面隱藏飛空艇", () => ref C.HideAirships)
 
-        .Section("Plans")
+        .Section("計畫設定")
         .Widget(SubmarineUnlockPlanUI.DrawButtonText, x =>
         {
             SubmarineUnlockPlanUI.DrawButton();
@@ -43,9 +43,9 @@ public class DeployablesTab : NeoUIEntry
             SubmarinePointPlanUI.DrawButton();
         })
 
-        .Section("Alert Settings")
-        .Checkbox($"Less than possible vessels enabled", () => ref C.AlertNotAllEnabled)
-        .Checkbox($"Enabled vessel isn't deployed", () => ref C.AlertNotDeployed)
+        .Section("警報設定")
+        .Checkbox($"啟用的潛艇數量少於可用上限", () => ref C.AlertNotAllEnabled)
+        .Checkbox($"已啟用的潛艇目前未處於航行狀態", () => ref C.AlertNotDeployed)
         .Widget("潛水艇配置非最佳化警報:", (z) =>
         {
             foreach(var x in C.UnoptimalVesselConfigurations)
@@ -261,7 +261,7 @@ public class DeployablesTab : NeoUIEntry
         ImGui.Separator();
 
         ImGui.SetNextItemWidth(150f);
-        if(ImGui.BeginCombo("##uplan", "Unlock plan: "+ (SelectedUnlockPlan?.Name ?? "not selected", ImGuiComboFlags.HeightLarge)))
+        if(ImGui.BeginCombo("##uplan", "Unlock plan: " + (SelectedUnlockPlan?.Name ?? "not selected", ImGuiComboFlags.HeightLarge)))
         {
             foreach(var plan in C.SubmarineUnlockPlans)
             {
@@ -292,7 +292,7 @@ public class DeployablesTab : NeoUIEntry
         ImGui.Separator();
 
         ImGui.SetNextItemWidth(150f);
-        if(ImGui.BeginCombo("##uplan2", "Point plan: "+ (VoyageUtils.GetPointPlanName(SelectedPointPlan) ?? "not selected"), ImGuiComboFlags.HeightLarge))
+        if(ImGui.BeginCombo("##uplan2", "Point plan: " + (VoyageUtils.GetPointPlanName(SelectedPointPlan) ?? "not selected"), ImGuiComboFlags.HeightLarge))
         {
             foreach(var plan in C.SubmarinePointPlans)
             {

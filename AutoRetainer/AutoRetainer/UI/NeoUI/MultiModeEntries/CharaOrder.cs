@@ -90,7 +90,7 @@ public class CharaOrder : NeoUIEntry
                     }
                     ImGuiEx.Tooltip($"按住CTRL + 左鍵以刪除儲存的角色資料。重新登入後會自動重建。");
                     ImGui.SameLine();
-                    if(ImGuiEx.IconButton("", enabled: ImGuiEx.Ctrl))
+                    if(ImGuiEx.IconButton("\uf057", enabled: ImGuiEx.Ctrl))
                     {
                         C.Blacklist.Add((chr.CID, chr.Name));
                     }
