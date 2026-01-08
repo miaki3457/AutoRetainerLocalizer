@@ -1,4 +1,4 @@
-﻿namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries;
+namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries;
 public abstract class InventoryManagementBase : NeoUIEntry
 {
     public abstract string Name { get; }

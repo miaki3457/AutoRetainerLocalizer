@@ -1,4 +1,4 @@
-﻿
+
 using ECommons.GameHelpers;
 using ECommons.UIHelpers.AddonMasterImplementations;
 using FFXIVClientStructs.FFXIV.Client.UI;
