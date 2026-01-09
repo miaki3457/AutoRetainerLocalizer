@@ -217,12 +217,9 @@ namespace Localizer
             string leadingWhitespace = "";
             if (isRawString)
             {
-                var endTrivia = node.StringEndToken.LeadingTrivia;
-                leadingWhitespace = endTrivia.ToString(); 
-                if (string.IsNullOrEmpty(leadingWhitespace))
-                {
-                    var lineSpan = node.GetLocation().GetLineSpan();
-                }
+                var endLocation = node.StringEndToken.GetLocation().GetLineSpan();
+                int column = endLocation.StartLinePosition.Character;
+                leadingWhitespace = new string(' ', column);
             }
 
             var matches = Regex.Matches(translatedTemplate, @"\{(\d+)\}");
