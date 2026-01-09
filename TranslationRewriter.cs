@@ -217,9 +217,8 @@ namespace Localizer
             string leadingWhitespace = "";
             if (isRawString)
             {
-                var endLocation = node.StringEndToken.GetLocation().GetLineSpan();
-                int column = endLocation.StartLinePosition.Character;
-                leadingWhitespace = new string(' ', column);
+                var endPos = node.StringEndToken.GetLocation().GetLineSpan().StartLinePosition;
+                leadingWhitespace = new string(' ', endPos.Character);
             }
 
             var matches = Regex.Matches(translatedTemplate, @"\{(\d+)\}");
