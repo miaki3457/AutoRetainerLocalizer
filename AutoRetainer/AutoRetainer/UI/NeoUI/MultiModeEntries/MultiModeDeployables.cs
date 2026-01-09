@@ -29,8 +29,7 @@ public class MultiModeDeployables : NeoUIEntry
         .Widget(() =>
         {
             ImGuiEx.HelpMarker($"""
-            當前狀態：{(Utils.CanShutdownForSubs() ? "Can shutdown" : "Can NOT shutdown")}
-            距離強制關機剩餘：{EzThrottler.GetRemainingTime("ForceShutdownForSubs")}
+            當前狀態：{(Utils.CanShutdownForSubs() ? "Can shutdown" : "Can NOT shutdown")}\n距離強制關機剩餘：{EzThrottler.GetRemainingTime("ForceShutdownForSubs")}
                 """);
         })
         .Unindent()
