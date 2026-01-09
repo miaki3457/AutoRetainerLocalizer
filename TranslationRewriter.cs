@@ -214,12 +214,15 @@ namespace Localizer
         {
             var contents = new List<InterpolatedStringContentSyntax>();
             bool isRawString = node.StringStartToken.ValueText.StartsWith("$" + "\"\"\"");
-
             string leadingWhitespace = "";
             if (isRawString)
             {
-                // 預設給予 12 格縮排
-                leadingWhitespace = new string(' ', 12);
+                var endTrivia = node.StringEndToken.LeadingTrivia;
+                leadingWhitespace = endTrivia.ToString(); 
+                if (string.IsNullOrEmpty(leadingWhitespace))
+                {
+                    var lineSpan = node.GetLocation().GetLineSpan();
+                }
             }
 
             var matches = Regex.Matches(translatedTemplate, @"\{(\d+)\}");
