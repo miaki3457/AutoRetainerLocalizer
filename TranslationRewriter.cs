@@ -140,7 +140,9 @@ namespace Localizer
                 {
                     if (TryGetTranslation(originalText, out var translated))
                     {
-                        return SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(translated));
+                        return SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(translated))
+                            // .WithLeadingTrivia(node.GetLeadingTrivia())
+                            .WithTrailingTrivia(node.GetTrailingTrivia());
                     }
                 }
             }
@@ -269,7 +271,9 @@ namespace Localizer
             return SyntaxFactory.InterpolatedStringExpression(
                 node.StringStartToken,
                 SyntaxFactory.List(contents),
-                node.StringEndToken);
+                node.StringEndToken)
+                // .WithLeadingTrivia(node.GetLeadingTrivia())   // 前導空格
+                .WithTrailingTrivia(node.GetTrailingTrivia()); // 後繼空格
         }
     }
 }
