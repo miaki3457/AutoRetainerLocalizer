@@ -90,7 +90,7 @@ internal unsafe class SubmarineUnlockPlanUI : Window
     public override void Draw()
     {
         C.SubmarineUnlockPlans.RemoveAll(x => x.Delete);
-        ImGuiEx.InputWithRightButtonsArea("SUPSelector", () =>
+        ImGuiEx.InputWithRightButtonsArea("潛艇計畫選擇器", () =>
         {
             if(ImGui.BeginCombo("##supsel", SelectedPlanName, ImGuiComboFlags.HeightLarge))
             {
@@ -105,10 +105,10 @@ internal unsafe class SubmarineUnlockPlanUI : Window
             }
         }, () =>
         {
-            if(ImGui.Button("New plan"))
+            if(ImGui.Button("新計畫"))
             {
                 var x = new SubmarineUnlockPlan();
-                x.Name = $"Plan {x.GUID}";
+                x.Name = $"計畫 {x.GUID}";
                 C.SubmarineUnlockPlans.Add(x);
                 SelectedPlanGuid = x.GUID;
             }
@@ -228,12 +228,12 @@ internal unsafe class SubmarineUnlockPlanUI : Window
                 ImGuiEx.TextWrapped($"解鎖欄位的優先級總是高於解鎖航線");
                 ImGui.Checkbox("在沉船區（翠浪海）強制執行「重複刷單一目的地」模式", ref SelectedPlan.EnforceDSSSinglePoint);
                 ImGui.Checkbox("將此計畫設為強制執行", ref SelectedPlan.EnforcePlan);
-                ImGuiEx.HelpMarker("Any point selected for unlock in this map will be executed by every single eligible submarine until everything is actually unlocked");
+                ImGuiEx.HelpMarker("在此地圖中選擇要解鎖的任何地點，都將由每一艘符合條件的潛水艇執行，直到該地點被正式解鎖為止。");
                 if(ImGui.BeginTable("##planTable", 3, ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.Borders | ImGuiTableFlags.RowBg))
                 {
-                    ImGui.TableSetupColumn("Zone", ImGuiTableColumnFlags.WidthStretch);
-                    ImGui.TableSetupColumn("Map");
-                    ImGui.TableSetupColumn("Unlocked by");
+                    ImGui.TableSetupColumn("區域", ImGuiTableColumnFlags.WidthStretch);
+                    ImGui.TableSetupColumn("地圖");
+                    ImGui.TableSetupColumn("解鎖來源");
                     ImGui.TableHeadersRow();
                     foreach(var x in Unlocks.PointToUnlockPoint)
                     {

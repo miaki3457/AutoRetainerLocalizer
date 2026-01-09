@@ -25,8 +25,8 @@ public class CharaOrder : NeoUIEntry
             {
                 ImGui.TableSetupColumn("##ctrl");
                 ImGui.TableSetupColumn("角色", ImGuiTableColumnFlags.WidthStretch);
-                ImGui.TableSetupColumn("Toggles");
-                ImGui.TableSetupColumn("Deletion");
+                ImGui.TableSetupColumn("切換開關");
+                ImGui.TableSetupColumn("刪除資料");
                 ImGui.TableHeadersRow();
 
                 for(var index = 0; index < C.OfflineData.Count; index++)
@@ -46,7 +46,7 @@ public class CharaOrder : NeoUIEntry
                         chr.Enabled = false;
                         C.SelectedRetainers.Remove(chr.CID);
                     }
-                    ImGuiEx.Tooltip("Enable retainers");
+                    ImGuiEx.Tooltip("啟用僱員自動化");
                     ImGuiEx.DragDropRepopulate("EnRet", chr.ExcludeRetainer, ref chr.ExcludeRetainer);
                     ImGui.SameLine();
                     if(ImGuiEx.ButtonCheckbox(FontAwesomeIcon.Ship, ref chr.ExcludeWorkshop, inverted: true))
@@ -55,7 +55,7 @@ public class CharaOrder : NeoUIEntry
                         chr.EnabledSubs.Clear();
                         chr.EnabledAirships.Clear();
                     }
-                    ImGuiEx.Tooltip("Enable deployables");
+                    ImGuiEx.Tooltip("啟用潛艇自動化");
                     ImGuiEx.DragDropRepopulate("EnDep", chr.ExcludeWorkshop, x =>
                     {
                         chr.ExcludeWorkshop = x;
@@ -67,22 +67,22 @@ public class CharaOrder : NeoUIEntry
                     });
                     ImGui.SameLine();
                     ImGuiEx.ButtonCheckbox(FontAwesomeIcon.DoorOpen, ref chr.ExcludeOverlay, inverted: true);
-                    ImGuiEx.Tooltip("Display on login overlay");
+                    ImGuiEx.Tooltip("在登入覆蓋視窗顯示");
                     ImGuiEx.DragDropRepopulate("EnLog", chr.ExcludeOverlay, ref chr.ExcludeOverlay);
                     ImGui.SameLine();
                     ImGuiEx.ButtonCheckbox(FontAwesomeIcon.Coins, ref chr.NoGilTrack, inverted: true);
-                    ImGuiEx.Tooltip("Count gil on this character towards total");
+                    ImGuiEx.Tooltip("將此角色的金幣計入總額");
                     ImGuiEx.DragDropRepopulate("EnGil", chr.NoGilTrack, ref chr.NoGilTrack);
                     ImGui.SameLine();
                     ImGuiEx.ButtonCheckbox(FontAwesomeIcon.GasPump, ref chr.AutoFuelPurchase, color:ImGuiColors.TankBlue);
-                    ImGuiEx.Tooltip("Allow this character to purchase fuel from workshop");
+                    ImGuiEx.Tooltip("允許此角色在工作坊購買燃料");
                     ImGuiEx.DragDropRepopulate("EnFuel", chr.AutoFuelPurchase, ref chr.AutoFuelPurchase);
                     ImGui.TableNextColumn();
                     if(ImGuiEx.IconButton(FontAwesomeIcon.UserMinus))
                     {
                         chr.ClearFCData();
                     }
-                    ImGuiEx.Tooltip("Reset FC data and deployable data for this character. It will regenerate once you log in and access workshop panel.");
+                    ImGuiEx.Tooltip("重置此角色的部隊資料與潛艇資料。資料將在你登入並訪問管制面板後重新生成。");
                     ImGui.SameLine();
                     if(ImGuiEx.IconButton(FontAwesomeIcon.Trash, enabled: ImGuiEx.Ctrl))
                     {
@@ -90,7 +90,7 @@ public class CharaOrder : NeoUIEntry
                     }
                     ImGuiEx.Tooltip($"按住CTRL + 左鍵以刪除儲存的角色資料。重新登入後會自動重建。");
                     ImGui.SameLine();
-                    if(ImGuiEx.IconButton("", enabled: ImGuiEx.Ctrl))
+                    if(ImGuiEx.IconButton("\uf057", enabled: ImGuiEx.Ctrl))
                     {
                         C.Blacklist.Add((chr.CID, chr.Name));
                     }

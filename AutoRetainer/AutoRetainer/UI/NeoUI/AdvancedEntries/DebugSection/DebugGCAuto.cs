@@ -1,4 +1,4 @@
-using ECommons.ExcelServices;
+﻿using ECommons.ExcelServices;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace AutoRetainer.UI.NeoUI.AdvancedEntries.DebugSection;
@@ -11,7 +11,7 @@ internal unsafe class DebugGCAuto : DebugSectionBase
         {
             foreach(var x in AutoGCHandin.GetHandinItems())
             {
-                ImGuiEx.Text(x.ToString() + "/"+ ExcelItemHelper.GetName(x.ItemID));
+                ImGuiEx.Text(x.ToString() + "/" + ExcelItemHelper.GetName(x.ItemID));
             }
         }
         if(ImGui.Button("EnqueueInitiation")) GCContinuation.EnqueueInitiation(true);

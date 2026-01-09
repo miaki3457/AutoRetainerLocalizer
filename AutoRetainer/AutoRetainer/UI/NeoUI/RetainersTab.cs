@@ -17,18 +17,18 @@ public class RetainersTab : NeoUIEntry
     public RetainersTab()
     {
         Builder = new NuiBuilder()
-                 .Section("Mass configuration change")
+                 .Section("批量修改配置")
                  .Widget(MassConfigurationChangeWidget);
     }
 
     private void MassConfigurationChangeWidget()
     {
-        ImGuiEx.Text("Select retainers:");
+        ImGuiEx.Text("選擇僱員:");
         ImGuiEx.SetNextItemFullWidth();
-        if(ImGui.BeginCombo("##sel", $"Selected {SelectedRetainers.Count}", ImGuiComboFlags.HeightLarge))
+        if(ImGui.BeginCombo("##sel", $"已選擇 {SelectedRetainers.Count}", ImGuiComboFlags.HeightLarge))
         {
             ref var search = ref Ref<string>.Get("Search");
-            ImGui.InputTextWithHint("##searchRetainers", "Character search", ref search, 100);
+            ImGui.InputTextWithHint("##searchRetainers", "角色搜尋", ref search, 100);
             foreach(var x in C.OfflineData)
             {
                 if((search.Length > 0 && !(x.Name + "@" + x.World).Contains(search, StringComparison.OrdinalIgnoreCase)) || x.RetainerData.Count <= 0)
@@ -66,14 +66,14 @@ public class RetainersTab : NeoUIEntry
 
         ImGui.Separator();
 
-        ImGuiEx.TextV("By level:");
+        ImGuiEx.TextV("按等級:");
         ImGui.SameLine();
         ImGui.SetNextItemWidth(100f);
         ImGui.DragInt("##minlevel", ref MassMinLevel, 0.1f);
         ImGui.SameLine();
         ImGui.SetNextItemWidth(100f);
         ImGui.DragInt("##maxlevel", ref MassMaxLevel, 0.1f);
-        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61543, "Add retainers by level to selection"))
+        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61543, "將此等級的僱員加入選擇"))
         {
             foreach(var x in C.OfflineData)
             {
@@ -89,10 +89,10 @@ public class RetainersTab : NeoUIEntry
 
         ImGui.Separator();
 
-        ImGuiEx.Text("Actions:");
+        ImGuiEx.Text("執行動作:");
         ImGui.Separator();
         ImGui.SetNextItemWidth(150f);
-        if(ImGui.BeginCombo("##ventureplans", SelectedVenturePlan?.Name ?? "None selected", (ImGuiComboFlags)8))
+        if(ImGui.BeginCombo("##ventureplans", SelectedVenturePlan?.Name ?? "未選擇任何項目", (ImGuiComboFlags)8))
         {
             foreach(var plan in C.SavedPlans)
             {
@@ -104,7 +104,7 @@ public class RetainersTab : NeoUIEntry
             ImGui.EndCombo();
         }
         ImGui.SameLine();
-        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)62073, "Enable planner with venture plan"))
+        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)62073, "啟用帶有探險計畫的規劃器"))
         {
             var num = 0;
             foreach(var x in SelectedRetainers)
@@ -125,7 +125,7 @@ public class RetainersTab : NeoUIEntry
         ImGui.Separator();
 
         ImGui.SetNextItemWidth(150f);
-        if(ImGui.BeginCombo("##entrustplans", SelectedEntrustPlan?.Name ?? "None selected", ImGuiComboFlags.HeightLarge))
+        if(ImGui.BeginCombo("##entrustplans", SelectedEntrustPlan?.Name ?? "未選擇任何項目", ImGuiComboFlags.HeightLarge))
         {
             foreach(var plan in C.EntrustPlans)
             {
@@ -137,7 +137,7 @@ public class RetainersTab : NeoUIEntry
             ImGui.EndCombo();
         }
         ImGui.SameLine();
-        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)62566, "Set entrust plan"))
+        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)62566, "設定存放計畫"))
         {
             var num = 0;
             foreach(var x in SelectedRetainers)
@@ -155,7 +155,7 @@ public class RetainersTab : NeoUIEntry
 
         ImGui.Separator();
 
-        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61526, "Remove entrust plan from selected retainers"))
+        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61526, "移除所選僱員的存放計畫"))
         {
             var num = 0;
             foreach(var x in SelectedRetainers)
@@ -173,7 +173,7 @@ public class RetainersTab : NeoUIEntry
 
         ImGui.Separator();
 
-        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61526, "Disable venture planner for selected retainers"))
+        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61526, "停用所選僱員的探險規劃器"))
         {
             var num = 0;
             foreach(var x in SelectedRetainers)
@@ -191,7 +191,7 @@ public class RetainersTab : NeoUIEntry
 
         ImGui.Separator();
 
-        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61452, "Enable selected retainers"))
+        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61452, "啟用所選僱員"))
         {
             var num = 0;
             foreach(var x in SelectedRetainers)
@@ -205,7 +205,7 @@ public class RetainersTab : NeoUIEntry
 
         ImGui.Separator();
 
-        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61453, "Disable selected retainers"))
+        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61453, "停用所選僱員"))
         {
             var num = 0;
             foreach(var x in SelectedRetainers)
@@ -219,7 +219,7 @@ public class RetainersTab : NeoUIEntry
 
         ImGui.Separator();
 
-        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61528, "Enable retainer multi mode for owners of selected retainers"))
+        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61528, "為所選僱員的主人啟用僱員多角色模式"))
         {
             var num = 0;
             foreach(var x in SelectedRetainers)
@@ -236,7 +236,7 @@ public class RetainersTab : NeoUIEntry
 
         ImGui.Separator();
 
-        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61527, "Disable retainer multi mode for owners of selected retainers"))
+        if(ImGuiEx.IconButtonWithText((FontAwesomeIcon)61527, "為所選僱員的主人停用僱員多角色模式"))
         {
             var num = 0;
             foreach(var x in SelectedRetainers)

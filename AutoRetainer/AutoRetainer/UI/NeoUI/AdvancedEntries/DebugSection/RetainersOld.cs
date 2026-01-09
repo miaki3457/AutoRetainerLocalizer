@@ -74,7 +74,7 @@ internal unsafe class RetainersOld : DebugSectionBase
             bars[i] = (start, end);
             ImGui.TableNextColumn();
             ImGui.TableSetBgColor(ImGuiTableBgTarget.CellBg, 0);
-            ImGuiEx.Text($"{(ret.VentureID == 0 ? "No Venture" : Utils.ToTimeString(ret.GetVentureSecondsRemaining(false)))}");
+            ImGuiEx.Text($"{(ret.VentureID == 0 ? "無探險" : Utils.ToTimeString(ret.GetVentureSecondsRemaining(false)))}");
             ImGui.TableNextColumn();
             ImGui.TableSetBgColor(ImGuiTableBgTarget.CellBg, 0);
             ImGuiEx.Text($"-");

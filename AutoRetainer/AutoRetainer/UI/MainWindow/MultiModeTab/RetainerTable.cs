@@ -46,7 +46,7 @@ public static unsafe class RetainerTable
                         if(!C.EnableEntrustManager) c = ImGuiColors.DalamudRed;
                         ImGuiEx.Text(c, Lang.IconDuplicate);
                         ImGui.PopFont();
-                        ImGuiEx.Tooltip($"委託計畫 \"{plan.Name}\" 已啟用。" + (plan.ManualPlan ? "\\n這是手動處理計劃": "") + (Utils.GetReachableRetainerBell(false) != null ? "\\n點擊進行委託": ""));
+                        ImGuiEx.Tooltip($"委託計畫 \"{plan.Name}\" 已啟用。" + (plan.ManualPlan ? "\\n這是手動處理計劃" : "") + (Utils.GetReachableRetainerBell(false) != null ? "\\n點擊進行委託" : ""));
                         if(ImGui.IsItemClicked())
                         {
                             if(!Svc.Condition[Dalamud.Game.ClientState.Conditions.ConditionFlag.OccupiedSummoningBell])
@@ -138,7 +138,7 @@ public static unsafe class RetainerTable
                         ImGui.SameLine();
                     }
                 }
-                ImGuiEx.Text($"{(!ret.HasVenture ? "No Venture" : Utils.ToTimeString(ret.GetVentureSecondsRemaining(C.TimerAllowNegative)))}");
+                ImGuiEx.Text($"{(!ret.HasVenture ? "無探險" : Utils.ToTimeString(ret.GetVentureSecondsRemaining(C.TimerAllowNegative)))}");
                 ImGui.TableNextColumn();
                 ImGui.TableSetBgColor(ImGuiTableBgTarget.CellBg, 0);
                 var n = $"{data.CID} {ret.Name} settings";

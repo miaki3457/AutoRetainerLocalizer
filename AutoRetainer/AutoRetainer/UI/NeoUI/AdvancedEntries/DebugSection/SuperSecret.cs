@@ -1,4 +1,4 @@
-using Dalamud.Interface.Components;
+﻿using Dalamud.Interface.Components;
 
 namespace AutoRetainer.UI.NeoUI.AdvancedEntries.DebugSection;
 

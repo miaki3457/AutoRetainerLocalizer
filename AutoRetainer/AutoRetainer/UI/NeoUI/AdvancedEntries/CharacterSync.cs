@@ -51,7 +51,7 @@ public unsafe sealed class CharacterSync : NeoUIEntry
         }
 
         ImGuiEx.TextWrapped($"一鍵刪除已不存在的角色資料");
-        var jbInstalled = Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "JustBackup"&& x.IsLoaded);
+        var jbInstalled = Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "JustBackup" && x.IsLoaded);
         if(!jbInstalled)
         {
             ImGuiEx.TextWrapped(EColor.RedBright, "若要繼續，你需要安裝 JustBackup 插件");

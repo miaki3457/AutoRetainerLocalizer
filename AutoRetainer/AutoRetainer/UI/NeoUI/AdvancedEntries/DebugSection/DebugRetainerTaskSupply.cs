@@ -1,4 +1,4 @@
-using AutoRetainer.Scheduler.Tasks;
+﻿using AutoRetainer.Scheduler.Tasks;
 using ECommons.ExcelServices;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using Lumina.Excel.Sheets;

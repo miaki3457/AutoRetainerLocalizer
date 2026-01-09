@@ -43,7 +43,7 @@ internal unsafe class LoginOverlay : Window
                 {
                     ImGui.SameLine();
                     ImGui.SetNextItemWidth(100f);
-                    ImGuiEx.Combo("##sacc", ref Ref<int>.Get("ServAcc", -1), userServiceAccounts, names: userServiceAccounts.ToDictionary(x => x, x => x == -1 ? "所有伺服帳號": $"服務帳號 {x + 1}"));
+                    ImGuiEx.Combo("##sacc", ref Ref<int>.Get("ServAcc", -1), userServiceAccounts, names: userServiceAccounts.ToDictionary(x => x, x => x == -1 ? "所有伺服帳號" : $"服務帳號 {x + 1}"));
                 }
             });
         }

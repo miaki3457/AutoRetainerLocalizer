@@ -333,7 +333,7 @@ public sealed unsafe class ExchangeLists : InventoryManagementBase
                         if(trans) ImGui.PushStyleVar(ImGuiStyleVar.Alpha, 0.2f);
                         ImGui.Image(ctex.Handle, new(ImGui.GetFrameHeight()));
                         if(trans) ImGui.PopStyleVar();
-                        ImGuiEx.Tooltip($"{c}" + (trans ? " (unavailable)": ""));
+                        ImGuiEx.Tooltip($"{c}" + (trans ? " (unavailable)" : ""));
                         ImGui.SameLine(0, 1);
                     }
                 }

@@ -45,7 +45,7 @@ public static unsafe class TroubleshootingUI
             }
         }
 
-        if((C.GlobalTeleportOptions.Enabled || C.OfflineData.Any(x => x.TeleportOptionsOverride.Enabled == true)) && !Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "Lifestream"&& x.IsLoaded))
+        if((C.GlobalTeleportOptions.Enabled || C.OfflineData.Any(x => x.TeleportOptionsOverride.Enabled == true)) && !Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "Lifestream" && x.IsLoaded))
         {
             Error("已啟用傳送功能但未安裝或未加載 Lifestream 插件。在此配置下 AutoRetainer 無法運作。請停用傳送功能或安裝 Lifestream 插件。");
         }
@@ -247,22 +247,22 @@ public static unsafe class TroubleshootingUI
             Info("你啟用了\"不針對從相同目錄執行的第二個遊戲實例進行警告\"，這會讓 AutoRetainer 在檢測到使用相同 Dalamud 目錄的第二個遊戲視窗時，自動跳過該視窗的加載。");
         }
 
-        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "SimpleTweaksPlugin"&& x.IsLoaded))
+        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "SimpleTweaksPlugin" && x.IsLoaded))
         {
             Info("偵測到 Simple Tweaks 插件。任何與僱員或潛水艇相關的微調都可能對 AutoRetainer 的功能造成負面影響。請確保微調設定不會干擾 AutoRetainer 的運作。");
         }
 
-        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "PandorasBox"&& x.IsLoaded))
+        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "PandorasBox" && x.IsLoaded))
         {
             Info("偵測到 Pandora's Box 插件。在 AutoRetainer 啟用時自動執行動作可能會造成負面影響。請確保當 AutoRetainer 處於活動狀態時，Pandora's Box 不會自動執行任何動作。");
         }
 
-        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "Automaton"&& x.IsLoaded))
+        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "Automaton" && x.IsLoaded))
         {
             Info("偵測到 Automaton 插件。在 AutoRetainer 啟用時自動執行動作或自動輸入數值可能會造成負面影響。請確保在 AutoRetainer 活動期間，Automaton 不會自動執行動作。");
         }
 
-        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "RotationSolver"&& x.IsLoaded))
+        if(Svc.PluginInterface.InstalledPlugins.Any(x => x.InternalName == "RotationSolver" && x.IsLoaded))
         {
             Info("偵測到 RotationSolver 插件。在 AutoRetainer 啟用時自動執行技能可能會造成負面影響。請確保在 AutoRetainer 活動期間，RotationSolver 不會自動執行動作。");
         }
@@ -297,7 +297,7 @@ public static unsafe class TroubleshootingUI
     private static void Error(string message, string tooltip = null)
     {
         ImGui.PushFont(UiBuilder.IconFont);
-        ImGuiEx.Text(EColor.RedBright, "");
+        ImGuiEx.Text(EColor.RedBright, "\uf057");
         ImGui.PopFont();
         if(tooltip != null) ImGuiEx.Tooltip(tooltip);
         ImGui.SameLine();
@@ -308,7 +308,7 @@ public static unsafe class TroubleshootingUI
     private static void Warning(string message, string tooltip = null)
     {
         ImGui.PushFont(UiBuilder.IconFont);
-        ImGuiEx.Text(EColor.OrangeBright, "");
+        ImGuiEx.Text(EColor.OrangeBright, "\uf071");
         ImGui.PopFont();
         if(tooltip != null) ImGuiEx.Tooltip(tooltip);
         ImGui.SameLine();
@@ -319,7 +319,7 @@ public static unsafe class TroubleshootingUI
     private static void Info(string message, string tooltip = null)
     {
         ImGui.PushFont(UiBuilder.IconFont);
-        ImGuiEx.Text(EColor.YellowBright, "");
+        ImGuiEx.Text(EColor.YellowBright, "\uf05a");
         ImGui.PopFont();
         if(tooltip != null) ImGuiEx.Tooltip(tooltip);
         ImGui.SameLine();
@@ -333,7 +333,7 @@ public static unsafe class TroubleshootingUI
         var current = C.GetFoP(nameOfSetting);
         if(!original.Equals(current))
         {
-            Info($"Expert setting \"{setting}\" differs from default", $"Default is \"{original}\", current is \"{current}\".");
+            Info($"專家設定 \"{setting}\" 與預設值不同", $"預設值為 \"{original}\", 當前值為 \"{current}\".");
         }
     }
 }

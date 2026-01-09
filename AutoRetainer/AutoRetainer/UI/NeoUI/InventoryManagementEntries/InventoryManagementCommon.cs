@@ -46,19 +46,19 @@ public unsafe class InventoryManagementCommon
             }
         }
         ImGuiEx.Tooltip("按住 CTRL 並點擊");
-        ImGuiEx.TreeNodeCollapsingHeader("Mass addition/removal", () =>
+        ImGuiEx.TreeNodeCollapsingHeader("批量新增/移除", () =>
         {
             ImGui.SetNextItemWidth(200f);
-            if(ImGui.BeginCombo("Select Categories", SelectedCategories.Count != 0 ? $"{SelectedCategories.Count} selected" : "None selected", ImGuiComboFlags.HeightLarge))
+            if(ImGui.BeginCombo("選擇類別", SelectedCategories.Count != 0 ? $"已選擇 {SelectedCategories.Count} 個" : "未選擇任何項目", ImGuiComboFlags.HeightLarge))
             {
-                if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.Plus, "All"))
+                if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.Plus, "全部"))
                 {
                     SelectedCategories.Clear();
                     SelectedCategories.UnionWith(Svc.Data.GetExcelSheet<ItemUICategory>().Where(x => x.Name != "").Select(x => x.RowId));
                     Modified = true;
                 }
                 ImGui.SameLine();
-                if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.Minus, "None"))
+                if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.Minus, "無"))
                 {
                     SelectedCategories.Clear();
                     Modified = true;
@@ -87,9 +87,9 @@ public unsafe class InventoryManagementCommon
             if(SelectedCategories.Count > 0)
             {
                 ImGui.SetNextItemWidth(200f);
-                Modified |= ImGui.InputText($"Filter by name", ref ItemSearch, 100);
+                Modified |= ImGui.InputText($"按名稱過濾", ref ItemSearch, 100);
                 ImGui.SetNextItemWidth(200f);
-                if(ImGui.BeginCombo("Select rarity", Rarities.Any() ? $"{Rarities.Print()}" : "Any rarity", ImGuiComboFlags.HeightLarge))
+                if(ImGui.BeginCombo("選擇稀有度", Rarities.Any() ? $"{Rarities.Print()}" : "任何稀有度", ImGuiComboFlags.HeightLarge))
                 {
                     foreach(var r in Enum.GetValues<ItemRarity>())
                     {
@@ -98,10 +98,10 @@ public unsafe class InventoryManagementCommon
                     ImGui.EndCombo();
                 }
                 ImGui.SetNextItemWidth(200f);
-                Modified |= ImGui.InputInt("Minimum item level", ref ItemLevelMin);
+                Modified |= ImGui.InputInt("最低物品等級", ref ItemLevelMin);
                 ImGui.SetNextItemWidth(200f);
-                Modified |= ImGui.InputInt("Maximum item level", ref ItemLevelMax);
-                Modified |= ImGuiEx.Checkbox("Tradeable", ref Tradeable);
+                Modified |= ImGui.InputInt("最高物品等級", ref ItemLevelMax);
+                Modified |= ImGuiEx.Checkbox("可交易", ref Tradeable);
 
                 if(Modified)
                 {
@@ -115,7 +115,7 @@ public unsafe class InventoryManagementCommon
                     && (filter == null || filter(x))
                     ).ToList();
                 }
-                if(ImGuiEx.CollapsingHeader($"Selected {SelectedItems.Count} items, among which {SelectedItems.Count(x => itemList.Contains(x.RowId))} already present in list###counter"))
+                if(ImGuiEx.CollapsingHeader($"已選擇 {SelectedItems.Count} 個物品，其中 {SelectedItems.Count(x => itemList.Contains(x.RowId))} 個已存在於清單中###counter"))
                 {
                     var actions = new List<Action>();
                     foreach(var x in SelectedItems)
@@ -135,14 +135,14 @@ public unsafe class InventoryManagementCommon
                             {
                                 if(!itemList.Contains(x.RowId))
                                 {
-                                    if(ImGuiEx.HoveredAndClicked("Click to add this single item to list immediately"))
+                                    if(ImGuiEx.HoveredAndClicked("點擊立即將此物品加入清單"))
                                     {
                                         addAction(x.RowId);
                                     }
                                 }
                                 else
                                 {
-                                    if(ImGuiEx.HoveredAndClicked("Right click to remove this single item from list immediately", ImGuiMouseButton.Right))
+                                    if(ImGuiEx.HoveredAndClicked("右鍵點擊立即將此物品從清單移除", ImGuiMouseButton.Right))
                                     {
                                         removeAction(x.RowId);
                                     }
@@ -153,7 +153,7 @@ public unsafe class InventoryManagementCommon
                     var draw = ImGuiEx.Pagination([.. actions], 100, 10);
                     ImGuiEx.EzTableColumns("cols", draw, Math.Max(1, (int)ImGui.GetContentRegionAvail().X / 150));
                 }
-                if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.PlusSquare, "Add these items to list", ImGuiEx.Ctrl))
+                if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.PlusSquare, "將這些物品加入清單", ImGuiEx.Ctrl))
                 {
                     foreach(var x in SelectedItems)
                     {
@@ -161,7 +161,7 @@ public unsafe class InventoryManagementCommon
                     }
                 }
                 ImGuiEx.Tooltip("按住 CTRL 並點擊");
-                if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.MinusSquare, "Remove these items to list", ImGuiEx.Ctrl))
+                if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.MinusSquare, "將這些物品從清單移除", ImGuiEx.Ctrl))
                 {
                     foreach(var x in SelectedItems)
                     {
@@ -247,7 +247,7 @@ public unsafe class InventoryManagementCommon
 
     public void ImportFromArDiscard(List<uint> target)
     {
-        if(ImGuiEx.Button("Import discard entries from Discard Helper", ImGuiEx.Ctrl))
+        if(ImGuiEx.Button("從 Discard Helper 匯入丟棄項目", ImGuiEx.Ctrl))
         {
             try
             {
@@ -264,13 +264,13 @@ public unsafe class InventoryManagementCommon
                 ex.Log();
             }
         }
-        ImGuiEx.HelpMarker("If you're using Discard Helper plugin, you may import entries from it using this button. They will be merged with your existing entries. Hold CTRL and click.");
+        ImGuiEx.HelpMarker("如果你有使用 Discard Helper 插件，可以點擊此按鈕匯入項目。這些項目將與你現有的清單合併。請按住 CTRL 並點擊。");
     }
 
     public void ImportBlacklistFromArDiscard()
     {
         var s = InventoryCleanupCommon.SelectedPlan;
-        if(ImGuiEx.Button("Import blacklisted entries from Discard Helper", ImGuiEx.Ctrl))
+        if(ImGuiEx.Button("從 Discard Helper 匯入黑名單項目", ImGuiEx.Ctrl))
         {
             try
             {
@@ -287,7 +287,7 @@ public unsafe class InventoryManagementCommon
                 ex.Log();
             }
         }
-        ImGuiEx.HelpMarker("If you're using Discard Helper plugin, you may import entries from it using this button. They will be merged with your existing entries. Hold CTRL and click.");
+        ImGuiEx.HelpMarker("如果你有使用 Discard Helper 插件，可以點擊此按鈕匯入項目。這些項目將與你現有的清單合併。請按住 CTRL 並點擊。");
     }
 
     private static void DrawListOfItems(List<uint> ItemList)

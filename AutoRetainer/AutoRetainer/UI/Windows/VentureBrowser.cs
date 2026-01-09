@@ -47,7 +47,7 @@ internal class VentureBrowser : Window
     public override void Draw()
     {
         ImGuiEx.SetNextItemFullWidth();
-        if(ImGui.BeginCombo("##selectRet", SelectedCharacter != null ? $"{Censor.Character(SelectedCharacter.Name, SelectedCharacter.World)} - {Censor.Retainer(SelectedRetainer.Name)} - {SelectedRetainer.Level} {ExcelJobHelper.GetJobNameById(SelectedRetainer.Job)}" : "Select a retainer...", ImGuiComboFlags.HeightLarge))
+        if(ImGui.BeginCombo("##selectRet", SelectedCharacter != null ? $"{Censor.Character(SelectedCharacter.Name, SelectedCharacter.World)} - {Censor.Retainer(SelectedRetainer.Name)} - {SelectedRetainer.Level} {ExcelJobHelper.GetJobNameById(SelectedRetainer.Job)}" : "選擇僱員...", ImGuiComboFlags.HeightLarge))
         {
             foreach(var x in C.OfflineData.OrderBy(x => !C.NoCurrentCharaOnTop && x.CID == Player.CID ? 0 : 1))
             {
@@ -75,7 +75,7 @@ internal class VentureBrowser : Window
             {
                 ImGuiEx.TextCentered($"{Lang.CharLevel}{SelectedRetainer.Level} {ExcelJobHelper.GetJobNameById(SelectedRetainer.Job)} | Item Level: {adata.Ilvl} ({adata.Ilvl / (float)MaxPerception:P0})");
             }
-            ImGuiEx.InputWithRightButtonsArea("VBrowser", delegate
+            ImGuiEx.InputWithRightButtonsArea("潛艇瀏覽器", delegate
             {
                 ImGui.InputTextWithHint("##search", "篩選...", ref search, 100);
             }, delegate
@@ -132,7 +132,7 @@ internal class VentureBrowser : Window
                     ImGui.TableSetupColumn("★★☆☆");
                     ImGui.TableSetupColumn("★★★☆");
                     ImGui.TableSetupColumn("★★★★");
-                    ImGui.TableSetupColumn("Unlocked");
+                    ImGui.TableSetupColumn("已解鎖");
                     ImGui.TableHeadersRow();
 
                     foreach(var x in Data.Where(x => x.VentureName.Contains(search, StringComparison.OrdinalIgnoreCase) && x.VentureLevel >= minLevel && x.VentureLevel <= maxLevel))
@@ -183,7 +183,7 @@ internal class VentureBrowser : Window
 
                         if(x.IsDol)
                         {
-                            ImGuiEx.Text(x.Gathered ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed, x.Gathered ? "Yes": "No");
+                            ImGuiEx.Text(x.Gathered ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed, x.Gathered ? "是" : "否");
                             if(!x.Gathered && GatherBuddyPresent)
                             {
                                 if(ImGui.SmallButton($"Gather##{x.ID}"))

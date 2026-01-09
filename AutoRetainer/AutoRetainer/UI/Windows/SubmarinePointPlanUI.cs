@@ -37,7 +37,7 @@ internal unsafe class SubmarinePointPlanUI : Window
     public override void Draw()
     {
         C.SubmarinePointPlans.RemoveAll(x => x.Delete);
-        ImGuiEx.InputWithRightButtonsArea("SUPSelector", () =>
+        ImGuiEx.InputWithRightButtonsArea("潛艇計畫選擇器", () =>
         {
             if(ImGui.BeginCombo("##supsel", SelectedPlanName, ImGuiComboFlags.HeightLarge))
             {
@@ -52,7 +52,7 @@ internal unsafe class SubmarinePointPlanUI : Window
             }
         }, () =>
         {
-            if(ImGui.Button("New plan"))
+            if(ImGui.Button("新計畫"))
             {
                 var x = new SubmarinePointPlan
                 {

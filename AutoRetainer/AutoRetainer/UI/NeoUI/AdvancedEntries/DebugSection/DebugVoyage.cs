@@ -49,8 +49,7 @@ internal unsafe class DebugVoyage : DebugSectionBase
                 {
                     try
                     {
-                        DuoLog.Information($"{VoyageUtils.GetIsVesselNeedsRepair(data1, data2, out var log).Print()}
-{log.Join("\n")}");
+                        DuoLog.Information($"{VoyageUtils.GetIsVesselNeedsRepair(data1, data2, out var log).Print()}\n{log.Join("\n")}");
                     }
                     catch(Exception e)
                     {
@@ -106,7 +105,7 @@ internal unsafe class DebugVoyage : DebugSectionBase
                     {
                         CurrentSubmarine.GetBestExps();
                     }
-                    if(ImGui.Button("Select best path"))
+                    if(ImGui.Button("選擇最佳航線"))
                     {
                         TaskCalculateAndPickBestExpRoute.Enqueue();
                     }
