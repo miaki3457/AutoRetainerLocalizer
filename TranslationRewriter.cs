@@ -217,8 +217,22 @@ namespace Localizer
             string leadingWhitespace = "";
             if (isRawString)
             {
-                var endPos = node.StringEndToken.GetLocation().GetLineSpan().StartLinePosition;
-                leadingWhitespace = new string(' ', endPos.Character);
+                {
+                    // 嘗試抓取結尾 """ 前面的所有空白 (LeadingTrivia)
+                    var whitespaceTrivia = node.StringEndToken.LeadingTrivia
+                        .FirstOrDefault(t => t.IsKind(SyntaxKind.WhitespaceTrivia));
+                        
+                    if (whitespaceTrivia != default)
+                    {
+                        leadingWhitespace = whitespaceTrivia.ToString();
+                    }
+                    else
+                    {
+                        // 如果 Trivia 抓不到，改用物理列號補償
+                        int column = node.StringEndToken.GetLocation().GetLineSpan().StartLinePosition.Character;
+                        leadingWhitespace = new string(' ', column);
+                    }
+                }
             }
 
             var matches = Regex.Matches(translatedTemplate, @"\{(\d+)\}");
