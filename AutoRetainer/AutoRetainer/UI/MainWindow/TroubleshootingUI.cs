@@ -297,7 +297,7 @@ public static unsafe class TroubleshootingUI
     private static void Error(string message, string tooltip = null)
     {
         ImGui.PushFont(UiBuilder.IconFont);
-        ImGuiEx.Text(EColor.RedBright, "\uf057");
+        ImGuiEx.Text(EColor.RedBright, "");
         ImGui.PopFont();
         if(tooltip != null) ImGuiEx.Tooltip(tooltip);
         ImGui.SameLine();
@@ -308,7 +308,7 @@ public static unsafe class TroubleshootingUI
     private static void Warning(string message, string tooltip = null)
     {
         ImGui.PushFont(UiBuilder.IconFont);
-        ImGuiEx.Text(EColor.OrangeBright, "\uf071");
+        ImGuiEx.Text(EColor.OrangeBright, "");
         ImGui.PopFont();
         if(tooltip != null) ImGuiEx.Tooltip(tooltip);
         ImGui.SameLine();
@@ -319,7 +319,7 @@ public static unsafe class TroubleshootingUI
     private static void Info(string message, string tooltip = null)
     {
         ImGui.PushFont(UiBuilder.IconFont);
-        ImGuiEx.Text(EColor.YellowBright, "\uf05a");
+        ImGuiEx.Text(EColor.YellowBright, "");
         ImGui.PopFont();
         if(tooltip != null) ImGuiEx.Tooltip(tooltip);
         ImGui.SameLine();
