@@ -217,22 +217,13 @@ namespace Localizer
             string leadingWhitespace = "";
             if (isRawString)
             {
-                {
-                    // 嘗試抓取結尾 """ 前面的所有空白 (LeadingTrivia)
-                    var whitespaceTrivia = node.StringEndToken.LeadingTrivia
-                        .FirstOrDefault(t => t.IsKind(SyntaxKind.WhitespaceTrivia));
-                        
-                    if (whitespaceTrivia != default)
-                    {
-                        leadingWhitespace = whitespaceTrivia.ToString();
-                    }
-                    else
-                    {
-                        // 如果 Trivia 抓不到，改用物理列號補償
-                        int column = node.StringEndToken.GetLocation().GetLineSpan().StartLinePosition.Character;
-                        leadingWhitespace = new string(' ', column);
-                    }
-                }
+                var endLocation = node.StringEndToken.GetLocation().GetLineSpan();
+                int lineIndex = endLocation.StartLinePosition.Line;
+                
+                var sourceText = node.SyntaxTree.GetText();
+                string wholeLineText = sourceText.Lines[lineIndex].ToString();
+                
+                leadingWhitespace = new string(wholeLineText.TakeWhile(char.IsWhiteSpace).ToArray());
             }
 
             var matches = Regex.Matches(translatedTemplate, @"\{(\d+)\}");
