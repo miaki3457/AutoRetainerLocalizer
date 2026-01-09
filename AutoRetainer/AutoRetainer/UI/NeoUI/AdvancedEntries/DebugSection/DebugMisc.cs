@@ -26,7 +26,7 @@ internal unsafe class DebugMisc : DebugSectionBase
         if(ImGui.CollapsingHeader("AskEligibility"))
         {
             ImGuiEx.Text($"""
-                       當前角色：\n已派遣僱員探險：{Data?.SentVenturesByDay.Sum(x => x.Value)}\n已派遣潛艇航行：{Data?.SentVoyagesByDay.Sum(x => x.Value)}\n啟用的僱員上限：{Data?.GetEnabledRetainers(false).Length}\n總計已派遣探險：{C.OfflineData.Sum(x => x.SentVenturesByDay.Select(x => x.Value).Sum())}\n總計已派遣航行：{C.OfflineData.Sum(x => x.SentVoyagesByDay.Select(x => x.Value).Sum())}\n全局啟用的僱員總量：{C.OfflineData.Select(x => x.GetEnabledRetainers().Length).MaxSafe()}\n已啟用僱員自動化的角色數：{C.OfflineData.Where(x => x.GetEnabledRetainers().Length > 0 && x.Enabled).Count()}\n已啟用潛艇自動化的角色數：{C.OfflineData.Where(x => x.GetEnabledVesselsData(Internal.VoyageType.Submersible).Count > 0 && x.WorkshopEnabled).Count()}\n---------\n按日期統計:
+                當前角色：\n已派遣僱員探險：{Data?.SentVenturesByDay.Sum(x => x.Value)}\n已派遣潛艇航行：{Data?.SentVoyagesByDay.Sum(x => x.Value)}\n啟用的僱員上限：{Data?.GetEnabledRetainers(false).Length}\n總計已派遣探險：{C.OfflineData.Sum(x => x.SentVenturesByDay.Select(x => x.Value).Sum())}\n總計已派遣航行：{C.OfflineData.Sum(x => x.SentVoyagesByDay.Select(x => x.Value).Sum())}\n全局啟用的僱員總量：{C.OfflineData.Select(x => x.GetEnabledRetainers().Length).MaxSafe()}\n已啟用僱員自動化的角色數：{C.OfflineData.Where(x => x.GetEnabledRetainers().Length > 0 && x.Enabled).Count()}\n已啟用潛艇自動化的角色數：{C.OfflineData.Where(x => x.GetEnabledVesselsData(Internal.VoyageType.Submersible).Count > 0 && x.WorkshopEnabled).Count()}\n---------\n按日期統計:
                 """);
             var days = C.OfflineData.Select(x => (long[])[..x.SentVenturesByDay.Keys, ..x.SentVoyagesByDay.Keys]).SelectNested(x => x).ToHashSet();
             ImGui.Indent();
@@ -36,7 +36,7 @@ internal unsafe class DebugMisc : DebugSectionBase
             }
             ImGui.Unindent();
             ImGuiEx.Text($"""
-                             ---------\n按角色統計:
+                ---------\n按角色統計:
                 """);
             foreach(var x in C.OfflineData)
             {

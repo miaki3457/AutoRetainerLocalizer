@@ -62,7 +62,7 @@ public unsafe sealed class CharacterSync : NeoUIEntry
             return;
         }
         ImGuiEx.TextWrapped($"""
-                                                           1. 輸入 /justbackup 建立備份，確保成功並存放在安全的位置。\n2. 開啟 FFXIV Lodestone 官網的角色名單
+            1. 輸入 /justbackup 建立備份，確保成功並存放在安全的位置。\n2. 開啟 FFXIV Lodestone 官網的角色名單
             """);
         if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.ExternalLinkSquareAlt, "立即開啟角色名單"))
         {
