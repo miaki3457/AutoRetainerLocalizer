@@ -156,7 +156,7 @@ namespace Localizer
             if (string.IsNullOrWhiteSpace(text)) return false;
 
             var invocation = node.Ancestors().OfType<InvocationExpressionSyntax>().FirstOrDefault();
-            if (text.StartsWith("##") || text.StartsWith("Component") || text.StartsWith("\u")) return false;
+            if (text.StartsWith("##") || text.StartsWith("Component") || text.StartsWith("\\u")) return false;
             if (invocation != null)
             {
                 string methodName = GetMethodName(invocation);
