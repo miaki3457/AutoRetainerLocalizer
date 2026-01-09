@@ -272,7 +272,7 @@ namespace Localizer
                 node.StringStartToken,
                 SyntaxFactory.List(contents),
                 node.StringEndToken)
-                // .WithLeadingTrivia(node.GetLeadingTrivia())   // 前導空格
+                .WithLeadingTrivia(node.GetLeadingTrivia())   // 前導空格
                 .WithTrailingTrivia(node.GetTrailingTrivia()); // 後繼空格
         }
     }
