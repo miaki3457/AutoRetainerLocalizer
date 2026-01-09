@@ -1,4 +1,4 @@
-﻿{
+{
   "Lock window position and size": "鎖定視窗位置和大小",
   "Abort {0} tasks": "中止 {0} 個流程",
   "Retainers": "僱員管理",
@@ -911,7 +911,7 @@
   "Mimics vanilla entrust duplicates option: entrusts any items that already present in retainer's inventory up until your retainer fills up it's stack of items. Does not affects crystals. Items and categories that are explicitly added into the list below will be excluded from being processed by this option.": "模擬遊戲原生的存放重複物品功能：將你身上已存在於僱員背包中的物品移交過去，直到該物品堆疊滿為止。此功能不影響水晶。加入下方清單的物品或類別將不會被此選項處理。",
   "Allow going over stack": "允許超過堆疊上限",
   "Allows entrust duplicates to create new stacks of items that already exist in the selected retainer.": "允許在存放重複物品時，於所選僱員背包中建立該物品的新堆疊。",
-  "Allow entrusting from Armory Chest": "允許從兵裝庫存放物品"",
+  "Allow entrusting from Armory Chest": "允許從兵裝庫存放物品",
   "Manual execution only": "僅限手動執行",
   "Mark this plan for manual execution only. This plan will only be processed upon manual \"Entrust Items\" button click and never automatically.": "將此計畫標記為僅限手動執行。此計畫只會在手動點擊 \"存放物品\" 按鈕時執行，絕不會自動運行。",
   "Exclude items present in protection list": "排除存在於保護清單中的物品",
@@ -952,5 +952,5 @@
   "- It may look like game hung up, but let it up to 5 seconds to wake up after you reactivate game window.\n": "- 遊戲看起來可能會像當機，但在你重新激活遊戲視窗後，請給它最多 5 秒的時間恢復運作。\n",
   "- By default, only Deployables are enabled in Night mode\n": "- 預設情況下，夜間模式僅啟用潛艇自動化\n",
   "- After disabling Night mode, Bailout manager will activate to relog you back to the game.": "- 停用夜間模式後，救援管理器 (Bailout manager) 會啟動並帶領你重新登入遊戲。",
-  "GetClosestRetainerVentureSecondsRemaining {0}": "獲取最接近的僱員探險剩餘秒數 {0}",
+  "GetClosestRetainerVentureSecondsRemaining {0}": "獲取最接近的僱員探險剩餘秒數 {0}"
 }
