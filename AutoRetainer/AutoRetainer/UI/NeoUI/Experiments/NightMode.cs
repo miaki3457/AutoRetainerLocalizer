@@ -5,12 +5,18 @@ internal class NightMode : ExperimentUIEntry
     public override string Name => "夜間模式";
     public override void Draw()
     {
-        ImGuiEx.TextWrapped($"Night mode:\n" +
-                $"- Wait on login screen option is forcefully enabled\n" +
-                $"- Built-in FPS limiter restrictions forcefully applied\n" +
-                $"- While unfocused and awaiting, game is limited to 0.2 FPS\n" +
-                $"- It may look like game hung up, but let it up to 5 seconds to wake up after you reactivate game window.\n" +
-                $"- By default, only Deployables are enabled in Night mode\n" +
+        ImGuiEx.TextWrapped($"Night mode:
+" +
+                $"- Wait on login screen option is forcefully enabled
+" +
+                $"- Built-in FPS limiter restrictions forcefully applied
+" +
+                $"- While unfocused and awaiting, game is limited to 0.2 FPS
+" +
+                $"- It may look like game hung up, but let it up to 5 seconds to wake up after you reactivate game window.
+" +
+                $"- By default, only Deployables are enabled in Night mode
+" +
                 $"- After disabling Night mode, Bailout manager will activate to relog you back to the game.");
         if(ImGui.Checkbox("啟用夜間模式", ref C.NightMode)) MultiMode.BailoutNightMode();
         ImGui.Checkbox("顯示夜間模式勾選框", ref C.ShowNightMode);

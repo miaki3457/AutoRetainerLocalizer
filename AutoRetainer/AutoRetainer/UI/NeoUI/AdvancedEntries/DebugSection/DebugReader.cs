@@ -16,9 +16,9 @@ internal unsafe class DebugReader : DebugSectionBase
             {
                 var reader = new ReaderFreeCompanyCreditShop(a);
                 ImGuiEx.Text($"""
-                    Rank: {reader.FCRank}
-                    Credits: {reader.Credits}
-                    Count: {reader.Count}
+            Rank: {reader.FCRank}
+            Credits: {reader.Credits}
+            Count: {reader.Count}
                     """);
                 for(var i = 0; i < reader.Count; i++)
                 {

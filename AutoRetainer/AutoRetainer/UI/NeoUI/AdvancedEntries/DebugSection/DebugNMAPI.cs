@@ -1,4 +1,4 @@
-﻿namespace AutoRetainer.UI.NeoUI.AdvancedEntries.DebugSection;
+namespace AutoRetainer.UI.NeoUI.AdvancedEntries.DebugSection;
 
 internal class DebugNMAPI : DebugSectionBase
 {

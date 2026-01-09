@@ -1,4 +1,4 @@
-﻿namespace AutoRetainer.UI.NeoUI;
+namespace AutoRetainer.UI.NeoUI;
 public class Keybinds : NeoUIEntry
 {
     public override string Path => "Keybinds";

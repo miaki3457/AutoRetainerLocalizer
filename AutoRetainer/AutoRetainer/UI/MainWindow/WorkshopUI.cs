@@ -49,7 +49,7 @@ internal static unsafe class WorkshopUI
             var rCurPos = ImGui.GetCursorPos();
             float pad = 0;
             ImGui.PushFont(UiBuilder.IconFont);
-            ImGuiEx.ButtonCheckbox($"\uf21a##{data.CID}", ref data.WorkshopEnabled, 0xFF097000);
+            ImGuiEx.ButtonCheckbox($"##{data.CID}", ref data.WorkshopEnabled, 0xFF097000);
             ImGui.PopFont();
             ImGuiEx.Tooltip($"Enable submersibles in multi mode on this character");
             ImGuiEx.DragDropRepopulate("RepopWsEn", data.WorkshopEnabled, ref data.WorkshopEnabled);
@@ -82,7 +82,7 @@ internal static unsafe class WorkshopUI
             if(data.NumSubSlots > data.GetVesselData(VoyageType.Submersible).Count)
             {
                 ImGui.PushFont(UiBuilder.IconFont);
-                ImGuiEx.TextV(ImGuiColors.DalamudYellow, "\uf6e3");
+                ImGuiEx.TextV(ImGuiColors.DalamudYellow, "");
                 ImGui.PopFont();
                 ImGuiEx.Tooltip($"You can construct new submersible ({data.GetVesselData(VoyageType.Submersible).Count}/{data.NumSubSlots})");
                 ImGui.SameLine(0, 3);
@@ -91,7 +91,7 @@ internal static unsafe class WorkshopUI
             if(data.IsNotEnoughSubmarinesEnabled())
             {
                 ImGui.PushFont(UiBuilder.IconFont);
-                ImGuiEx.TextV(ImGuiColors.DalamudOrange, "\ue4ac");
+                ImGuiEx.TextV(ImGuiColors.DalamudOrange, "");
                 ImGui.PopFont();
                 ImGuiEx.Tooltip($"Some of your submersibles are not enabled");
                 ImGui.SameLine(0, 3);
@@ -100,7 +100,7 @@ internal static unsafe class WorkshopUI
             if(data.IsThereNotAssignedSubmarine())
             {
                 ImGui.PushFont(UiBuilder.IconFont);
-                ImGuiEx.TextV(ImGuiColors.DalamudOrange, "\ue4ab");
+                ImGuiEx.TextV(ImGuiColors.DalamudOrange, "");
                 ImGui.PopFont();
                 ImGuiEx.Tooltip($"Some of your submersibles are not undertaking voyage");
                 ImGui.SameLine(0, 3);
@@ -109,7 +109,7 @@ internal static unsafe class WorkshopUI
             if(data.AreAnySuboptimalBuildsFound())
             {
                 ImGui.PushFont(UiBuilder.IconFont);
-                ImGuiEx.TextV(ImGuiColors.DalamudOrange, "\uf0ad");
+                ImGuiEx.TextV(ImGuiColors.DalamudOrange, "");
                 ImGui.PopFont();
                 ImGuiEx.Tooltip($"Unoptimal configurations are found");
                 ImGui.SameLine(0, 3);
@@ -129,7 +129,7 @@ internal static unsafe class WorkshopUI
                 if(C.MultiModeWorkshopConfiguration.MultiWaitForAll)
                 {
                     ImGui.PushFont(UiBuilder.IconFont);
-                    ImGuiEx.TextV("\uf252");
+                    ImGuiEx.TextV("");
                     ImGui.PopFont();
                     ImGuiEx.Tooltip($"已全域啟用等待所有遠航探索功能");
                     ImGui.SameLine(0, 3);
@@ -137,7 +137,7 @@ internal static unsafe class WorkshopUI
                 else if(data.MultiWaitForAllDeployables)
                 {
                     ImGui.PushFont(UiBuilder.IconFont);
-                    ImGuiEx.TextV("\uf252");
+                    ImGuiEx.TextV("");
                     ImGui.PopFont();
                     ImGuiEx.Tooltip($"已為此角色啟用等待所有遠航探索功能");
                     ImGui.SameLine(0, 3);
@@ -340,7 +340,7 @@ internal static unsafe class WorkshopUI
         ImGui.TableSetBgColor(ImGuiTableBgTarget.CellBg, 0);
         var start = ImGui.GetCursorPos();
         ImGui.PushFont(UiBuilder.IconFont);
-        ImGuiEx.TextV(type == VoyageType.Airship ? "\ue22d" : "\uf21a");
+        ImGuiEx.TextV(type == VoyageType.Airship ? "": "");
         ImGui.PopFont();
         ImGui.SameLine();
         var disabled = data.OfflineSubmarineData.Count(x => data.EnabledSubs.Contains(x.Name)) + data.OfflineAirshipData.Count(x => data.EnabledAirships.Contains(x.Name)) >= 4 && !enabled.Contains(vessel.Name);
@@ -495,8 +495,8 @@ internal static unsafe class WorkshopUI
                 ImGuiEx.EnumCombo("##umode", ref adata.UnlockMode, Lang.UnlockModeNames);
                 var currentPlan = VoyageUtils.GetSubmarineUnlockPlanByGuid(adata.SelectedUnlockPlan) ?? VoyageUtils.GetDefaultSubmarineUnlockPlan(false);
                 var isDefault = VoyageUtils.GetSubmarineUnlockPlanByGuid(adata.SelectedUnlockPlan) == null;
-                var text = Environment.TickCount64 % 2000 > 1000 ? "Unlocking every point" : "No or unknown plan selected";
-                if(ImGui.BeginCombo("##uplan", (currentPlan?.Name ?? text) + (isDefault ? " (default)" : ""), ImGuiComboFlags.HeightLarge))
+                var text = Environment.TickCount64 % 2000 > 1000 ? "Unlocking every point": "No or unknown plan selected";
+                if(ImGui.BeginCombo("##uplan", (currentPlan?.Name ?? text) + (isDefault ? " (default)": ""), ImGuiComboFlags.HeightLarge))
                 {
                     if(ImGui.Button("Open editor"))
                     {

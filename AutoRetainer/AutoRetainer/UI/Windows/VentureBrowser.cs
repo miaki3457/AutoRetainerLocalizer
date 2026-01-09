@@ -183,7 +183,7 @@ internal class VentureBrowser : Window
 
                         if(x.IsDol)
                         {
-                            ImGuiEx.Text(x.Gathered ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed, x.Gathered ? "Yes" : "No");
+                            ImGuiEx.Text(x.Gathered ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed, x.Gathered ? "Yes": "No");
                             if(!x.Gathered && GatherBuddyPresent)
                             {
                                 if(ImGui.SmallButton($"Gather##{x.ID}"))
