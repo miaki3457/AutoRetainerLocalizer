@@ -27,7 +27,7 @@ internal unsafe class RetainersOld : DebugSectionBase
         ImGui.SameLine(0, 0);
         ImGuiEx.Text(ventures < 2 * GameRetainerManager.Count ? ImGuiColors.DalamudRed : ventures < 24 * GameRetainerManager.Count ? ImGuiColors.DalamudOrange : ImGuiColors.ParsedGreen,
                 $"{ventures}");
-        ImGuiComponents.HelpMarker("The plugin will automatically disable itself at < 2 Ventures or inventory slots available.");
+        ImGuiComponents.HelpMarker("當探險幣或背包剩餘空格少於 2 個時，插件將自動停用。");
         var storePos = ImGui.GetCursorPos();
         for(var i = 0; i < GameRetainerManager.Count; i++)
         {
@@ -47,7 +47,7 @@ internal unsafe class RetainersOld : DebugSectionBase
         ImGui.BeginTable("##ertainertable", 3, ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.Borders);
         ImGui.TableSetupColumn("名稱", ImGuiTableColumnFlags.WidthStretch);
         ImGui.TableSetupColumn("探險");
-        ImGui.TableSetupColumn("Interaction");
+        ImGui.TableSetupColumn("交互設定");
         ImGui.TableHeadersRow();
         var retainers = P.GetSelectedRetainers(Svc.ClientState.LocalContentId);
         for(var i = 0; i < GameRetainerManager.Count; i++)
@@ -59,7 +59,7 @@ internal unsafe class RetainersOld : DebugSectionBase
             ImGui.TableSetBgColor(ImGuiTableBgTarget.CellBg, 0);
             var start = ImGui.GetCursorPos();
             var selected = retainers.Contains(ret.Name.ToString());
-            if(ImGui.Checkbox((string)$"Retainer {(C.NoNames ? i + 1 : ret.Name)}", ref selected))
+            if(ImGui.Checkbox((string)$"僱員 {(C.NoNames ? i + 1 : ret.Name)}", ref selected))
             {
                 if(selected)
                 {
@@ -74,7 +74,7 @@ internal unsafe class RetainersOld : DebugSectionBase
             bars[i] = (start, end);
             ImGui.TableNextColumn();
             ImGui.TableSetBgColor(ImGuiTableBgTarget.CellBg, 0);
-            ImGuiEx.Text($"{(ret.VentureID == 0 ? "No Venture" : Utils.ToTimeString(ret.GetVentureSecondsRemaining(false)))}");
+            ImGuiEx.Text($"{(ret.VentureID == 0 ? "無探險" : Utils.ToTimeString(ret.GetVentureSecondsRemaining(false)))}");
             ImGui.TableNextColumn();
             ImGui.TableSetBgColor(ImGuiTableBgTarget.CellBg, 0);
             ImGuiEx.Text($"-");

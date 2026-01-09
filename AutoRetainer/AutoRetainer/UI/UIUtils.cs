@@ -86,7 +86,7 @@ internal static class UIUtils
         if(data.WorldOverride != null)
         {
             ImGui.PushFont(UiBuilder.IconFont);
-            ImGuiEx.Text("");
+            ImGuiEx.Text("\uf0ac");
             ImGui.PopFont();
             if(ImGuiEx.HoveredAndClicked("正在訪問另一個數據中心。點擊右鍵以清除此狀態。", ImGuiMouseButton.Right))
             {
@@ -113,10 +113,9 @@ internal static class UIUtils
                 error = "部隊房屋已在 Lifestream 註冊，但尚未設定前往入口的路徑";
             }
             ImGui.PushFont(UiBuilder.IconFont);
-            ImGuiEx.Text(error == null ? null : ImGuiColors.DalamudGrey3, "");
+            ImGuiEx.Text(error == null ? null : ImGuiColors.DalamudGrey3, "\uf1ad");
             ImGui.PopFont();
-            ImGuiEx.Tooltip(error ?? $"部隊房屋已在 Lifestream 註冊且路徑已設定。你將被傳送至部隊房屋以重新派遣潛水艇/飛空艇。若有開啟相關設定，也會一併重新派遣僱員。
-房屋地址: {Svc.Data.GetExcelSheet<Aetheryte>().GetRowOrDefault((uint)data.FC.ResidentialDistrict)?.Territory.Value.PlaceNameRegion.Value.Name}, ward {data.FC.Ward + 1}, plot {data.FC.Plot + 1}");
+            ImGuiEx.Tooltip(error ?? $"部隊房屋已在 Lifestream 註冊且路徑已設定。你將被傳送至部隊房屋以重新派遣潛水艇/飛空艇。若有開啟相關設定，也會一併重新派遣僱員。\n房屋地址: {Svc.Data.GetExcelSheet<Aetheryte>().GetRowOrDefault((uint)data.FC.ResidentialDistrict)?.Territory.Value.PlaceNameRegion.Value.Name}, ward {data.FC.Ward + 1}, plot {data.FC.Plot + 1}");
             ImGui.SameLine(0, 3);
         }
         if(offlineData.GetAllowPrivateTeleportForRetainers())
@@ -131,7 +130,7 @@ internal static class UIUtils
                 error = "個人房屋已在 Lifestream 註冊，但尚未設定前往入口的路徑";
             }
             ImGui.PushFont(UiBuilder.IconFont);
-            ImGuiEx.Text(error == null ? null : ImGuiColors.DalamudGrey3, "");
+            ImGuiEx.Text(error == null ? null : ImGuiColors.DalamudGrey3, "\ue1b0");
             ImGui.PopFont();
             ImGuiEx.Tooltip(error ?? $"個人房屋已在 Lifestream 中註冊且路徑已設定完成。你將被傳送至個人房屋，以重新派遣僱員。\n房屋地址: {Svc.Data.GetExcelSheet<Aetheryte>().GetRowOrDefault((uint)data.Private.ResidentialDistrict)?.Territory.Value.PlaceNameRegion.Value.Name}, ward {data.Private.Ward + 1}, plot {data.Private.Plot + 1}");
             ImGui.SameLine(0, 3);
@@ -158,7 +157,7 @@ internal static class UIUtils
                 black = true;
             }
             ImGui.PushFont(UiBuilder.IconFont);
-            ImGuiEx.Text(error == null ? null : black?ImGuiColors.DalamudGrey2:ImGuiColors.DalamudGrey3, black ? "" : "");
+            ImGuiEx.Text(error == null ? null : black?ImGuiColors.DalamudGrey2:ImGuiColors.DalamudGrey3, black ? "\ue4fe" : "\uf004");
             ImGui.PopFont();
             ImGuiEx.Tooltip(error ?? $"共享房屋已在 Lifestream 中註冊且路徑已設定完成。你將被傳送至共享房屋，以重新派遣僱員。\n房屋地址: {Svc.Data.GetExcelSheet<Aetheryte>().GetRowOrDefault((uint)sharedData.ResidentialDistrict)?.Territory.Value.PlaceNameRegion.Value.Name}, ward {sharedData.Ward + 1}, plot {sharedData.Plot + 1}");
             ImGui.SameLine(0, 3);

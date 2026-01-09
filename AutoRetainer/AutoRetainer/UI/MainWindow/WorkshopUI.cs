@@ -49,7 +49,7 @@ internal static unsafe class WorkshopUI
             var rCurPos = ImGui.GetCursorPos();
             float pad = 0;
             ImGui.PushFont(UiBuilder.IconFont);
-            ImGuiEx.ButtonCheckbox($"##{data.CID}", ref data.WorkshopEnabled, 0xFF097000);
+            ImGuiEx.ButtonCheckbox($"\uf21a##{data.CID}", ref data.WorkshopEnabled, 0xFF097000);
             ImGui.PopFont();
             ImGuiEx.Tooltip($"在此角色啟用多角色模式下的潛水艇自動化");
             ImGuiEx.DragDropRepopulate("工作坊資料重整", data.WorkshopEnabled, ref data.WorkshopEnabled);
@@ -82,7 +82,7 @@ internal static unsafe class WorkshopUI
             if(data.NumSubSlots > data.GetVesselData(VoyageType.Submersible).Count)
             {
                 ImGui.PushFont(UiBuilder.IconFont);
-                ImGuiEx.TextV(ImGuiColors.DalamudYellow, "");
+                ImGuiEx.TextV(ImGuiColors.DalamudYellow, "\uf6e3");
                 ImGui.PopFont();
                 ImGuiEx.Tooltip($"你可以建造新的潛水艇 ({data.GetVesselData(VoyageType.Submersible).Count}/{data.NumSubSlots})");
                 ImGui.SameLine(0, 3);
@@ -91,7 +91,7 @@ internal static unsafe class WorkshopUI
             if(data.IsNotEnoughSubmarinesEnabled())
             {
                 ImGui.PushFont(UiBuilder.IconFont);
-                ImGuiEx.TextV(ImGuiColors.DalamudOrange, "");
+                ImGuiEx.TextV(ImGuiColors.DalamudOrange, "\ue4ac");
                 ImGui.PopFont();
                 ImGuiEx.Tooltip($"部分潛水艇未啟用自動化");
                 ImGui.SameLine(0, 3);
@@ -100,7 +100,7 @@ internal static unsafe class WorkshopUI
             if(data.IsThereNotAssignedSubmarine())
             {
                 ImGui.PushFont(UiBuilder.IconFont);
-                ImGuiEx.TextV(ImGuiColors.DalamudOrange, "");
+                ImGuiEx.TextV(ImGuiColors.DalamudOrange, "\ue4ab");
                 ImGui.PopFont();
                 ImGuiEx.Tooltip($"部分潛水艇目前未在航行中");
                 ImGui.SameLine(0, 3);
@@ -109,7 +109,7 @@ internal static unsafe class WorkshopUI
             if(data.AreAnySuboptimalBuildsFound())
             {
                 ImGui.PushFont(UiBuilder.IconFont);
-                ImGuiEx.TextV(ImGuiColors.DalamudOrange, "");
+                ImGuiEx.TextV(ImGuiColors.DalamudOrange, "\uf0ad");
                 ImGui.PopFont();
                 ImGuiEx.Tooltip($"發現未優化的配置");
                 ImGui.SameLine(0, 3);
@@ -129,7 +129,7 @@ internal static unsafe class WorkshopUI
                 if(C.MultiModeWorkshopConfiguration.MultiWaitForAll)
                 {
                     ImGui.PushFont(UiBuilder.IconFont);
-                    ImGuiEx.TextV("");
+                    ImGuiEx.TextV("\uf252");
                     ImGui.PopFont();
                     ImGuiEx.Tooltip($"已全域啟用等待所有遠航探索功能");
                     ImGui.SameLine(0, 3);
@@ -137,7 +137,7 @@ internal static unsafe class WorkshopUI
                 else if(data.MultiWaitForAllDeployables)
                 {
                     ImGui.PushFont(UiBuilder.IconFont);
-                    ImGuiEx.TextV("");
+                    ImGuiEx.TextV("\uf252");
                     ImGui.PopFont();
                     ImGuiEx.Tooltip($"已為此角色啟用等待所有遠航探索功能");
                     ImGui.SameLine(0, 3);
@@ -340,7 +340,7 @@ internal static unsafe class WorkshopUI
         ImGui.TableSetBgColor(ImGuiTableBgTarget.CellBg, 0);
         var start = ImGui.GetCursorPos();
         ImGui.PushFont(UiBuilder.IconFont);
-        ImGuiEx.TextV(type == VoyageType.Airship ? "" : "");
+        ImGuiEx.TextV(type == VoyageType.Airship ? "\ue22d" : "\uf21a");
         ImGui.PopFont();
         ImGui.SameLine();
         var disabled = data.OfflineSubmarineData.Count(x => data.EnabledSubs.Contains(x.Name)) + data.OfflineAirshipData.Count(x => data.EnabledAirships.Contains(x.Name)) >= 4 && !enabled.Contains(vessel.Name);

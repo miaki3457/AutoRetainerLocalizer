@@ -15,7 +15,7 @@ internal unsafe class DebugScheduler : DebugSectionBase
         ImGuiEx.Text($"Gil: {TaskDepositGil.Gil}");
         ImGui.Checkbox($"TaskWithdrawGil.forceCheck", ref TaskWithdrawGil.forceCheck);
         ImGuiEx.Text($"{Svc.Data.GetExcelSheet<LogMessage>().GetRow(4578).Text.ToDalamudString().GetText(true)}");
-        if(ImGui.Button("Close retainer"))
+        if(ImGui.Button("關閉僱員選單"))
         {
             DuoLog.Information($"{RetainerHandlers.CloseAgentRetainer()}");
         }

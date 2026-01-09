@@ -19,7 +19,7 @@ internal static class SharedUI
     internal static void DrawMultiModeHeader(OfflineCharacterData data, string overrideTitle = null)
     {
         var b = true;
-        ImGui.CollapsingHeader($"{Censor.Character(data.Name)} {overrideTitle ?? "Configuration"}##conf", ref b, ImGuiTreeNodeFlags.DefaultOpen | ImGuiTreeNodeFlags.Bullet | ImGuiTreeNodeFlags.OpenOnArrow);
+        ImGui.CollapsingHeader($"{Censor.Character(data.Name)} {overrideTitle ?? "配置"}##conf", ref b, ImGuiTreeNodeFlags.DefaultOpen | ImGuiTreeNodeFlags.Bullet | ImGuiTreeNodeFlags.OpenOnArrow);
         if(b == false)
         {
             ImGui.CloseCurrentPopup();
