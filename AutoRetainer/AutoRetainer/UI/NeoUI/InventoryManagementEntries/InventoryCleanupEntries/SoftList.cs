@@ -1,3 +1,5 @@
+using AutoRetainerAPI.Configuration;
+
 namespace AutoRetainer.UI.NeoUI.InventoryManagementEntries.InventoryCleanupEntries;
 public class SoftList : InventoryManagementBase
 {

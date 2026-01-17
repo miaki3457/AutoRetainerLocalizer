@@ -1418,5 +1418,6 @@
   " (unavailable)": " (unavailable)",
   "~Character": "~Character",
   "Enter plan name": "Enter plan name",
-  "CleanupPlan": "CleanupPlan"
+  "CleanupPlan": "CleanupPlan",
+  "LightlessSync": "LightlessSync"
 }

@@ -7,9 +7,17 @@ namespace AutoRetainer.UI.MainWindow;
 public static unsafe class TroubleshootingUI
 {
     private static readonly Config EmptyConfig = new();
+
+    public static bool IsPluginInstalled(string name)
+    {
+        return Svc.PluginInterface.InstalledPlugins.Any(x => x.IsLoaded && (x.InternalName.EqualsIgnoreCase(name) || x.Name.EqualsIgnoreCase(name)));
+    }
+
     public static void Draw()
     {
         ImGuiEx.TextWrapped("本分頁將檢查您的配置是否有常見問題，您可以在聯絡技術支援前自行解決這些問題。");
+
+        if(IsPluginInstalled("LightlessSync"))
 
         if(!Player.Available)
         {
