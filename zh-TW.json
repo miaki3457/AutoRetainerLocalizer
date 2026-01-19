@@ -1419,5 +1419,6 @@
   "~Character": "~Character",
   "Enter plan name": "Enter plan name",
   "CleanupPlan": "CleanupPlan",
-  "LightlessSync": "LightlessSync"
+  "LightlessSync": "LightlessSync",
+  "ApiTest1": "ApiTest1"
 }
