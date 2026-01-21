@@ -1410,5 +1410,15 @@
   "Enter plan name": "Enter plan name",
   "CleanupPlan": "CleanupPlan",
   "LightlessSync": "LightlessSync",
-  "ApiTest1": "ApiTest1"
+  "ApiTest1": "ApiTest1",
+  "loading bailoutTitleRestart.png": "loading bailoutTitleRestart.png",
+  "loading timer.png": "loading timer.png",
+  "loading multi.png": "loading multi.png",
+  "loading bellalert.png": "loading bellalert.png",
+  "Night.png": "Night.png",
+  "loading Night.png": "loading Night.png",
+  "loading submarine.png": "loading submarine.png",
+  "loading bell.png": "loading bell.png",
+  "loading notify.png": "loading notify.png",
+  "loading wait.png": "loading wait.png"
 }
