@@ -138,10 +138,11 @@ internal static class UIUtils
         if(offlineData.GetAllowSharedTeleportForRetainers())
         {
             string error = null;
+            string message = "";
             var black = false;
-            var sharedData = S.LifestreamIPC.GetSharedHousePathData();
             if(Player.CID == offlineData.CID && Player.IsInHomeWorld)
             {
+                var sharedData = S.LifestreamIPC.GetSharedHousePathData();
                 if(sharedData == null)
                 {
                     error = "共享房屋尚未在 Lifestream 中註冊";
@@ -149,6 +150,10 @@ internal static class UIUtils
                 else if(sharedData.PathToEntrance.Count == 0)
                 {
                     error = "共有房屋已在 Lifestream 註冊，但尚未設定前往入口的路徑";
+                }
+                else
+                {
+                    message = $"共享房屋已在 Lifestream 中註冊且路徑已設定完成。你將被傳送至共享房屋，以重新派遣僱員。\n房屋地址: {Svc.Data.GetExcelSheet<Aetheryte>().GetRowOrDefault((uint)sharedData.ResidentialDistrict)?.Territory.Value.PlaceNameRegion.Value.Name}, ward {sharedData.Ward + 1}, plot {sharedData.Plot + 1}";
                 }
             }
             else
@@ -159,7 +164,7 @@ internal static class UIUtils
             ImGui.PushFont(UiBuilder.IconFont);
             ImGuiEx.Text(error == null ? null : black?ImGuiColors.DalamudGrey2:ImGuiColors.DalamudGrey3, black ? "" : "");
             ImGui.PopFont();
-            ImGuiEx.Tooltip(error ?? $"共享房屋已在 Lifestream 中註冊且路徑已設定完成。你將被傳送至共享房屋，以重新派遣僱員。\n房屋地址: {Svc.Data.GetExcelSheet<Aetheryte>().GetRowOrDefault((uint)sharedData.ResidentialDistrict)?.Territory.Value.PlaceNameRegion.Value.Name}, ward {sharedData.Ward + 1}, plot {sharedData.Plot + 1}");
+            ImGuiEx.Tooltip(error ?? message);
             ImGui.SameLine(0, 3);
         }
     }
