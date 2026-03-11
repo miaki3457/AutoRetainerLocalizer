@@ -1420,5 +1420,9 @@
   "loading submarine.png": "loading submarine.png",
   "loading bell.png": "loading bell.png",
   "loading notify.png": "loading notify.png",
-  "loading wait.png": "loading wait.png"
+  "loading wait.png": "loading wait.png",
+  "Exit the game upon deployable completion": "Exit the game upon deployable completion",
+  "Important: when activated, your multi mode will be set to do deployables only, no retainers.": "Important: when activated, your multi mode will be set to do deployables only, no retainers.",
+  "Maximum time to wait for sub return, minutes": "Maximum time to wait for sub return, minutes",
+  "FC Rank: {0}": "FC Rank: {0}"
 }
