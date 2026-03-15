@@ -17,8 +17,6 @@ public static unsafe class TroubleshootingUI
     {
         ImGuiEx.TextWrapped("本分頁將檢查您的配置是否有常見問題，您可以在聯絡技術支援前自行解決這些問題。");
 
-        if(IsPluginInstalled("LightlessSync"))
-
         if(!Player.Available)
         {
             ImGuiEx.TextWrapped($"未登入時無法進行故障排除。");
