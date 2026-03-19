@@ -21,8 +21,17 @@ namespace Localizer
         public HashSet<string> MissingTranslations { get; } = new HashSet<string>();
 
         private readonly string[] _uiKeywords = { "Text", "Button", "Label", "Combo", "Header", "Section", "Tooltip", "MenuItem", "Checkbox", "Help", "Notify", "Info", "FormatToken", "InputInt", "Widget", "EnumCombo" };
-        private readonly string[] _blackList = { "PushID", "GetConfig", "Log", "Debug", "Print", "ExecuteCommand", "ToString", "GetField", "GetProperty", "SetFilter", "Tag", "GetTag", "InternalName", "Database", "HasTag", "AddTag", "Find" };
-
+        private readonly string[] _blackList = { 
+            "PushID", "GetConfig", "Log", "Debug", "Print", "ExecuteCommand", 
+            "ToString", "GetField", "GetProperty", "SetFilter", "Tag", "GetTag", 
+            "InternalName", "Database", "HasTag", "AddTag", "Find",
+            // 遊戲引擎內部識別碼，不可翻譯
+            "TryGetAddonByName", "GetAddonByName",
+            // ImGui 內部 ID，不可翻譯
+            "OpenPopup", "BeginPopup", "PushStyleColor", "PushStyleVar",
+            // 命令與路由
+            "ProcessCommand", "GetIpcProvider", "GetIpcSubscriber"
+        };
         public TranslationRewriter(Dictionary<string, string> dictionary, string jsonPath)
         {
             _dictionary = dictionary;
