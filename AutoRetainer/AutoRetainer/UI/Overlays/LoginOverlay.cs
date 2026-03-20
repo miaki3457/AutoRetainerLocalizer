@@ -70,7 +70,7 @@ internal unsafe class LoginOverlay : Window
         }
         if(cnt % C.NumLoginOverlayCols.ValidateRange(1, 10) != 0) ImGui.NewLine();
             //ImGui.PopFont();
-            ImGuiEx.LineCentered("登入中心", delegate
+            ImGuiEx.LineCentered("LoginCenter", delegate
         {
             if(ImGui.Checkbox("多角色模式", ref MultiMode.Enabled))
             {

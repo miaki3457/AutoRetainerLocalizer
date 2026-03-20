@@ -1421,5 +1421,8 @@
   "Exit the game upon deployable completion": "Exit the game upon deployable completion",
   "Important: when activated, your multi mode will be set to do deployables only, no retainers.": "Important: when activated, your multi mode will be set to do deployables only, no retainers.",
   "Maximum time to wait for sub return, minutes": "Maximum time to wait for sub return, minutes",
-  "FC Rank: {0}": "FC Rank: {0}"
+  "FC Rank: {0}": "FC Rank: {0}",
+  "RetainerList": "RetainerList",
+  "LoginCenter": "LoginCenter",
+  "FreeCompanyCreditShop": "FreeCompanyCreditShop"
 }

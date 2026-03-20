@@ -23,7 +23,7 @@ internal unsafe class RetainerListOverlay : Window
     public override bool DrawConditions()
     {
         if(!C.UIBar) return false;
-        if(Svc.Condition[Dalamud.Game.ClientState.Conditions.ConditionFlag.OccupiedSummoningBell] && TryGetAddonByName<AtkUnitBase>("僱員名單", out var addon) && IsAddonReady(addon))
+        if(Svc.Condition[Dalamud.Game.ClientState.Conditions.ConditionFlag.OccupiedSummoningBell] && TryGetAddonByName<AtkUnitBase>("RetainerList", out var addon) && IsAddonReady(addon))
         {
             Position = new(addon->X, addon->Y - height);
             return true;
@@ -149,10 +149,10 @@ internal unsafe class RetainerListOverlay : Window
                 }
                 if(ImGui.IsItemClicked(ImGuiMouseButton.Right))
                 {
-                    ImGui.OpenPopup("快速出售視窗");
+                    ImGui.OpenPopup("QuickVendorPopup");
                 }
                 ImGuiEx.Tooltip("快速出售物品");
-                if(ImGui.BeginPopup("快速出售視窗"))
+                if(ImGui.BeginPopup("QuickVendorPopup"))
                 {
                     if(ImGui.Selectable("從籌備物資清單中出售物品"))
                     {
