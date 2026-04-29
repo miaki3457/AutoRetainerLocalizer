@@ -23,10 +23,19 @@ public static unsafe class TroubleshootingUI
             return;
         }
 
+        if(C.CutsceneSkipMode != AutoRetainerAPI.Configuration.CutsceneSkipMode.Never)
+        {
+            Info($"Inn cutscene skip module is set to {C.CutsceneSkipMode}. Inn cutscene will be skipped by AutoRetainer.");
+        }
+
         if(Data == null)
         {
-            ImGuiEx.TextWrapped($"找不到目前角色的資料。請開啟傳喚鈴、探險隊（派遣）面板或重新登入以產生資料。");
-            return;
+            Error($"找不到目前角色的資料。請開啟傳喚鈴、探險隊（派遣）面板或重新登入以產生資料。");
+        }
+
+        if(C.IgnoreGCRankCheck)
+        {
+            Error("Ignore GC rank check is enabled. Disable it for normal plugin operation. (/ays set IgnoreGCRankCheck false)");
         }
 
         if(!Svc.ClientState.ClientLanguage.EqualsAny(ClientLanguage.Japanese, ClientLanguage.German, ClientLanguage.French, ClientLanguage.English))
@@ -93,11 +102,11 @@ public static unsafe class TroubleshootingUI
             {
                 Error("目前角色已完全排除在AutoRetainer處理之外。請前往設定→排除項進行變更。");
             }
-            if(Data.ExcludeRetainer)
+            if(Data?.ExcludeRetainer == true)
             {
                 Error("目前角色已被排除在僱員清單外。請前往設定→排除項進行變更。");
             }
-            if(Data.ExcludeWorkshop)
+            if(Data?.ExcludeWorkshop == true)
             {
                 Error("當前角色已被排除在遠航探索清單外。請前往設定→排除項進行變更。");
             }

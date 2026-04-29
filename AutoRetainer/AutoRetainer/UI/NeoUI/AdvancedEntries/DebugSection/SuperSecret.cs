@@ -19,5 +19,7 @@ internal class SuperSecret : DebugSectionBase
         }
         var g = Safety.Get();
         ImGuiEx.Text(g ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed, $"安全標記: {(g ? "Present" : "Absent")}");
+        ImGui.Separator();
+        ImGuiEx.Checkbox("Ignore GC rank check for MM delivery", ref C.IgnoreGCRankCheck);
     }
 }

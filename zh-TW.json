@@ -1425,5 +1425,10 @@
   "RetainerList": "RetainerList",
   "LoginCenter": "LoginCenter",
   "FreeCompanyCreditShop": "FreeCompanyCreditShop",
-  "OfflineSubmarineData.Count {0}, NumSubSlots {1}": "OfflineSubmarineData.Count {0}, NumSubSlots {1}"
+  "OfflineSubmarineData.Count {0}, NumSubSlots {1}": "OfflineSubmarineData.Count {0}, NumSubSlots {1}",
+  "Inn cutscene skip module is set to {0}. Inn cutscene will be skipped by AutoRetainer.": "Inn cutscene skip module is set to {0}. Inn cutscene will be skipped by AutoRetainer.",
+  "Ignore GC rank check is enabled. Disable it for normal plugin operation. (/ays set IgnoreGCRankCheck false)": "Ignore GC rank check is enabled. Disable it for normal plugin operation. (/ays set IgnoreGCRankCheck false)",
+  "Skip Inn Login Cutscene": "Skip Inn Login Cutscene",
+  "Cutscene skip is detectable server-side and increases chance of ban": "Cutscene skip is detectable server-side and increases chance of ban",
+  "Ignore GC rank check for MM delivery": "Ignore GC rank check for MM delivery"
 }
