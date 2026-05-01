@@ -20,8 +20,11 @@ using ECommons.Configuration;
 using ECommons.Events;
 using ECommons.ExcelServices;
 using ECommons.ExcelServices.TerritoryEnumeration;
+using ECommons.EzIpcManager;
 using ECommons.EzSharedDataManager;
 using ECommons.GameHelpers;
+using ECommons.IPC;
+using ECommons.IPC.Subscribers;
 using ECommons.Reflection;
 using ECommons.Singletons;
 using ECommons.Throttlers;
@@ -84,8 +87,10 @@ public unsafe class AutoRetainer : IDalamudPlugin
     {
         //PluginLoader.CheckAndLoad(pi, "https://love.puni.sh/plugins/AutoRetainer/blacklist.txt", delegate
         {
+            IPCBase.DefaultWrapper = SafeWrapper.AnyException;
             P = this;
             ECommonsMain.Init(pi, this, Module.DalamudReflector);
+            EzIPC.OnSafeInvocationException += x => InternalLog.Error(x.ToStringFull());
 #if CUSTOMCS
             PluginLog.Warning($"Using custom FFXIVClientStructs");
             var gameVersion = DalamudReflector.TryGetDalamudStartInfo(out var ver) ? ver.GameVersion.ToString() : "unknown";
@@ -560,7 +565,7 @@ public unsafe class AutoRetainer : IDalamudPlugin
         MultiMode.Tick();
         NotificationHandler.Tick();
         NewYesAlreadyManager.Tick();
-        Artisan.ArtisanTick();
+        ArtisanManager.ArtisanTick();
         FPSManager.Tick();
         PriorityManager.Tick();
         TextAdvanceManager.Tick();
