@@ -1430,5 +1430,6 @@
   "Ignore GC rank check is enabled. Disable it for normal plugin operation. (/ays set IgnoreGCRankCheck false)": "Ignore GC rank check is enabled. Disable it for normal plugin operation. (/ays set IgnoreGCRankCheck false)",
   "Skip Inn Login Cutscene": "Skip Inn Login Cutscene",
   "Cutscene skip is detectable server-side and increases chance of ban": "Cutscene skip is detectable server-side and increases chance of ban",
-  "Ignore GC rank check for MM delivery": "Ignore GC rank check for MM delivery"
+  "Ignore GC rank check for MM delivery": "Ignore GC rank check for MM delivery",
+  "Preserve Multi Mode state between plugin reloads": "Preserve Multi Mode state between plugin reloads"
 }
