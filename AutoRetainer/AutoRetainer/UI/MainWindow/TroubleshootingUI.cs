@@ -1,4 +1,6 @@
+using AutoRetainer.Internal;
 using AutoRetainer.Modules.Voyage;
+using AutoRetainerAPI.Configuration;
 using Dalamud.Game;
 using ECommons.GameHelpers;
 using ECommons.Reflection;
@@ -46,6 +48,31 @@ public static unsafe class TroubleshootingUI
         if(C.DontLogout)
         {
             Error("已啟用DontLogout調試選項");
+        }
+
+        if(C.FullAutoGCDelivery) 
+        {
+            int maxRetainersWhenGcDelivery = 0;
+            var warnSub = false;
+            foreach(var x in C.OfflineData)
+            {
+                if(x.Enabled && x.GCDeliveryType != GCDeliveryType.Disabled)
+                {
+                    maxRetainersWhenGcDelivery = Math.Max(maxRetainersWhenGcDelivery, x.GetEnabledRetainers(false).Length);
+                }
+                if(x.WorkshopEnabled && x.GetEnabledVesselsData(VoyageType.Submersible).Count > 0)
+                {
+                    warnSub = true;
+                }
+            }
+            if(warnSub && C.FullAutoGCDeliveryInventory < 50)
+            {
+                Warning($"Multi Mode expert delivery free inventory slot trigger value is set to {C.FullAutoGCDeliveryInventory} while submersible module is enabled. It is recommended to set it to at least 50 to avoid inventory overflow issues.");
+            }
+            if(C.FullAutoGCDeliveryInventory < maxRetainersWhenGcDelivery * 5)
+            {
+                Warning($"Some of your multi-mode enabled characters have {maxRetainersWhenGcDelivery} retainers enabled, and Multi Mode expert delivery free inventory slot trigger value is set to {C.FullAutoGCDeliveryInventory}. It is strongly recommended that you set it to at least {C.FullAutoGCDeliveryInventory * maxRetainersWhenGcDelivery} (5 slots per retainer).");
+            }
         }
 
         foreach(var x in C.OfflineData)

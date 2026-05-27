@@ -12,6 +12,7 @@ using ECommons.Configuration;
 using ECommons.Events;
 using ECommons.ExcelServices.TerritoryEnumeration;
 using ECommons.EzSharedDataManager;
+using ECommons.GameFunctions;
 using ECommons.GameHelpers;
 using ECommons.Throttlers;
 using FFXIVClientStructs.FFXIV.Client.Game;
@@ -159,6 +160,15 @@ internal static unsafe class MultiMode
         {
             if(EzThrottler.Throttle("MultiNotify", 15000)) Utils.NotifyIfLifestreamIsNotInstalled("Multi Mode");
             ValidateAutoAfkSettings();
+            var shouldDisableRender = C.MultiDisableRender && (!C.MultiDisableRenderNightModeOnly || C.NightMode) && (!C.MultiDisableRenderOnlyInactive || TerraFX.Interop.Windows.Windows.IsIconic((TerraFX.Interop.Windows.HWND)(*ECommonsMain.MainWindowHandle)) || CSFramework.Instance()->WindowInactive);
+            if(shouldDisableRender)
+            {
+                RenderDisableManager.PlaceRequest();
+            }
+            else
+            {
+                RenderDisableManager.RemoveRequest();
+            }
             if(!Svc.ClientState.IsLoggedIn && TryGetAddonByName<AtkUnitBase>("Title", out _) && !P.TaskManager.IsBusy)
             {
                 LastLogin = 0;
@@ -282,9 +292,10 @@ internal static unsafe class MultiMode
                     return;
                 }
             }
+            var eligibleForGcDelivery = CanExpertDeliver() && EzThrottler.Check($"ExpertDeliver_{Data.Identity}");
             if(ProperOnLogin.PlayerPresent && !P.TaskManager.IsBusy)
             {
-                if(!Utils.IsInventoryFree())
+                if(!Utils.IsInventoryFree() && !eligibleForGcDelivery)
                 {
                     Data.Enabled = false;
                 }
@@ -294,7 +305,7 @@ internal static unsafe class MultiMode
                 && EzThrottler.Check("GcBusy"))
             {
                 Synchronize = false;
-                if(CanExpertDeliver() && !IsOccupied() && EzThrottler.Check($"ExpertDeliver_{Data.Identity}"))
+                if(eligibleForGcDelivery && !IsOccupied())
                 {
                     TaskDeliverItems.Enqueue();
                     EzThrottler.Throttle("GcBusy", 60000, true);
@@ -383,6 +394,10 @@ internal static unsafe class MultiMode
                 }
             }
         }
+        else
+        {
+            RenderDisableManager.RemoveRequest();
+        }
     }
 
     internal static bool CanExpertDeliver()
@@ -411,11 +426,6 @@ internal static unsafe class MultiMode
                 P.TaskManager.Abort();
             });
         }
-    }
-
-    internal static bool CheckInventoryValidity()
-    {
-        return Svc.ClientState.LocalPlayer.HomeWorld.RowId == Svc.ClientState.LocalPlayer.CurrentWorld.RowId && Utils.GetVenturesAmount() >= Data.GetNeededVentureAmount() && Utils.IsInventoryFree();
     }
 
     internal static IEnumerable<OfflineCharacterData> GetEnabledOfflineData()
@@ -525,13 +535,21 @@ internal static unsafe class MultiMode
                         CharaCnt.Clear();
                     }
                     P.TaskManager.Enqueue(() => Player.Interactable && IsScreenReady());
-                    if(data != null)
+                    if(C.DontLogout)
                     {
-                        P.TaskManager.Enqueue(() => Lifestream.ChangeCharacter(data.Name, data.World));
+                        P.TaskManager.Enqueue(() => DuoLog.Warning($"Would change character to {data?.NameWithWorldCensored ?? "Logout"}"));
+                        P.TaskManager.EnqueueDelay(99999999);
                     }
                     else
                     {
-                        P.TaskManager.Enqueue(() => Lifestream.Logout());
+                        if(data != null)
+                        {
+                            P.TaskManager.Enqueue(() => Lifestream.ChangeCharacter(data.Name, data.World));
+                        }
+                        else
+                        {
+                            P.TaskManager.Enqueue(() => Lifestream.Logout());
+                        }
                     }
                     return true;
                 }

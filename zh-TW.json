@@ -1431,5 +1431,15 @@
   "Skip Inn Login Cutscene": "Skip Inn Login Cutscene",
   "Cutscene skip is detectable server-side and increases chance of ban": "Cutscene skip is detectable server-side and increases chance of ban",
   "Ignore GC rank check for MM delivery": "Ignore GC rank check for MM delivery",
-  "Preserve Multi Mode state between plugin reloads": "Preserve Multi Mode state between plugin reloads"
+  "Preserve Multi Mode state between plugin reloads": "Preserve Multi Mode state between plugin reloads",
+  "Multi Mode expert delivery free inventory slot trigger value is set to {0} while submersible module is enabled. It is recommended to set it to at least 50 to avoid inventory overflow issues.": "Multi Mode expert delivery free inventory slot trigger value is set to {0} while submersible module is enabled. It is recommended to set it to at least 50 to avoid inventory overflow issues.",
+  "Some of your multi-mode enabled characters have {0} retainers enabled, and Multi Mode expert delivery free inventory slot trigger value is set to {1}. It is strongly recommended that you set it to at least {2} (5 slots per retainer).": "Some of your multi-mode enabled characters have {0} retainers enabled, and Multi Mode expert delivery free inventory slot trigger value is set to {1}. It is strongly recommended that you set it to at least {2} (5 slots per retainer).",
+  "Multi Mode/Disable Render": "Multi Mode/Disable Render",
+  "Disable Render": "Disable Render",
+  "Disable Render when in Multi Mode": "Disable Render when in Multi Mode",
+  "Disables world rendering while in Multi Mode.": "Disables world rendering while in Multi Mode.",
+  "Only when in Night Mode": "Only when in Night Mode",
+  "Only when window is not active": "Only when window is not active",
+  "RenderDisable verbose log": "RenderDisable verbose log",
+  "Execute plugin terminator": "Execute plugin terminator"
 }

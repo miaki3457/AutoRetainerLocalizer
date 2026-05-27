@@ -4,6 +4,7 @@ using Dalamud.Utility;
 using ECommons.Configuration;
 using ECommons.Events;
 using ECommons.ExcelServices;
+using ECommons.GameFunctions;
 using ECommons.Interop;
 using ECommons.MathHelpers;
 using ECommons.UIHelpers.AddonMasterImplementations;
@@ -19,6 +20,11 @@ internal unsafe class DebugMisc : DebugSectionBase
 {
     public override void Draw()
     {
+        ImGui.Checkbox("RenderDisable verbose log", ref RenderDisableManager.Debug);
+        if(ImGui.Button("Execute plugin terminator"))
+        {
+            S.PluginTerminator.OnUpdate();
+        }
         ImGuiEx.Text($"OfflineSubmarineData.Count {Data.OfflineSubmarineData.Count}, NumSubSlots {Data.NumSubSlots}");
         ImGuiEx.Text($"FC Rank: {Utils.FCRank}");
         if(ImGui.CollapsingHeader("ApiTest1"))
