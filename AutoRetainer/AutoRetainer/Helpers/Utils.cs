@@ -49,6 +49,27 @@ namespace AutoRetainer.Helpers;
 
 public static unsafe class Utils
 {
+    public static byte[] GetResource(string s)
+    {
+        var asm = P.GetType().Assembly;
+        var resourceName = asm.GetManifestResourceNames()
+                                  .FirstOrDefault(n => n.EndsWith(s, StringComparison.OrdinalIgnoreCase));
+        if(resourceName == null)
+        {
+            return null;
+        }
+
+        using var stream = asm.GetManifestResourceStream(resourceName);
+        if(stream == null)
+        {
+            return null;
+        }
+
+        using var ms = new MemoryStream();
+        stream.CopyTo(ms);
+        return ms.ToArray();
+    }
+
     public static Func<T> CreateGetter<T>(FieldInfo field)
     {
         return () => (T)field.GetValue(C);

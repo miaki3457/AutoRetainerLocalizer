@@ -1,6 +1,7 @@
 ﻿using AutoRetainerAPI.Configuration;
 using Dalamud.Game.Gui.ContextMenu;
 using Dalamud.Game.Text.SeStringHandling;
+using Dalamud.Utility;
 using ECommons.ChatMethods;
 using ECommons.ExcelServices;
 using ECommons.EzContextMenu;
@@ -26,8 +27,7 @@ internal unsafe class ContextMenuManager
         if(!Data.GetIMSettings().IMEnableContextMenu) return;
         if(args.MenuType == ContextMenuType.Inventory && args.Target is MenuTargetInventory inv && inv.TargetItem != null)
         {
-            var id = inv.TargetItem.Value.ItemId % 1_000_000;
-            if(id != 0 && inv.TargetItem.Value.ItemId < 2_000_000)
+            if(ItemUtil.GetBaseId(inv.TargetItem.Value.ItemId) is { ItemId: > 0 and var id, Kind: not ItemKind.EventItem })
             {
                 if(Data.GetIMSettings(true).IMProtectList.Contains(id))
                 {

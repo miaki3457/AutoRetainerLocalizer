@@ -396,3 +396,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/AutoRetainer/_build/BuildExtensions.targets
+/AutoRetainer/_build/CleanupDeps.ps1
+/AutoRetainer/_build/PostBuild.bat

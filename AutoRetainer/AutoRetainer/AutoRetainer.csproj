@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<Authors>NightmareXIV, kawaii</Authors>
-		<Version>4.6.1.0</Version>
+		<Version>4.6.1.2</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -23,21 +23,18 @@
       <Deterministic>true</Deterministic>
       <CustomCS>false</CustomCS>
       <UseWindowsForms>true</UseWindowsForms>
+      <OutputPath>bin/Release</OutputPath>
+      <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
-		<OutputPath>bin/Release</OutputPath>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-		<OutputPath>bin/Debug</OutputPath>
-	</PropertyGroup>
+    <!--Import Project="_build\BuildExtensions.targets" /-->
 
 	<ItemGroup>
 		<ProjectReference Include="..\AutoRetainerAPI\AutoRetainerAPI\AutoRetainerAPI.csproj" />
 		<ProjectReference Include="..\ECommons.IPC\ECommons.IPC\ECommons.IPC.csproj" />
     <ProjectReference Include="..\ECommons\ECommons\ECommons.csproj">
     </ProjectReference>
+    <PackageReference Include="DalamudPackager" Version="15.0.0" />
     <PackageReference Include="ECommons" Version="*">
         <ExcludeAssets>runtime;build;native;contentfiles;analyzers</ExcludeAssets>
         <PrivateAssets>all</PrivateAssets>
@@ -76,7 +73,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="CsvHelper" Version="33.1.0" />
-		<PackageReference Include="DalamudPackager" Version="15.0.0" />
 		<PackageReference Include="MessagePack" Version="3.1.4" />
 		<PackageReference Include="NotificationMasterAPI" Version="1.0.0.1" />
 		<Reference Include="Newtonsoft.Json">
@@ -122,47 +118,54 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="res\autoretainer.png">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		<None Update="AutoRetainer.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-	  <None Update="res\bailoutTitleRestart.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="res\bell.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="res\bellalert.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="res\bellcrossed.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="res\home.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="res\login.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="res\multi.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="res\Night.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="res\notify.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="res\processing.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="res\submarine.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="res\timer.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="res\wait.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
+		<None Update="res\autoretainer.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="res\bailoutTitleRestart.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="res\bell.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="res\bellalert.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="res\bellcrossed.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="res\home.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="res\login.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="res\multi.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="res\Night.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="res\notify.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="res\processing.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="res\submarine.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="res\timer.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="res\wait.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="_build\" />
 	</ItemGroup>
 </Project>
