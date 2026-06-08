@@ -47,7 +47,7 @@ public class MultiModeDeployables : NeoUIEntry
         .InputInt(150f, "購買至背包內達到此數量", () => ref C.AutoFuelPurchaseMax)
         .Checkbox("僅在工作站解鎖時進行購買", () => ref C.AutoFuelPurchaseOnlyWsUnlocked)
         .Unindent()
-        .Checkbox("Exit the game upon deployable completion", () => ref C.ExitOnSubCompletion, "Important: when activated, your multi mode will be set to do deployables only, no retainers.")
+        .Checkbox("部屬完成後退出遊戲", () => ref C.ExitOnSubCompletion, "Important: when activated, your multi mode will be set to do deployables only, no retainers.")
         .Indent()
         .InputInt(150f, "Maximum time to wait for sub return, minutes", () => ref C.ExitOnSubCompletionTime)
         .Unindent()

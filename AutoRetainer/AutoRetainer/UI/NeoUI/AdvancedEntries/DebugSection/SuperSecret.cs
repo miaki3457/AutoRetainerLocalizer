@@ -20,6 +20,6 @@ internal class SuperSecret : DebugSectionBase
         var g = Safety.Get();
         ImGuiEx.Text(g ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed, $"安全標記: {(g ? "Present" : "Absent")}");
         ImGui.Separator();
-        ImGuiEx.Checkbox("Ignore GC rank check for MM delivery", ref C.IgnoreGCRankCheck);
+        ImGuiEx.Checkbox("忽略籌備任務時的大國防聯軍（GC）階級檢查", ref C.IgnoreGCRankCheck);
     }
 }

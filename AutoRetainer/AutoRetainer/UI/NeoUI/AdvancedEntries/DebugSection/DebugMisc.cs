@@ -20,13 +20,13 @@ internal unsafe class DebugMisc : DebugSectionBase
 {
     public override void Draw()
     {
-        ImGui.Checkbox("RenderDisable verbose log", ref RenderDisableManager.Debug);
-        if(ImGui.Button("Execute plugin terminator"))
+        ImGui.Checkbox("渲染停用詳細記錄", ref RenderDisableManager.Debug);
+        if(ImGui.Button("執行外掛終止器"))
         {
             S.PluginTerminator.OnUpdate();
         }
         ImGuiEx.Text($"OfflineSubmarineData.Count {Data.OfflineSubmarineData.Count}, NumSubSlots {Data.NumSubSlots}");
-        ImGuiEx.Text($"FC Rank: {Utils.FCRank}");
+        ImGuiEx.Text($"部隊等級: {Utils.FCRank}");
         if(ImGui.CollapsingHeader("ApiTest1"))
         {
             try

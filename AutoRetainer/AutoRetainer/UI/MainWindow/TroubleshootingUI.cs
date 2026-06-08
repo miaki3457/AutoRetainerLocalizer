@@ -27,7 +27,7 @@ public static unsafe class TroubleshootingUI
 
         if(C.CutsceneSkipMode != AutoRetainerAPI.Configuration.CutsceneSkipMode.Never)
         {
-            Info($"Inn cutscene skip module is set to {C.CutsceneSkipMode}. Inn cutscene will be skipped by AutoRetainer.");
+            Info($"跳過旅館登入動畫模組已設定為 {C.CutsceneSkipMode}. 旅館登入動畫將由 AutoRetainer 跳過");
         }
 
         if(Data == null)
@@ -37,7 +37,7 @@ public static unsafe class TroubleshootingUI
 
         if(C.IgnoreGCRankCheck)
         {
-            Error("Ignore GC rank check is enabled. Disable it for normal plugin operation. (/ays set IgnoreGCRankCheck false)");
+            Error("已啟用忽略大國防聯軍（GC）等級檢查。若要正常使用插件，請將其停用。（/ays set IgnoreGCRankCheck false）");
         }
 
         if(!Svc.ClientState.ClientLanguage.EqualsAny(ClientLanguage.Japanese, ClientLanguage.German, ClientLanguage.French, ClientLanguage.English))
@@ -67,11 +67,11 @@ public static unsafe class TroubleshootingUI
             }
             if(warnSub && C.FullAutoGCDeliveryInventory < 50)
             {
-                Warning($"Multi Mode expert delivery free inventory slot trigger value is set to {C.FullAutoGCDeliveryInventory} while submersible module is enabled. It is recommended to set it to at least 50 to avoid inventory overflow issues.");
+                Warning($"啟用遠航探索模組後，多角色模式下觸發籌備的剩餘背包格數設置為 {C.FullAutoGCDeliveryInventory} 。 建議設置為至少 50 以免背包物品易出問題");
             }
             if(C.FullAutoGCDeliveryInventory < maxRetainersWhenGcDelivery * 5)
             {
-                Warning($"Some of your multi-mode enabled characters have {maxRetainersWhenGcDelivery} retainers enabled, and Multi Mode expert delivery free inventory slot trigger value is set to {C.FullAutoGCDeliveryInventory}. It is strongly recommended that you set it to at least {C.FullAutoGCDeliveryInventory * maxRetainersWhenGcDelivery} (5 slots per retainer).");
+                Warning($"部分多角色模式的人物啟用了 {maxRetainersWhenGcDelivery} 個僱員， 在多角色模式下觸發籌備的剩餘背包格數設置為 {C.FullAutoGCDeliveryInventory} 。強烈建議設置為 {C.FullAutoGCDeliveryInventory * maxRetainersWhenGcDelivery} (每個僱員五格)");
             }
         }
 

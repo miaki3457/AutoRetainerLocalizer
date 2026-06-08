@@ -23,14 +23,14 @@ public class ExpertTab : NeoUIEntry
         .InputInt(150f, "AutoRetainer嘗試解除卡死前的超時時間(秒)", () => ref C.BailoutTimeout)
 
         .Section("設定")
-        .Widget("Skip Inn Login Cutscene", text =>
+        .Widget("跳過旅館登入動畫", text =>
         {
             ImGui.SetNextItemWidth(200);
             if(ImGuiEx.EnumCombo(text, ref C.CutsceneSkipMode))
             {
                 S.InnCutsceneSkip.RefreshAccordingToConfig();
             }
-            ImGuiEx.HelpMarker("Cutscene skip is detectable server-side and increases chance of ban", EColor.RedBright, FontAwesomeIcon.ExclamationTriangle.ToIconString());
+            ImGuiEx.HelpMarker("跳過登入動畫可被伺服器檢測到，會增加被封鎖機率", EColor.RedBright, FontAwesomeIcon.ExclamationTriangle.ToIconString());
         })
         .Checkbox($"禁用排序和折疊/展開功能", () => ref C.NoCurrentCharaOnTop)
         .Checkbox($"在插件UI欄顯示多角色模式複選框", () => ref C.MultiModeUIBar)

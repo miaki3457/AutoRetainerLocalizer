@@ -28,7 +28,7 @@ public class MultiModeCommon : NeoUIEntry
             ImGuiEx.Combo(x, ref C.AutoLogin, ["", "~", .. names], names: dict);
         })
         .SliderInt(150f, "Delay", () => ref C.AutoLoginDelay.ValidateRange(0, 60), 0, 20, "Set appropriate delay to let plugins fully load before logging in and to allow yourself some time to cancel login if needed")
-        .Checkbox("Preserve Multi Mode state between plugin reloads", () => ref C.PreserveMultiModeState)
+        .Checkbox("在外掛程式重新載入後維持多角色模式", () => ref C.PreserveMultiModeState)
 
         .Section("背包空間警告")
         .InputInt(100f, $"僱員清單：剩餘背包空格警告", () => ref C.UIWarningRetSlotNum.ValidateRange(2, 1000))
