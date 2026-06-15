@@ -38,6 +38,7 @@ public class GeneralSettings : InventoryManagementBase
             .Unindent()
             .Checkbox($"啟用右鍵選單整合", () => ref InventoryCleanupCommon.SelectedPlan.IMEnableContextMenu)
             .Checkbox($"允許從兵裝庫出售/丟棄物品", () => ref InventoryCleanupCommon.SelectedPlan.AllowSellFromArmory)
+            .Checkbox("Deliver eligible items into Armoire when in Multi Mode", () => ref InventoryCleanupCommon.SelectedPlan.EnableCabinetAutoDelivery, "Items that are not in Armoire will be delivered there. Eligible items also will be excluded from being discarded, desynthesed, entrusted to retainers or delivered into grand company (only while you are running multi mode). This will trigger before Multi Mode Expert Delivery.")
             .Checkbox($"演示模式", () => ref InventoryCleanupCommon.SelectedPlan.IMDry, "不實際出售/丟棄物品，僅在聊天視窗顯示哪些物品將被處理")
             ;
     }

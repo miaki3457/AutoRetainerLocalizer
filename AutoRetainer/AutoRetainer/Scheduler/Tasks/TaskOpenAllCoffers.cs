@@ -11,7 +11,7 @@ public static unsafe class TaskOpenAllCoffers
     {
         TaskRecursiveItemDiscard.EnqueueIfNeeded();
         OpenedCoffers = 0;
-        P.TaskManager.Enqueue(RecursivelyOpenCoffers, new(timeLimitMS: 10 * 60 * 1000, abortOnTimeout: false));
+        P.TaskManager.Enqueue(RecursivelyOpenCoffers, new(timeLimitMS: Data.GetIMSettings().MaxCoffersAtOnce * 10 * 1000, abortOnTimeout: false));
         P.TaskManager.Enqueue(() => Utils.AnimationLock == 0);
         TaskRecursiveItemDiscard.EnqueueIfNeeded();
     }

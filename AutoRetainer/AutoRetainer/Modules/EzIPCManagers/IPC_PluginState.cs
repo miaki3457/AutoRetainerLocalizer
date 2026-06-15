@@ -117,7 +117,7 @@ public class IPC_PluginState
         {
             if(C.OfflineData.TryGetFirst(x => x.CID == CID, out var data))
             {
-                var selectedRetainers = data.GetEnabledRetainers().Where(z => z.HasVenture).OrderBy(z => z.GetVentureSecondsRemaining());
+                var selectedRetainers = data.GetEnabledRetainers().Where(z => z.HasVentureOrReadyToAssign(data)).OrderBy(z => z.GetVentureSecondsRemaining());
                 if(selectedRetainers.Any()) return selectedRetainers.First().GetVentureSecondsRemaining();
             }
         }

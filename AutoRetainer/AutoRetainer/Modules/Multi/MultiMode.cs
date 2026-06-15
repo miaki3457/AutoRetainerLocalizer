@@ -56,6 +56,7 @@ internal static unsafe class MultiMode
             {
                 C.LastLoggedInChara = Data.CID;
                 EzThrottler.Reset($"ExpertDeliver_{Data?.Identity}");
+                EzThrottler.Reset($"CabinetDeliver_{Data?.Identity}");
                 EzThrottler.Reset($"GcBusy");
             }
             if(MultiMode.ExpectedCharacter != null)
@@ -120,6 +121,7 @@ internal static unsafe class MultiMode
         EzThrottler.Throttle("ForceShutdownForSubs", 10 * 60 * 1000, true);
         EzThrottler.Reset("GcBusy");
         EzThrottler.Reset($"ExpertDeliver_{Data?.Identity}");
+        EzThrottler.Reset($"CabinetDeliver_{Data?.Identity}");
         LastLogin = 0;
         if(!TaskTeleportToProperty.ShouldVoidHET())
         {
@@ -293,9 +295,10 @@ internal static unsafe class MultiMode
                 }
             }
             var eligibleForGcDelivery = CanExpertDeliver() && EzThrottler.Check($"ExpertDeliver_{Data.Identity}");
+            var eligibleForCabinet = CanCabinetDeliver() && EzThrottler.Check($"CabinetDeliver_{Data.Identity}");
             if(ProperOnLogin.PlayerPresent && !P.TaskManager.IsBusy)
             {
-                if(!Utils.IsInventoryFree() && !eligibleForGcDelivery)
+                if(!Utils.IsInventoryFree() && !eligibleForGcDelivery && !eligibleForCabinet)
                 {
                     Data.Enabled = false;
                 }
@@ -305,7 +308,13 @@ internal static unsafe class MultiMode
                 && EzThrottler.Check("GcBusy"))
             {
                 Synchronize = false;
-                if(eligibleForGcDelivery && !IsOccupied())
+                if(eligibleForCabinet && !IsOccupied())
+                {
+                    S.CabinetManager.EnqueueGoToInnAndDeliverEverything();
+                    EzThrottler.Throttle("GcBusy", 10000, true);
+                    EzThrottler.Throttle($"CabinetDeliver_{Data.Identity}", 30 * 60 * 1000, true);
+                }
+                else if(eligibleForGcDelivery && !IsOccupied())
                 {
                     TaskDeliverItems.Enqueue();
                     EzThrottler.Throttle("GcBusy", 60000, true);
@@ -361,6 +370,7 @@ internal static unsafe class MultiMode
                             if(!TaskTeleportToProperty.EnqueueIfNeededAndPossible(true))
                             {
                                 EzThrottler.Reset($"ExpertDeliver_{Data.Identity}");
+                                EzThrottler.Reset($"CabinetDeliver_{Data?.Identity}");
                                 DebugLog($"Enqueueing interaction with panel");
                                 BlockInteraction(10);
                                 TaskInteractWithNearestPanel.Enqueue();
@@ -381,6 +391,7 @@ internal static unsafe class MultiMode
                                 if(data.Enabled)
                                 {
                                     EzThrottler.Reset($"ExpertDeliver_{Data.Identity}");
+                                    EzThrottler.Reset($"CabinetDeliver_{Data?.Identity}");
                                     DebugLog($"Enqueueing interaction with bell");
                                     TaskInteractWithNearestBell.Enqueue();
                                     P.TaskManager.Enqueue(() => { SchedulerMain.EnablePlugin(PluginEnableReason.MultiMode); return true; });
@@ -412,6 +423,17 @@ internal static unsafe class MultiMode
             canDeliver = GCContinuation.DoesInventoryHaveDeliverableItem(Utils.PlayerInvetories);
         }
         if(C.FullAutoGCDeliveryDeliverOnVentureExhaust && InventoryManager.Instance()->GetInventoryItemCount(GCContinuation.VentureItem) <= C.FullAutoGCDeliveryDeliverOnVentureLessThan) canDeliver = true;
+        return canDeliver;
+    }
+
+    internal static bool CanCabinetDeliver()
+    {
+        if(!Data.GetIMSettings(true).EnableCabinetAutoDelivery) return false;
+        var canDeliver = false;
+        if(Utils.GetInventoryFreeSlotCount() <= C.FullAutoGCDeliveryInventory)
+        {
+            canDeliver = S.CabinetManager.CanDeliverCabinet();
+        }
         return canDeliver;
     }
 
@@ -473,7 +495,7 @@ internal static unsafe class MultiMode
     {
         if(C.SelectedRetainers.TryGetValue(data.CID, out var enabledRetainers))
         {
-            return data.RetainerData.Where(z => enabledRetainers.Contains(z.Name) && (!checkHasVenture || z.HasVenture)).ToArray();
+            return data.RetainerData.Where(z => enabledRetainers.Contains(z.Name) && (!checkHasVenture || z.HasVentureOrReadyToAssign(data))).ToArray();
         }
         return Array.Empty<OfflineRetainerData>();
     }
@@ -664,7 +686,7 @@ internal static unsafe class MultiMode
                 if(x.CID == Player.CID) continue;
                 if(x.Enabled && C.SelectedRetainers.TryGetValue(x.CID, out var enabledRetainers))
                 {
-                    var selectedRetainers = x.GetEnabledRetainers().Where(z => z.HasVenture);
+                    var selectedRetainers = x.GetEnabledRetainers().Where(z => z.HasVentureOrReadyToAssign(x));
                     if(selectedRetainers.Any() &&
                         C.MultiModeRetainerConfiguration.MultiWaitForAll ? selectedRetainers.All(z => z.GetVentureSecondsRemaining() <= 0) : selectedRetainers.Any(z => z.GetVentureSecondsRemaining() <= 0))
                     {
@@ -677,7 +699,7 @@ internal static unsafe class MultiMode
                 if(x.CID == Player.CID) continue;
                 if(x.Enabled && C.SelectedRetainers.TryGetValue(x.CID, out var enabledRetainers))
                 {
-                    var selectedRetainers = x.GetEnabledRetainers().Where(z => z.HasVenture);
+                    var selectedRetainers = x.GetEnabledRetainers().Where(z => z.HasVentureOrReadyToAssign(x));
                     if(selectedRetainers.Any() &&
                         C.MultiModeRetainerConfiguration.MultiWaitForAll ? selectedRetainers.All(z => z.GetVentureSecondsRemaining() <= C.MultiModeRetainerConfiguration.AdvanceTimer) : selectedRetainers.Any(z => z.GetVentureSecondsRemaining() <= C.MultiModeRetainerConfiguration.AdvanceTimer))
                     {
@@ -725,7 +747,7 @@ internal static unsafe class MultiMode
         if(!EnabledRetainers) return false;
         if(GetEnabledOfflineData().TryGetFirst(x => x.CID == Svc.ClientState.LocalContentId, out var data))
         {
-            var selectedRetainers = data.GetEnabledRetainers().Where(z => z.HasVenture);
+            var selectedRetainers = data.GetEnabledRetainers().Where(z => z.HasVentureOrReadyToAssign(data));
             return selectedRetainers.Any(z => z.GetVentureSecondsRemaining() <= seconds);
         }
         return false;

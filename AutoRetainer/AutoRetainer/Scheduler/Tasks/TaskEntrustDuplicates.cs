@@ -7,6 +7,7 @@ using ECommons.ExcelServices;
 using ECommons.Throttlers;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Component.GUI;
+using Lumina.Excel.Sheets;
 
 namespace AutoRetainer.Scheduler.Tasks;
 
@@ -18,7 +19,7 @@ internal static unsafe class TaskEntrustDuplicates
 
     public static void EnqueueNew(EntrustPlan plan)
     {
-        P.TaskManager.Enqueue((Action)(() => WasOpen = false), "Set WasOpen = false");
+        P.TaskManager.Enqueue((System.Action)(() => WasOpen = false), "Set WasOpen = false");
         P.TaskManager.Enqueue(() => TryGetAddonByName<AtkUnitBase>("SelectString", out var addon) && IsAddonReady(addon), "Wait until addon SelectString ready");
         P.TaskManager.Enqueue(() => RecursivelyEntrustItems(plan), $"Recursivelty entrust items ({plan.Guid} | {plan.Name})", new(timeLimitMS: 60 * 60 * 1000));
         P.TaskManager.Enqueue(() => !WasOpen || TaskVendorItems.CloseInventory() == true);
@@ -55,12 +56,14 @@ internal static unsafe class TaskEntrustDuplicates
                 {
                     var add = (x, plan.EntrustItemsAmountToKeep.SafeSelect(x));
                     if(plan.ExcludeProtected && s.IMProtectList.Contains(add.Item1)) continue;
+                    if(S.CabinetManager.ShouldExcludeItemFromProcessing(add.Item1)) continue;
                     itemList.Add(add);
                     InternalLog.Debug($"[TED] From EntrustItems added item: {ExcelItemHelper.GetName(add.Item1, true)} toKeep={add.Item2}");
                 }
                 foreach(var x in Utils.GetItemsInInventory(allowedPlayerInventories))
                 {
                     if(plan.ExcludeProtected && s.IMProtectList.Contains(x)) continue;
+                    if(S.CabinetManager.ShouldExcludeItemFromProcessing(x)) continue;
                     var item = ExcelItemHelper.Get(x);
                     if(item == null) continue;
                     if(itemList.Any(s => s.ItemID == item?.RowId)) continue;
@@ -83,6 +86,7 @@ internal static unsafe class TaskEntrustDuplicates
                             if(item->ItemId != 0 && item->Quantity > 0)
                             {
                                 if(plan.ExcludeProtected && s.IMProtectList.Contains(item->ItemId)) continue;
+                                if(S.CabinetManager.ShouldExcludeItemFromProcessing(item->ItemId)) continue;
                                 if(itemList.Any(s => s.ItemID == item->ItemId)) continue;
                                 var data = ExcelItemHelper.Get(item->ItemId);
                                 itemList.Add((item->ItemId, 0));
@@ -101,6 +105,7 @@ internal static unsafe class TaskEntrustDuplicates
                         if(item->ItemId != 0 && item->Quantity > 0)
                         {
                             if(plan.ExcludeProtected && s.IMProtectList.Contains(item->ItemId)) continue;
+                            if(S.CabinetManager.ShouldExcludeItemFromProcessing(item->ItemId)) continue;
                             var itemCount = Utils.GetItemCount(allowedPlayerInventories, item->ItemId);
                             InternalLog.Debug($"[TED] Item count for {ExcelItemHelper.GetName(item->ItemId, true)} = {itemCount}");
                             var data = ExcelItemHelper.Get(item->ItemId);
@@ -136,6 +141,7 @@ internal static unsafe class TaskEntrustDuplicates
                         {
                             var item = inv->GetInventorySlot(i);
                             if(plan.ExcludeProtected && s.IMProtectList.Contains(item->ItemId)) continue;
+                            if(S.CabinetManager.ShouldExcludeItemFromProcessing(item->ItemId)) continue;
                             if(item->ItemId != 0 && !itemList.Any(s => s.ItemID == item->ItemId))
                             {
                                 var data = ExcelItemHelper.Get(item->ItemId);

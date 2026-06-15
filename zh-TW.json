@@ -1441,5 +1441,11 @@
   "Only when in Night Mode": "只在夜間模式啟用",
   "Only when window is not active": "僅在遊戲視窗非作用中時",
   "RenderDisable verbose log": "渲染停用詳細記錄",
-  "Execute plugin terminator": "執行外掛終止器"
+  "Execute plugin terminator": "執行外掛終止器",
+  "CanDeliverCabinet: {0}": "CanDeliverCabinet: {0}",
+  "Deliver items": "Deliver items",
+  "EnqueueGoToInnAndDeliverEverything": "EnqueueGoToInnAndDeliverEverything",
+  "Cached: {0}": "Cached: {0}",
+  "Deliver eligible items into Armoire when in Multi Mode": "Deliver eligible items into Armoire when in Multi Mode",
+  "Items that are not in Armoire will be delivered there. Eligible items also will be excluded from being discarded, desynthesed, entrusted to retainers or delivered into grand company (only while you are running multi mode). This will trigger before Multi Mode Expert Delivery.": "Items that are not in Armoire will be delivered there. Eligible items also will be excluded from being discarded, desynthesed, entrusted to retainers or delivered into grand company (only while you are running multi mode). This will trigger before Multi Mode Expert Delivery."
 }

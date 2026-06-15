@@ -94,6 +94,10 @@ internal static unsafe class OfflineDataManager
         data.ClassJobLevelArray = UIState.Instance()->PlayerState.ClassJobLevels.ToArray();
         data.GCRank = AutoGCHandin.GetRank();
         data.GCSeals = AutoGCHandin.GetSeals();
+        if(S.CabinetManager.TryGetStoredCabinetItems(out var cached, out var cabinedItems) && !cached)
+        {
+            data.StoredCabinetItems = cabinedItems;
+        }
         if(writeGatherables)
         {
             try

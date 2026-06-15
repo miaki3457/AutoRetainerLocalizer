@@ -41,7 +41,7 @@ internal static class NotificationHandler
                 {
                     foreach(var r in x.RetainerData)
                     {
-                        if(r.HasVenture && r.GetVentureSecondsRemaining() <= 0)
+                        if(r.HasVentureOrReadyToAssign(x) && r.GetVentureSecondsRemaining() <= 0)
                         {
                             return true;
                         }
@@ -56,7 +56,7 @@ internal static class NotificationHandler
             {
                 foreach(var r in x.RetainerData)
                 {
-                    if(r.HasVenture && r.GetVentureSecondsRemaining() <= 0)
+                    if(r.HasVentureOrReadyToAssign(x) && r.GetVentureSecondsRemaining() <= 0)
                     {
                         return true;
                     }

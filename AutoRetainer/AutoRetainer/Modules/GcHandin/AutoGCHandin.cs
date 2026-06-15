@@ -323,6 +323,7 @@ internal static unsafe class AutoGCHandin
         {
             var item = items[i];
             if(Data.GetIMSettings().IMProtectList.Contains(item.ItemID)) continue;
+            if(S.CabinetManager.ShouldExcludeItemFromProcessing(item.ItemID)) continue;
             var seals = (uint)(item.Seals * Utils.GetGCSealMultiplier());
             if(!checkSealCap || sealsRemaining > seals) candidates.Add((item.ItemID, seals, i));
         }
