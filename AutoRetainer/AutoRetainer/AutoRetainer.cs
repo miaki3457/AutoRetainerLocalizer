@@ -69,6 +69,7 @@ public unsafe class AutoRetainer : IDalamudPlugin
     internal MarketCooldownOverlay MarketCooldownOverlay;
     internal SubmarineUnlockPlanUI SubmarineUnlockPlanUI;
     internal SubmarinePointPlanUI SubmarinePointPlanUI;
+    internal bool TestRenderDisable = false;
 
     internal long Time => C.UseServerTime ? CSFramework.GetServerTime() : DateTimeOffset.Now.ToUnixTimeSeconds();
 
@@ -306,6 +307,14 @@ public unsafe class AutoRetainer : IDalamudPlugin
                 if(MultiMode.Enabled) MultiMode.Enabled = false;
             }
             else if(arg2.EqualsIgnoreCaseAny("e", "enable"))
+            {
+                if(!MultiMode.Enabled)
+                {
+                    MultiMode.Enabled = true;
+                    MultiMode.OnMultiModeEnabled();
+                }
+            }
+            else if(arg2.EqualsIgnoreCaseAny("single"))
             {
                 if(!MultiMode.Enabled)
                 {

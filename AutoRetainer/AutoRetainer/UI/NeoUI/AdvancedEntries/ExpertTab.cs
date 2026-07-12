@@ -23,6 +23,7 @@ public class ExpertTab : NeoUIEntry
         .InputInt(150f, "AutoRetainer嘗試解除卡死前的超時時間(秒)", () => ref C.BailoutTimeout)
 
         .Section("設定")
+        .Checkbox("Allow operating on retainers without a job", () => ref C.AllowUnemployed)
         .Widget("跳過旅館登入動畫", text =>
         {
             ImGui.SetNextItemWidth(200);

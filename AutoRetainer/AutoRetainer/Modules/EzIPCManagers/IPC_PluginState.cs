@@ -54,6 +54,12 @@ public class IPC_PluginState
     }
 
     [EzIPC]
+    public void EnableMultiModeSingle()
+    {
+        Svc.Commands.ProcessCommand("/autoretainer multi single");
+    }
+
+    [EzIPC]
     public int GetInventoryFreeSlotCount()
     {
         return Utils.GetInventoryFreeSlotCount();

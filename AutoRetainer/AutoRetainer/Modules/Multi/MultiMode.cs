@@ -13,7 +13,6 @@ using ECommons.Events;
 using ECommons.ExcelServices.TerritoryEnumeration;
 using ECommons.EzSharedDataManager;
 using ECommons.GameFunctions;
-using ECommons.GameHelpers;
 using ECommons.Throttlers;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -25,8 +24,9 @@ namespace AutoRetainer.Modules.Multi;
 internal static unsafe class MultiMode
 {
     internal static bool Active => Enabled && !IPC.Suppressed;
-
+    internal static HashSet<string> SingleMultiMide = null;
     internal static ref bool Enabled => ref C.MultiModeEnabled;
+
     public static (string Name, string World)? ExpectedCharacter = null;
 
     internal static bool WaitOnLoginScreen => C.MultiWaitOnLoginScreen || BailoutManager.IsLogOnTitleEnabled || C.NightMode;
@@ -162,7 +162,7 @@ internal static unsafe class MultiMode
         {
             if(EzThrottler.Throttle("MultiNotify", 15000)) Utils.NotifyIfLifestreamIsNotInstalled("Multi Mode");
             ValidateAutoAfkSettings();
-            var shouldDisableRender = C.MultiDisableRender && (!C.MultiDisableRenderNightModeOnly || C.NightMode) && (!C.MultiDisableRenderOnlyInactive || TerraFX.Interop.Windows.Windows.IsIconic((TerraFX.Interop.Windows.HWND)(*ECommonsMain.MainWindowHandle)) || CSFramework.Instance()->WindowInactive);
+            var shouldDisableRender = (C.MultiDisableRender && (!C.MultiDisableRenderNightModeOnly || C.NightMode) && (!C.MultiDisableRenderOnlyInactive || TerraFX.Interop.Windows.Windows.IsIconic((TerraFX.Interop.Windows.HWND)(*ECommonsMain.MainWindowHandle)) || CSFramework.Instance()->WindowInactive)) || P.TestRenderDisable;
             if(shouldDisableRender)
             {
                 RenderDisableManager.PlaceRequest();
@@ -428,7 +428,9 @@ internal static unsafe class MultiMode
 
     internal static bool CanCabinetDeliver()
     {
-        if(!Data.GetIMSettings(true).EnableCabinetAutoDelivery) return false;
+        var data = Data;
+        if(Data == null) return false;
+        if(!data.GetIMSettings(true).EnableCabinetAutoDelivery) return false;
         var canDeliver = false;
         if(Utils.GetInventoryFreeSlotCount() <= C.FullAutoGCDeliveryInventory)
         {

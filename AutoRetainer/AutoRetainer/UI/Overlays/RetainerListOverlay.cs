@@ -121,6 +121,80 @@ internal unsafe class RetainerListOverlay : Window
             ImGuiEx.Tooltip("快速存放");
 
             ImGui.SameLine();
+            if(ImGuiEx.IconButton($"{FontAwesomeIcon.ArrowRightToBracket.ToIconString()}##EntrustManually"))
+            {
+                ImGui.OpenPopup("EntrustManually");
+            }
+            if(ImGui.BeginPopup("EntrustManually"))
+            {
+                foreach(var selectedPlan in C.EntrustPlans)
+                {
+                    ImGui.PushID(selectedPlan.Guid.ToString());
+                    if(ImGui.Selectable($"{selectedPlan.Name}"))
+                    {
+                        for(var i = 0; i < GameRetainerManager.Count; i++)
+                        {
+                            var ret = GameRetainerManager.Retainers[i];
+                            if(ret.Available)
+                            {
+                                var adata = Utils.GetAdditionalData(Data.CID, ret.Name);
+                                if(selectedPlan != null)
+                                {
+                                    P.TaskManager.Enqueue(() => RetainerListHandlers.SelectRetainerByName(ret.Name.ToString()));
+                                    TaskEntrustDuplicates.EnqueueNew(selectedPlan);
+                                    if(C.RetainerMenuDelay > 0)
+                                    {
+                                        TaskWaitSelectString.Enqueue(C.RetainerMenuDelay);
+                                    }
+                                    P.TaskManager.Enqueue(RetainerHandlers.SelectQuit);
+                                }
+                            }
+                        }
+                    }
+                    ImGui.PopID();
+                }
+                ImGui.EndPopup();
+            }
+            ImGuiEx.Tooltip("Run a specific entrust plan");
+
+            ImGui.SameLine();
+            if(ImGuiEx.IconButton($"{FontAwesomeIcon.ArrowRightFromBracket.ToIconString()}##ReverseEntrust"))
+            {
+                ImGui.OpenPopup("ReverseEntrust");
+            }
+            if(ImGui.BeginPopup("ReverseEntrust")) 
+            { 
+                foreach(var selectedPlan in C.EntrustPlans)
+                {
+                    ImGui.PushID(selectedPlan.Guid.ToString());
+                    if(ImGui.Selectable($"{selectedPlan.Name}"))
+                    {
+                        for(var i = 0; i < GameRetainerManager.Count; i++)
+                        {
+                            var ret = GameRetainerManager.Retainers[i];
+                            if(ret.Available)
+                            {
+                                var adata = Utils.GetAdditionalData(Data.CID, ret.Name);
+                                if(selectedPlan != null)
+                                {
+                                    P.TaskManager.Enqueue(() => RetainerListHandlers.SelectRetainerByName(ret.Name.ToString()));
+                                    TaskEntrustDuplicates.EnqueueNewReverse(selectedPlan);
+                                    if(C.RetainerMenuDelay > 0)
+                                    {
+                                        TaskWaitSelectString.Enqueue(C.RetainerMenuDelay);
+                                    }
+                                    P.TaskManager.Enqueue(RetainerHandlers.SelectQuit);
+                                }
+                            }
+                        }
+                    }
+                    ImGui.PopID();
+                }
+                ImGui.EndPopup();
+            }
+            ImGuiEx.Tooltip("Reverse run a specific entrust plan (withdraw items according to entrust plan from retainers)");
+
+            ImGui.SameLine();
             if(ImGuiEx.IconButton($"{Lang.IconGil}##WithdrawGil"))
             {
                 for(var i = 0; i < GameRetainerManager.Count; i++)

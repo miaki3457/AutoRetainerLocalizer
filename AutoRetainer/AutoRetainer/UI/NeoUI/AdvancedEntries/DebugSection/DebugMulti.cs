@@ -16,6 +16,7 @@ internal unsafe class DebugMulti : DebugSectionBase
 {
     public override void Draw()
     {
+        ImGui.Checkbox("Disable render", ref P.TestRenderDisable);
         if(ImGui.CollapsingHeader("Sorted data"))
         {
             ImGuiEx.Text($"{MultiMode.GetRetainerSortedOfflineDatas(true).Where(x => !x.ExcludeRetainer).Select(x => $"{x.Name}@{x.World}").Print("\n")}");

@@ -1447,5 +1447,11 @@
   "EnqueueGoToInnAndDeliverEverything": "EnqueueGoToInnAndDeliverEverything",
   "Cached: {0}": "Cached: {0}",
   "Deliver eligible items into Armoire when in Multi Mode": "Deliver eligible items into Armoire when in Multi Mode",
-  "Items that are not in Armoire will be delivered there. Eligible items also will be excluded from being discarded, desynthesed, entrusted to retainers or delivered into grand company (only while you are running multi mode). This will trigger before Multi Mode Expert Delivery.": "Items that are not in Armoire will be delivered there. Eligible items also will be excluded from being discarded, desynthesed, entrusted to retainers or delivered into grand company (only while you are running multi mode). This will trigger before Multi Mode Expert Delivery."
+  "Items that are not in Armoire will be delivered there. Eligible items also will be excluded from being discarded, desynthesed, entrusted to retainers or delivered into grand company (only while you are running multi mode). This will trigger before Multi Mode Expert Delivery.": "Items that are not in Armoire will be delivered there. Eligible items also will be excluded from being discarded, desynthesed, entrusted to retainers or delivered into grand company (only while you are running multi mode). This will trigger before Multi Mode Expert Delivery.",
+  "{0}##EntrustManually": "{0}##EntrustManually",
+  "Run a specific entrust plan": "Run a specific entrust plan",
+  "{0}##ReverseEntrust": "{0}##ReverseEntrust",
+  "Reverse run a specific entrust plan (withdraw items according to entrust plan from retainers)": "Reverse run a specific entrust plan (withdraw items according to entrust plan from retainers)",
+  "Allow operating on retainers without a job": "Allow operating on retainers without a job",
+  "Disable render": "Disable render"
 }

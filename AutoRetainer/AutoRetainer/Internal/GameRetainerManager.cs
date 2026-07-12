@@ -32,7 +32,7 @@ public static unsafe class GameRetainerManager
         public RetainerManager.Retainer Handle;
         public string Name;
         public uint VentureID => Handle.VentureId;
-        public bool Available => Handle.ClassJob != 0 && Handle.Available;
+        public bool Available => (Handle.ClassJob != 0 || C.AllowUnemployed) && Handle.Available;
         public DateTime VentureComplete => Utils.DateFromTimeStamp(Handle.VentureComplete);
         public ulong RetainerID => Handle.RetainerId;
         public uint Gil => Handle.Gil;

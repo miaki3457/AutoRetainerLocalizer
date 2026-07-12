@@ -28,6 +28,8 @@ internal unsafe class Config
         return false;
     }
 
+    public bool AllowUnemployed = false;
+
     public bool GCHandinNotify = false;
     internal bool BypassSanctuaryCheck = false;
     public bool MultiHETOnEnable = true;
