@@ -23,6 +23,7 @@ public class HardList : InventoryManagementBase
                     ImGuiEx.CollectionButtonCheckbox(FontAwesomeIcon.Database.ToIconString(), x, InventoryCleanupCommon.SelectedPlan.IMAutoVendorHardIgnoreStack);
                     ImGui.PopFont();
                     ImGuiEx.Tooltip($"忽略此物品的堆疊設定");
+                    ImGuiEx.DragDropRepopulate("StkDsc", x, InventoryCleanupCommon.SelectedPlan.IMAutoVendorHardIgnoreStack);
                 },
                 filter: item => item.PriceLow != 0))
             .Separator()

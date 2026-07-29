@@ -1453,5 +1453,13 @@
   "{0}##ReverseEntrust": "{0}##ReverseEntrust",
   "Reverse run a specific entrust plan (withdraw items according to entrust plan from retainers)": "Reverse run a specific entrust plan (withdraw items according to entrust plan from retainers)",
   "Allow operating on retainers without a job": "Allow operating on retainers without a job",
-  "Disable render": "Disable render"
+  "Disable render": "Disable render",
+  "SubEn": "SubEn",
+  "GCTC": "GCTC",
+  "Move stuck detection": "Move stuck detection",
+  "\nLastRefreshTime {0} ({1})\nLastPosition {2}\nExtendIsMoving {3}": "\nLastRefreshTime {0} ({1})\nLastPosition {2}\nExtendIsMoving {3}",
+  "ExtendIsMoving": "ExtendIsMoving",
+  "AddonOpenedAt": "AddonOpenedAt",
+  "{0}: {1} ({2} ago)": "{0}: {1} ({2} ago)",
+  "-1 min##{0}": "-1 min##{0}"
 }

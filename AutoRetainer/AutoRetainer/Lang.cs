@@ -120,6 +120,7 @@ internal static class Lang
         "自由探索委托（需要2枚探险币）",
         "自由探索委託（需要2枚探險幣）",
         "발굴수행 (필요한 집사 급료: 2개)",
+        "自由尋寶委託（需要2枚探險幣）",
     ];
 
     internal static readonly string[] Entrance =
@@ -273,6 +274,7 @@ internal static class Lang
             "要修理下列部件嗎",
             "要修理下列元件嗎",
             "수리하시겠습니까?",
+            "要修理下列組件嗎",
         ];
 
     // Use the components selected and <If(Equal(IntegerParameter(1),1))>the following item<Else/><Value>IntegerParameter(1)</Value> of the following items</If> to outfit and register your submersible?
@@ -305,8 +307,6 @@ internal static class Lang
     internal static string[] WillBeUnableToProcessBuyback => field ??= [
         Svc.Data.GetExcelSheet<QuestDialogueText>(name:"custom/000/CmnDefRetainerCall_00010").GetRow(215).Value.GetText(),
         ];
-
-    internal static readonly string[] LogInPartialText = ["Logging in with", "Log in with", "でログインします。", "einloggen?", "eingeloggt.", "Se connecter avec", "Vous allez vous connecter avec", "Souhaitez-vous vous connecter avec", "登入吗", "登入嗎", "登录吗", "접속하시겠습니까?", "三可以通过次级指令重新编辑角色形象"];
 
     //3290	<Sheet(Item,IntegerParameter(1),0)/>×<Value>IntegerParameter(2)</Value>を、<Format(IntegerParameter(3),FF022C)/>枚の軍票と交換します。
     //よろしいですか？
