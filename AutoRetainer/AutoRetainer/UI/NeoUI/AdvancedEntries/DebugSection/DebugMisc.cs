@@ -25,7 +25,7 @@ internal unsafe class DebugMisc : DebugSectionBase
         {
             ImGuiEx.Text($"""
                 
-                LastRefreshTime {BailoutManager.LastRefreshTime} ({Environment.TickCount64 - BailoutManager.LastRefreshTime})
+                LastRefreshTime {BailoutManager.LastRefreshTime}({Environment.TickCount64 - BailoutManager.LastRefreshTime})
                 LastPosition {BailoutManager.LastPosition}
                 ExtendIsMoving {EzThrottler.GetRemainingTime("ExtendIsMoving")}
                 """);
