@@ -21,11 +21,12 @@ public class CharaOrder : NeoUIEntry
             ImGui.SetNextItemWidth(150f);
             ImGui.InputText($"搜索", ref Search, 50);
             DragDrop.Begin();
-            if(ImGui.BeginTable("角色順序表", 4, ImGuiTableFlags.Borders | ImGuiTableFlags.NoSavedSettings | ImGuiTableFlags.RowBg | ImGuiTableFlags.SizingFixedFit))
+            if(ImGui.BeginTable("角色順序表", 5, ImGuiTableFlags.Borders | ImGuiTableFlags.NoSavedSettings | ImGuiTableFlags.RowBg | ImGuiTableFlags.SizingFixedFit))
             {
                 ImGui.TableSetupColumn("##ctrl");
                 ImGui.TableSetupColumn("角色", ImGuiTableColumnFlags.WidthStretch);
-                ImGui.TableSetupColumn("切換開關");
+                ImGui.TableSetupColumn("Functions");
+                ImGui.TableSetupColumn("Exclusions");
                 ImGui.TableSetupColumn("刪除資料");
                 ImGui.TableHeadersRow();
 
@@ -40,6 +41,27 @@ public class CharaOrder : NeoUIEntry
                     DragDrop.DrawButtonDummy(chr, C.OfflineData, index);
                     ImGui.TableNextColumn();
                     ImGuiEx.TextV((Search != "" && ($"{chr.Name}@{chr.World}").Contains(Search, StringComparison.OrdinalIgnoreCase)) ? ImGuiColors.ParsedGreen : (Search == "" ? null : ImGuiColors.DalamudGrey3), Censor.Character(chr.Name, chr.World));
+
+                    ImGui.TableNextColumn();
+
+                    ImGuiEx.ButtonCheckbox(FontAwesomeIcon.GasPump, ref chr.AutoFuelPurchase, color: ImGuiColors.TankBlue);
+                    ImGuiEx.Tooltip("允許此角色在工作坊購買燃料");
+                    ImGuiEx.DragDropRepopulate("EnFuel", chr.AutoFuelPurchase, ref chr.AutoFuelPurchase);
+
+                    ImGui.SameLine();
+
+                    ImGuiEx.ButtonCheckbox(FontAwesomeIcon.BuildingFlag, ref chr.NoFcBuffUse, color: !C.FullAutoGCDeliveryUseBuffFCAction ? ImGuiColors.DalamudRed : ImGuiColors.TankBlue, inverted: true);
+                    ImGuiEx.Tooltip("Allow this character to use FC buffs");
+                    if(!C.FullAutoGCDeliveryUseBuffFCAction) ImGuiEx.Tooltip(EColor.RedBright, $"You are required to enable this function globally as well in order for it to work.");
+                    ImGuiEx.DragDropRepopulate("EnFcBuf", chr.NoFcBuffUse, ref chr.NoFcBuffUse);
+
+                    ImGui.SameLine();
+
+                    ImGuiEx.ButtonCheckbox(FontAwesomeIcon.Ticket, ref chr.NoItemBuffUse, color: !C.FullAutoGCDeliveryUseBuffItem ? ImGuiColors.DalamudRed : ImGuiColors.TankBlue, inverted: true);
+                    ImGuiEx.Tooltip("Allow this character to use priority seal allowance");
+                    if(!C.FullAutoGCDeliveryUseBuffItem) ImGuiEx.Tooltip(EColor.RedBright, $"You are required to enable this function globally as well in order for it to work.");
+                    ImGuiEx.DragDropRepopulate("EnGiBuf", chr.NoItemBuffUse, ref chr.NoItemBuffUse);
+
                     ImGui.TableNextColumn();
                     if(ImGuiEx.ButtonCheckbox(FontAwesomeIcon.Users, ref chr.ExcludeRetainer, inverted: true))
                     {
@@ -73,10 +95,7 @@ public class CharaOrder : NeoUIEntry
                     ImGuiEx.ButtonCheckbox(FontAwesomeIcon.Coins, ref chr.NoGilTrack, inverted: true);
                     ImGuiEx.Tooltip("將此角色的金幣計入總額");
                     ImGuiEx.DragDropRepopulate("EnGil", chr.NoGilTrack, ref chr.NoGilTrack);
-                    ImGui.SameLine();
-                    ImGuiEx.ButtonCheckbox(FontAwesomeIcon.GasPump, ref chr.AutoFuelPurchase, color:ImGuiColors.TankBlue);
-                    ImGuiEx.Tooltip("允許此角色在工作坊購買燃料");
-                    ImGuiEx.DragDropRepopulate("EnFuel", chr.AutoFuelPurchase, ref chr.AutoFuelPurchase);
+
                     ImGui.TableNextColumn();
                     if(ImGuiEx.IconButton(FontAwesomeIcon.UserMinus))
                     {

@@ -1,5 +1,6 @@
 using AutoRetainer.Internal;
 using AutoRetainer.Modules.Voyage;
+using AutoRetainerAPI.Configuration;
 using ECommons.EzIpcManager;
 
 namespace AutoRetainer.Modules.EzIPCManagers;
@@ -51,6 +52,15 @@ public class IPC_PluginState
     public void EnableMultiMode()
     {
         Svc.Commands.ProcessCommand("/autoretainer multi enable");
+    }
+
+    [EzIPC]
+    public void EnableSingleMultiMode(MultiModeType? multiModeType)
+    {
+        EnableMultiMode();
+        MultiMode.SingleMultiMode = [];
+        MultiMode.SingleMultiModeType = multiModeType;
+        if(Player.Available) MultiMode.SingleMultiMode.Add(Player.NameWithWorld);
     }
 
     [EzIPC]
@@ -155,4 +165,6 @@ public class IPC_PluginState
         }
         return false;
     }
+
+    [EzIPCEvent] public Action OnSingleMultiModeFinished;
 }
