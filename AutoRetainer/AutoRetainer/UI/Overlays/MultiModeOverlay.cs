@@ -201,7 +201,12 @@ internal class MultiModeOverlay : Window
                     {
                         MultiMode.SingleMultiMode = null;
                     }
-                    ImGui.SetTooltip($"Single pass MultiMode enabled.\nCharacters processed:\n{MultiMode.SingleMultiMode?.Select(x => $"- {Censor.Character(x)}").Print("\n")} \n\nLeft click - open AutoRetainer. \nRight click - convert to regular Multi Mode.");
+                    ImGui.SetTooltip($"Single pass MultiMode enabled.
+Characters processed:
+{MultiMode.SingleMultiMode?.Select(x => $"- {Censor.Character(x)}").Print("\n")} 
+
+Left click - open AutoRetainer. 
+Right click - convert to regular Multi Mode.");
                 }
             }
             else
