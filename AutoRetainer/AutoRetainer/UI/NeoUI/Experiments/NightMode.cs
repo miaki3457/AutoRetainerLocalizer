@@ -18,5 +18,6 @@ internal class NightMode : ExperimentUIEntry
         ImGui.Checkbox("在夜間模式下處理派遣", ref C.NightModeDeployables);
         ImGui.Checkbox("使夜間模式狀態持久化", ref C.NightModePersistent);
         ImGui.Checkbox("使關機指令改為啟動夜間模式而非關閉遊戲", ref C.ShutdownMakesNightMode);
+        ImGui.Checkbox("Auto-activate temporary night mode when workstation is locked", ref C.NightModeAutoWsLocked);
     }
 }

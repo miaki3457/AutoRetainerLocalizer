@@ -17,6 +17,7 @@ public class MultiModeDeployables : NeoUIEntry
         .Checkbox("派遣後立即出售\"無條件出售清單\"中的物品（需要僱員）", () => ref C.VendorItemAfterVoyage)
         .Checkbox("進入部隊工作坊時，定期檢查部隊箱中的金幣", () => ref C.FCChestGilCheck, "在進入工作坊時定期檢查部隊箱，以保持金幣計數為最新狀態。")
         .Indent()
+        .Checkbox("Also scan items in FC chests", () => ref C.FCChestItemCheck)
         .SliderInt(150f, "Check frequency, hours", () => ref C.FCChestGilCheckCd, 0, 24 * 5)
         .Widget("重設冷卻時間", (x) =>
         {

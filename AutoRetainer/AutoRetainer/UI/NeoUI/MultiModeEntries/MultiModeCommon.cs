@@ -11,6 +11,8 @@ public class MultiModeCommon : NeoUIEntry
         .Checkbox("允許進入共享房屋", () => ref C.SharedHET)
         .Checkbox("即使多角色模式停用也嘗試在登入時進入房屋", () => ref C.HETWhenDisabled)
         .Checkbox("當已在傳喚鈴旁時禁止傳送或進入房屋", () => ref C.NoTeleportHetWhenNextToBell)
+        .Checkbox("Never enter houses on characters that do not have neither retainers nor deployables enabled", () => ref C.NoHetWhenNothingEnabled)
+        .Checkbox("Do not try to auto-enter houses when enabling multi mode", () => ref C.MultiHETOnEnable, "If you don't have teleportation options enabled you will have problems")
 
         .Section("遊戲啟動")
         .Checkbox($"遊戲啟動時啟用多角色模式", () => ref C.MultiAutoStart)
@@ -36,6 +38,7 @@ public class MultiModeCommon : NeoUIEntry
         .InputInt(100f, $"潛艇清單：剩餘背包空格警告", () => ref C.UIWarningDepSlotNum.ValidateRange(2, 1000))
         .InputInt(100f, $"潛艇清單：剩餘青磷水警告", () => ref C.UIWarningDepTanksNum.ValidateRange(20, 1000))
         .InputInt(100f, $"潛艇清單：剩餘修理材料警告", () => ref C.UIWarningDepRepairNum.ValidateRange(5, 1000))
+        .InputInt(100f, $"Both lists: remaining gil warning", () => ref C.MinGilDisplay)
 
         .Section("傳送設定")
         .Widget(() => ImGuiEx.Text("需要安裝 Lifestream 插件"))

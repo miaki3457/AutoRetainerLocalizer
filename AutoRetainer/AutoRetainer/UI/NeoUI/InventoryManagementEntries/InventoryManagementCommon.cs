@@ -47,6 +47,16 @@ public unsafe class InventoryManagementCommon
             }
         }
         ImGuiEx.Tooltip("按住 CTRL 並點擊");
+        ImGui.SameLine();
+        if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.Trash, "Clear list", ImGuiEx.Ctrl))
+        {
+            for(var i = itemList.Count - 1; i >= 0; i--)
+            {
+                var x = itemList[i];
+                removeAction(x);
+            }
+        }
+        ImGuiEx.Tooltip("按住 CTRL 並點擊");
         ImGuiEx.TreeNodeCollapsingHeader("批量新增/移除", () =>
         {
             ImGui.SetNextItemWidth(200f);

@@ -37,12 +37,12 @@ public unsafe static class TaskRecursiveItemDiscard
             for(int i = 0; i < cont->Size; i++)
             {
                 var slot = cont->Items[i];
-                if(ProcessedSlots.Contains(new(invType, i)) || Data.GetIMSettings().IMProtectList.Contains(slot.ItemId) || S.CabinetManager.ShouldExcludeItemFromProcessing(slot.ItemId))
+                if(ProcessedSlots.Contains(new(invType, i)) || Data.GetIMSettings().IMProtectList.Contains(slot.ItemId) || Utils.ShouldExcludeItemByMirageOrCabinet(slot.ItemId, slot.Condition))
                 {
                     continue;
                 }
                 else if(Data.GetIMSettings().IMDiscardList.Contains(slot.ItemId)
-                    && !S.CabinetManager.ShouldExcludeItemFromProcessing(slot.ItemId)
+                    && !Utils.ShouldExcludeItemByMirageOrCabinet(slot.ItemId, slot.Condition)
                     && (slot.Quantity < Data.GetIMSettings().IMDiscardStackLimit || Data.GetIMSettings().IMDiscardIgnoreStack.Contains(slot.ItemId)))
                 {
                     if(EzThrottler.Check("DiscardItem") && Utils.GenericThrottle && EzThrottler.Throttle("DiscardItem", Utils.GenerateRandomDelay()))
@@ -72,6 +72,7 @@ public unsafe static class TaskRecursiveItemDiscard
         else
         {
             var addon = Utils.GetSpecificYesno(Lang.DiscardItem);
+            if(addon == null) addon = Utils.GetSpecificYesno(x => Lang.IsAddon(x, 110, 153));
             return addon != null && addon->IsReady();
         }
     }
@@ -85,6 +86,7 @@ public unsafe static class TaskRecursiveItemDiscard
         else
         {
             var addon = Utils.GetSpecificYesno(Lang.DiscardItem);
+            if(addon == null) addon = Utils.GetSpecificYesno(x => Lang.IsAddon(x, 110, 153));
             if(addon != null && addon->IsReady())
             {
                 var m = new AddonMaster.SelectYesno(addon);

@@ -236,7 +236,11 @@ public unsafe class AutoRetainer : IDalamudPlugin
                     Content = $"Multi Mode will be enabled in {C.MultiModeOnPluginLoadDelay} seconds. Click here to cancel."
                 });
                 TaskManager.EnqueueDelay(C.MultiModeOnPluginLoadDelay * 1000);
-                TaskManager.Enqueue((Action)(() => MultiMode.Enabled = true));
+                TaskManager.Enqueue((Action)(() =>
+                {
+                    MultiMode.Enabled = true;
+                    BailoutManager.IsLogOnTitleEnabled = true;
+                }));
                 n.Click += delegate 
                 {
                     TaskManager.Abort(); 
@@ -246,6 +250,7 @@ public unsafe class AutoRetainer : IDalamudPlugin
             else
             {
                 MultiMode.Enabled = true;
+                BailoutManager.IsLogOnTitleEnabled = true;
             }
         }
     }
@@ -502,11 +507,12 @@ public unsafe class AutoRetainer : IDalamudPlugin
         else if(arguments.EqualsIgnoreCase("reset"))
         {
             P.TaskManager.Abort();
-            SchedulerMain.CharacterPostProcessLocked = false;
+            SchedulerMain.CharacterPostProcessLocked = null;
             Notify.Success("Reset completed");
         }
         else if(arguments.EqualsIgnoreCase("deliver"))
         {
+            TaskActivateSealSweetener.LastAttemptAt = 0;
             if(!P.TaskManager.IsBusy)
             {
                 TaskDeliverItems.Enqueue();
@@ -693,10 +699,20 @@ public unsafe class AutoRetainer : IDalamudPlugin
             //5800	60	8	0	False	他のデータセンター<Highlight>StringParameter(1)</Highlight>へ遊びに行っているため操作できません。
             //5800	60	8	0	False	Der Vorgang kann nicht ausgeführt werden, da der Charakter gerade das Datenzentrum <Highlight>StringParameter(1)</Highlight> bereist.
             //5800	60	8	0	False	Impossible d'exécuter cette commande. Le personnage se trouve dans un autre centre de traitement de données (<Highlight>StringParameter(1)</Highlight>).
-            if(message.ToString().StartsWithAny(Lang.UnableToVisitWorld))
+            if(message.ToString().StartsWithAny(Lang.UnableToVisitWorld) || Lang.IsLogMessage(message.ToString(), 5800))
             {
 
                 MultiMode.Enabled = false;
+            }
+        }
+        else if(MultiMode.Active)
+        {
+            if(message.ToString() == LogMessage.Get(1669).Text.GetText())
+            {
+                Data.Enabled = false;
+                Data.WorkshopEnabled = false;
+                S.AnomalyWindow.Add($"Character does not have enough gil for teleport (has {InventoryManager.Instance()->GetInventoryItemCount(1)} gil). Multi mode disabled on this character.");
+                Utils.CleanupOperations();
             }
         }
     }

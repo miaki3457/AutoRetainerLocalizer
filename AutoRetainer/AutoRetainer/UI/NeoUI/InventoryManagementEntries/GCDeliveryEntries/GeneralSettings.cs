@@ -31,10 +31,18 @@ public sealed unsafe class GeneralSettings : InventoryManagementBase
         .Checkbox("啟用多角色籌備交換", () => ref C.FullAutoGCDelivery)
         .Checkbox("僅在工作台未鎖定時觸發", () => ref C.FullAutoGCDeliveryOnlyWsUnlocked)
         .InputInt(150f, "觸發籌備的剩餘背包格數 (小於或等於)", () => ref C.FullAutoGCDeliveryInventory, "僅計算主要背包，不包含兵裝庫")
+
         .Checkbox("當當探險幣耗盡時觸發", () => ref C.FullAutoGCDeliveryDeliverOnVentureExhaust, "此選項可能導致每次登入時都會前往軍隊兌換。請確保已設置足夠探險幣的方案。")
         .Indent()
         .InputInt(150f, "觸發籌備的剩餘探險幣數量 (小於或等於)", () => ref C.FullAutoGCDeliveryDeliverOnVentureLessThan)
         .Unindent()
+
+        .Checkbox("Trigger on ceruleum tanks and FC seals exhaustion", () => ref C.FullAutoGCDeliveryDeliverOnCeruleumExhaust, "This may cause situation where you will just go to GC exchange every login.")
+        .Indent()
+        .InputInt(150f, "Ceruleum tanks remaining to trigger delivery, less or equal", () => ref C.FullAutoGCDeliveryDeliverOnCeruleumLessThan)
+        .InputInt(150f, "FC points remaining to trigger delivery, less or equal", () => ref C.FullAutoGCDeliveryDeliverOnFcPointsLessThan)
+        .Unindent()
+
         .Checkbox("優先使用軍票加成票券，如果可用的話", () => ref C.FullAutoGCDeliveryUseBuffItem)
         .Widget(() =>
         {
@@ -56,12 +64,25 @@ public sealed unsafe class GeneralSettings : InventoryManagementBase
             if(C.FullAutoGCDeliveryUseBuffFCAction)
             {
                 ImGui.Indent();
-                if(Data != null)
                 {
-                    ImGuiEx.Checkbox($"Exclude {Data.NameWithWorldCensored}", ref Data.NoFcBuffUse);
+                    if(Data != null)
+                    {
+                        ImGuiEx.Checkbox($"Exclude {Data.NameWithWorldCensored}", ref Data.NoFcBuffUse);
+                    }
+                    var cnt = C.OfflineData.Count(x => x.NoFcBuffUse);
+                    ImGuiEx.Text($"{(cnt > 0 ? $"{cnt} character(s) are excluded from buff item usage. " : "")} Navigate to \"Functions, Exclusions, Order\" section to exclude a character.");
                 }
-                var cnt = C.OfflineData.Count(x => x.NoFcBuffUse);
-                ImGuiEx.Text($"{(cnt > 0 ? $"{cnt} character(s) are excluded from buff item usage. " : "")} Navigate to \"Functions, Exclusions, Order\" section to exclude a character.");
+                ImGui.Checkbox("Buy buff if needed", ref C.FullAutoGCDeliveryBuyBuffFCAction);
+                ImGui.Indent();
+                {
+                    if(Data != null)
+                    {
+                        ImGuiEx.Checkbox($"Exclude {Data.NameWithWorldCensored} from buff purchase", ref Data.DisallowedFromBuffPurchase);
+                    }
+                    var cnt = C.OfflineData.Count(x => x.DisallowedFromBuffPurchase);
+                    ImGuiEx.Text($"{(cnt > 0 ? $"{cnt} character(s) are excluded from buff item purchase. " : "")} Navigate to \"Functions, Exclusions, Order\" section to exclude a character.");
+                }
+                ImGui.Unindent();
                 ImGui.Unindent();
             }
         })

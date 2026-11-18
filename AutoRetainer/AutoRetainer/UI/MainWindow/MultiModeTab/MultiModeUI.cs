@@ -59,22 +59,23 @@ internal static unsafe class MultiModeUI
             ImGuiEx.Tooltip($"為此角色啟用多角色模式");
             ImGuiEx.DragDropRepopulate("EnMulti", data.Enabled, ref data.Enabled);
             ImGui.SameLine(0, 3);
+
             if(ImGuiEx.IconButton(FontAwesomeIcon.DoorOpen))
             {
-                if(MultiMode.Relog(data, out var error, RelogReason.ConfigGUI))
+                if(!Utils.IsBusy)
                 {
-                    Notify.Success("正在重新登入...");
-                }
-                else
-                {
-                    Notify.Error(error);
+                    MultiMode.Relog(data, out _, RelogReason.ConfigGUI);
                 }
             }
-            if(ImGui.IsItemClicked(ImGuiMouseButton.Right))
+            if(ImGuiEx.HoveredAndClicked("Left click - relog to this character\nRight click - open quick travel window", ImGuiMouseButton.Right))
             {
-                Copy($"/ays relog {data.Name}@{data.World}");
+                if(C.MultiDisableOnRelog)
+                {
+                    MultiMode.Enabled = false;
+                }
+                Svc.Commands.ProcessCommand($"/li w {data.Name}@{data.World}");
             }
-            ImGuiEx.Tooltip($"左鍵 - 重新登入此角色\n右鍵 - 複製重新登入指令到剪貼簿");
+
             ImGui.SameLine(0, 3);
             if(ImGuiEx.IconButton(FontAwesomeIcon.UserCog))
             {
@@ -154,7 +155,11 @@ internal static unsafe class MultiModeUI
                 }
             }
             ImGui.SameLine(0, 0);
-            List<(bool, string)> texts = [(data.Ventures < C.UIWarningRetVentureNum, $"探險幣: {data.Ventures}"), (data.InventorySpace < C.UIWarningRetSlotNum, $"空格: {data.InventorySpace}")];
+            List<(bool, string)> texts = [
+                (data.Gil < C.UIWarningGil, $"G: {Utils.FormatGil(data.Gil)}"),
+                (data.Ventures < C.UIWarningRetVentureNum, $"探險幣: {data.Ventures}"), 
+                (data.InventorySpace < C.UIWarningRetSlotNum, $"空格: {data.InventorySpace}")
+                ];
             if(C.CharEqualize && MultiMode.Enabled)
             {
                 texts.Insert(0, (false, $"青磷水: {MultiMode.CharaCnt.GetOrDefault(data.CID)}"));
